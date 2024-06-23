@@ -1,0 +1,23 @@
+@font-face {
+  font-family: ArtegraSans;
+  src: url('assets/fonts/ArtegraSansExLight.eot');
+  src: url('assets/fonts/ArtegraSansExLight.eot') format('embedded-opentype'),
+  url('assets/fonts/ArtegraSansExLight.woff2') format('woff2'),
+  url('assets/fonts/ArtegraSansExLight.woff') format('woff'),
+  url('assets/fonts/ArtegraSansExLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ArtegraSans;
+  src: url('assets/fonts/ArtegraSansExMedium.eot');
+  src: url('assets/fonts/ArtegraSansExMedium.eot') format('embedded-opentype'),
+  url('assets/fonts/ArtegraSansExMedium.woff2') format('woff2'),
+  url('assets/fonts/ArtegraSansExMedium.woff') format('woff'),
+  url('assets/fonts/ArtegraSansExMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
