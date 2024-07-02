@@ -27,4 +27,5 @@ jobs:
             rm -rf /var/www/bp/*
             cd /var/upload && unzip bp.zip -d /var/www/bp
             rm -rf /var/upload/bp.zip
+            cd /var/www/bp && npm i
             cd /var/www/bp && npm run build
