@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NuxtRouteAnnouncer />
     <NuxtPage />
     <Header />
   </div>
@@ -11,10 +10,10 @@
     position: relative;
     display: block;
     svg {
-      width: initial !important;
-      height: initial !important;
-      margin-bottom: 0 !important;
-      vertical-align: initial !important;
+      width: initial;
+      height: initial;
+      margin-bottom: 0;
+      vertical-align: initial;
     }
   }
 </style>

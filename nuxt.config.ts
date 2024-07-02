@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   app: {
     head: {
       title: "Black Project",
@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@pinia/nuxt',
     'nuxt-icons',
     '@nuxt/image',
     '@nuxt/eslint',
@@ -21,6 +22,17 @@ export default defineNuxtConfig({
       checker: true,
   },
   css: ["@/assets/css/main.scss"],
+  vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData:
+						'@import "@/assets/css/mixins.scss";',
+				},
+			},
+		},
+	},
+
   image: {
       quality: 80,
       format: ["webp"],

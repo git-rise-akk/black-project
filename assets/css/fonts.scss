@@ -12,6 +12,19 @@
 
 @font-face {
   font-family: ArtegraSans;
+  src: url('assets/fonts/ArtegraSansExRegular.eot');
+  src: url('assets/fonts/ArtegraSansExRegular.eot') format('embedded-opentype'),
+  url('assets/fonts/ArtegraSansExRegular.woff2') format('woff2'),
+  url('assets/fonts/ArtegraSansExRegular.woff') format('woff'),
+  url('assets/fonts/ArtegraSansExRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: ArtegraSans;
   src: url('assets/fonts/ArtegraSansExMedium.eot');
   src: url('assets/fonts/ArtegraSansExMedium.eot') format('embedded-opentype'),
   url('assets/fonts/ArtegraSansExMedium.woff2') format('woff2'),
