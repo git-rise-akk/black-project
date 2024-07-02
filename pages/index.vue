@@ -5,7 +5,7 @@
       <nuxt-icon class="big-logo" name="big-logo" filled />
       <video ref="video" class="video" src="/pages/home/major.mp4" poster="/pages/home/major.jpg" playsinline loop muted autoplay></video>
       <div class="info">
-        Мы — светотехническая компания,<br />
+        test Мы — светотехническая компания,<br />
         которая настроена на решение любой<br />
         вашей задачи и запроса
       </div>
