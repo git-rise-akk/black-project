@@ -29,4 +29,4 @@ jobs:
             rm -rf /var/upload/bp.zip
             cd /var/www/bp && npm i
             cd /var/www/bp && npm run build
-            cd /var/www/bp && node .output/server/index.mjs
+            # cd /var/www/bp && node .output/server/index.mjs
