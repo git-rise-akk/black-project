@@ -17,20 +17,17 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/device',
   ],
-  eslint: {
-      checker: true,
-  },
   css: ["@/assets/css/main.scss"],
   vite: {
-		css: {
-			preprocessorOptions: {
-				scss: {
-					additionalData:
-						'@import "@/assets/css/mixins.scss";',
-				},
-			},
-		},
-	},
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData:
+                    '@import "@/assets/css/mixins.scss";',
+            },
+        },
+    },
+  },
 
   image: {
       quality: 80,
