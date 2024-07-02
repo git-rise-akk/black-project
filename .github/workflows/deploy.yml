@@ -29,4 +29,5 @@ jobs:
             rm -rf /var/upload/bp.zip
             cd /var/www/bp && npm i
             cd /var/www/bp && npm run build
+            pm2 restart BlackProject
             # cd /var/www/bp && node .output/server/index.mjs
