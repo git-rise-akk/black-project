@@ -24,9 +24,7 @@ jobs:
           source: "./"
           destination: "/var/upload/bp.zip"
           scripts: |
-            #rm -rf /var/www/vtp/*
-            #cd /var/www && unzip vtp.zip -d /var/www/vtp
-            #rm -rf /var/www/vtp.zip
-            #cd /var/www/vtp && deno task build
-            #sudo supervisorctl reload
-            #sudo supervisorctl status
+            rm -rf /var/www/bp/*
+            cd /var/upload && unzip bp.zip -d /var/www/bp
+            rm -rf /var/upload/bp.zip
+            cd /var/www/bp && npm run build
