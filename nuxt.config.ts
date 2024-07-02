@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-icons',
     '@nuxt/image',
-    '@nuxt/eslint',
     '@nuxtjs/device',
   ],
   eslint: {
