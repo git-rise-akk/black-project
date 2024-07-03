@@ -7,6 +7,7 @@ module.exports = {
             instances: '1',
             script: './.output/server/index.mjs',
             env: {
+                NODE_ENV: 'production',
                 EMAIL_USER: 'test@mail.ru',
             },
         }
