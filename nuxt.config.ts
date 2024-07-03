@@ -30,4 +30,8 @@ export default defineNuxtConfig({
         quality: 80,
         format: ["webp"],
     },
+    devServer: {
+        host: '0.0.0.0',
+        port: 80,
+    },
 })
