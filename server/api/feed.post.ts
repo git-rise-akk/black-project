@@ -1,22 +1,23 @@
 import mailer from '@/modules/mailer.ts';
 
-const env = useRuntimeConfig().public;
+const {
+    mailUser,
+    mailPass,
+    mailTo,
+} = useRuntimeConfig();
 
-const yandexMail = mailer({
-    user: env.mailUser,
-    pass: env.mailPass,
-    to: env.mailTo,
+let yandexMail = mailer({
+    user: mailUser,
+    pass: mailPass,
+    to: mailTo,
 });
 
 export default defineEventHandler(async (event) => {
 
     try {
 
-        console.log(env);
-
         const body = await readBody(event);
         await yandexMail(body?.text, body?.title ?? "Untitled message");
-        
 
     } catch (err) {
         return {

@@ -6,11 +6,9 @@ module.exports = {
             exec_mode: 'cluster',
             instances: '1',
             script: './.output/server/index.mjs',
+            args: 'start',
             env: {
                 NODE_ENV: 'production',
-                NUXT_PUBLIC_MAIL_USER: '%MU%',
-                NUXT_PUBLIC_MAIL_PASS: '%MP%',
-                NUXT_PUBLIC_MAIL_TO: '%MT%',
             },
         }
     ]

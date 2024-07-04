@@ -31,11 +31,9 @@ export default defineNuxtConfig({
         format: ["webp"],
     },
     runtimeConfig: {
-        public: {
-            mailUser: '',
-            mailPass: '',
-            mailTo: '',
-        },
+        mailUser: '%MU%',
+        mailPass: '%MP%',
+        mailTo: '%MT%',
     },
     devServer: {
         host: '0.0.0.0',
