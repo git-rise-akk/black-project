@@ -73,3 +73,7 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Yandex mail doc
+[Настроить по протоколу IMAP](https://yandex.ru/support/mail/mail-clients/others.html)  
+[Настройка собственного SMTP](https://habr.com/ru/companies/ruvds/articles/325356/)
