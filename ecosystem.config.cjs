@@ -8,7 +8,9 @@ module.exports = {
             script: './.output/server/index.mjs',
             env: {
                 NODE_ENV: 'production',
-                EMAIL_USER: 'test@mail.ru',
+                NUXT_PUBLIC_MAIL_USER: '',
+                NUXT_PUBLIC_MAIL_PASS: '',
+                NUXT_PUBLIC_MAIL_TO: '',
             },
         }
     ]

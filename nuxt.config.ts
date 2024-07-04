@@ -30,6 +30,13 @@ export default defineNuxtConfig({
         quality: 80,
         format: ["webp"],
     },
+    runtimeConfig: {
+        public: {
+            mailUser: '',
+            mailPass: '',
+            mailTo: '',
+        },
+    },
     devServer: {
         host: '0.0.0.0',
         port: 80,
