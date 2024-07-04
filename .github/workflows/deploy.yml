@@ -28,6 +28,9 @@ jobs:
             cd /var/upload && unzip bp.zip -d /var/www/bp
             rm -rf /var/upload/bp.zip
             cd /var/www/bp && npm i
+            cd /var/www/bp && sed -i 's/%MU%/${{ secrets.MAIL_USER }}/' ecosystem.config.cjs
+            cd /var/www/bp && sed -i 's/%MP%/${{ secrets.MAIL_PASS }}/' ecosystem.config.cjs
+            cd /var/www/bp && sed -i 's/%MT%/${{ secrets.MAIL_TO }}/' ecosystem.config.cjs
             cd /var/www/bp && npm run build
             pm2 restart BlackProject
             # cd /var/www/bp && node .output/server/index.mjs
