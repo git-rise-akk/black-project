@@ -1,79 +1,21 @@
-# Nuxt 3 Minimal Starter
+# Black project
+## 🔦 🔆
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Документация API
 
-## Setup
+### 1. Отправка заявки на почту:
 
-Make sure to install the dependencies:
+| Тип  | адрес     | данные                                            |
+|------|-----------|---------------------------------------------------|
+| POST | /api/feed | title?: Заголовок письма <br/> text: Тело письма |
 
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+> ⚠ Данные отправляются в формате json через запрос **body**;
 
 ## Yandex mail doc
 [Настроить по протоколу IMAP](https://yandex.ru/support/mail/mail-clients/others.html)  
 [Настройка собственного SMTP](https://habr.com/ru/companies/ruvds/articles/325356/)
+
+
+## Look at
+the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
