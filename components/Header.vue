@@ -32,7 +32,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.startClass = false;
-    }, 1500);
+    }, 2000);
     // console.log(this.headerStore.state);
   }
 }
