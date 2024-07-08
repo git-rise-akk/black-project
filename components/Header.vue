@@ -21,6 +21,12 @@
 <script>
 import { mapStores } from 'pinia'
 export default {
+  // props: {
+  //   startClass: {
+  //     type: Boolean,
+  //     default: true,
+  //   },
+  // },
   data() {
       return {
         startClass: true,
@@ -32,7 +38,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.startClass = false;
-    }, 2000);
+    }, 2100);
     // console.log(this.headerStore.state);
   }
 }
