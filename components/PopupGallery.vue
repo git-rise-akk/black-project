@@ -1,10 +1,10 @@
 <template>
     <div class="PopupGallery">
-      <div class="controls">
+      <div class="PopupGallery__controls">
         <div class="control-element control-element__left"></div>
         <div class="control-element control-element__right"></div>
       </div>
-      <div class="photos">
+      <div class="PopupGallery__photos">
         <template v-for="(photo, key) in photos" :key="`photo${key}`">
           <transition :name="getDynamicTransitionName">
             <div v-show="currentPhoto === key" class="photo-wrapper">
@@ -12,6 +12,10 @@
             </div>
           </transition>
         </template>
+      </div>
+      <div class="PopupGallery__text">
+        <div class="title"></div>
+        <div class="text"></div>
       </div>
       <!-- <div class="counter-photos">
         <div class="current-photo" :style="{ width: widthNumber }">
@@ -56,9 +60,19 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    .photos {
+
+    &__photos {
       width: 100%;
       height: 100%;
+      .photo-wrapper {
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
     }
   }
 </style>

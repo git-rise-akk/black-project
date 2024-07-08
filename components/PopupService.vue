@@ -1,0 +1,201 @@
+<template>
+    <div class="PopupService">
+        <div class="PopupService_bg"></div>
+        <div class="PopupService_wrapper">
+            <div class="PopupService__left">
+                <div class="title" v-html="info[id].title"></div>
+                <div class="content">
+                    <div class="text" v-html="info[id].text"></div>
+                    <div class="price" v-html="`от ${separateThousands(info[id].price)}`"></div>
+                    <StandardButton :text="info[id].btn" width="42.5" height="12"/>
+                </div>
+            </div>
+            <div class="PopupService__right">
+                <img
+                    v-for="(img, key) in info[id].images"
+                    :key="key"
+                    :src="`/popups/popup-service/${id}/${img}.jpg`"
+                    :class="`image image_n${key}`"
+                />
+            </div>
+            <Close @click="closingEvent()"/>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: {
+            id: {
+                type: Number,
+                default: 0,
+            },
+        },
+        data() {
+            return {
+                info: [
+                    {
+                        images: ['00', '01', '02'],
+                        title: 'Проектирование<br />систем освещения<br />и управления',
+                        text: 'Наши специалисты выслушают все ваши пожелания и технические особенности вашего объекта и учтут все нюансы для подготовки проекта. Качество кроется в деталях, а каждый проект уникален, наш инженерный опыт поможет подобрать именно то решение, которое позволит решить вашу задачу на высочайшем техническом уровне.<br /> -Электротехнический проект; -светотехнический проект;<br /> -Проект щита управления умным домом;<br /> -Проект освещения ЖК или БЦ;<br /> -Проект управления на протоколах или экосистемах: KNX, DALI, DMX512, Crestron, SPI, Tuya.',
+                        price: '50000',
+                        btn: 'Обсудить проект',
+                    },
+                    {
+                        images: ['00', '01', '02'],
+                        title: 'Поставка и продажа<br />светильников, комплектующих,<br />устройств управления<br />освещением (Алиса, Siri)',
+                        text: 'Внимателно выслушаем все ваши пожелания к ТЗ на ваш светильник и воплатим их в жизнь для поставки вам в самые короткие сроки.<br /> -Конструирование и подбор светильника под любые требования;<br /> -Светильники защищенные от пыли и влаги от IP20 до IP68;<br /> -Правильно подобраный теплоотвод, для увеличенного срока службы;<br /> -Высокая цветопередача CRI>90 всегда будет давать вам насладиться настоящим цветом и обеспечит здоровье ваших глаз при использовнии;<br /> -Произведем и поставим выбранные вами светильники и системы в самые короткие сроки.',
+                        price: '50000',
+                        btn: 'Обсудить поставку',
+                    },
+                    {
+                        images: ['00', '01', '02'],
+                        title: 'Монтаж и подключение<br />светильников, систем<br />освещения и управления,<br />сборка слаботочных щитов',
+                        text: 'Установим и подключим любое, даже самое специфичное оборудование. Наш инженерный опыт и глубокие технические знания позваляют подключить и установить любую существующую на светотехническом рынке продукцию или систему управления.<br /> -Установим светильник с любым уровнем сложности подключения;<br /> -Смонтируем трековую или могнитную систему освещения;<br /> -Соберем щит управления и автоматики.',
+                        price: '50000',
+                        btn: 'Обсудить монтаж',
+                    },
+                    {
+                        images: ['00', '01', '02'],
+                        title: 'Пуско-наладочные работы –<br />настройка систем управления<br />светом по вашему ТЗ',
+                        text: 'Настроим вашу систему освещения по вашему Техническому Заданию. Запустим проект любой сложности. -Настройка ситемы на протоколе - KNX;<br /> -Настройка ситемы на протоколе - DALI;<br /> -Настройка ситемы на протоколе - DMX512;<br /> -Настройка ситемы на протоколе - SPI;<br /> -Настройка ситемы Crestron; -Настройка ситемы Tuya.',
+                        price: '50000',
+                        btn: 'Обсудить пнр',
+                    },
+                    {
+                        images: ['00', '01', '02'],
+                        title: 'Сервисное<br />обслуживание и ремонт<br />оборудования',
+                        text: 'Поможем с обслуживанием или ремонтом вашей системы освещения. Наш инженерный опыт позваляет бережно разобрать ваш светильник и снова вернуть его в рабочее состояние.<br /> -Ремонт светильников; -Ремонт системы освещения;<br /> -Перенастройка системы освещения.',
+                        price: '50000',
+                        btn: 'Обсудить ремонт',
+                    },
+                    {
+                        images: ['00', '01', '02'],
+                        title: 'Нужны дополнительные услуги?',
+                        text: 'Поможем реализовать любые ваши задумки.<br /> -Электротехнический проект;<br /> -Светотехнический проект;<br /> -Проект щита управления умным домом;<br /> -Проект освещения ЖК или БЦ;<br /> -Проект управления на протоколах или экосистемах: KNX, DALI, DMX512, Crestron, SPI, Tuya.',
+                        price: '50000',
+                        btn: 'Обсудить задачу',
+                    },
+                ],
+            };
+        },
+        computed: {
+        },
+        methods: {
+            closingEvent() {
+                this.$emit('closePopup');
+            },
+            separateThousands(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            },
+        },
+    }    
+</script>
+  
+<style lang="scss">
+.PopupService {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  &_active {
+    pointer-events: auto;
+    .PopupService_bg {
+        background-color: rgba($color: #000000, $alpha: .2);
+        backdrop-filter: blur(5px);
+    }
+    .PopupService_wrapper {
+        transform: translateY(0);
+    }
+  }
+  &_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0);
+    backdrop-filter: blur(0px);
+    transition: backdrop-filter .4s, background-color .4s;
+  }
+  &_wrapper {
+    position: relative;
+    height: calc(100vh - 1.6rem);
+    width: 150rem;
+    padding: 10rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    background: $popup;
+    transform: translateY(calc(100% + 1.6rem));
+    transition: transform .5s;
+    .Close {
+        width: 10rem;
+        height: 10rem;
+        top: 0;
+        right: 0;
+        svg {
+            width: 3.7rem;
+        }
+    }
+  }
+  &__left {
+    width: 54.4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 5.4rem;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        height: 100%;
+        .text {
+            font-size: 1.8rem;
+            text-transform: initial;
+        }
+        .price {
+            font-size: 4rem;
+        }
+    }
+  }
+  &__right {
+    position: relative;
+    width: 73.6rem;
+    height: 100%;
+    .image {
+        position: absolute;
+        object-fit: cover;
+        &_n0 {
+            top: 0;
+            right: 0;
+            width: 44.2rem;
+            height: calc(62% - 0.3rem);
+        }
+        &_n1 {
+            top: 10.1rem;
+            right: 44.8rem;
+            width: 28.4rem;
+            height: 55.7rem;
+        }
+        &_n2 {
+            bottom: 0;
+            right: 5.8rem;
+            width: 38.4rem;
+            height: calc(38% - 0.3rem);
+        }
+    }
+  }
+}
+</style>
+  
