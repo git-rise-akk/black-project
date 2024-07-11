@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export default function (opt: object) {
+export default function (opt: any) {
     opt = {
         host: 'smtp.yandex.ru',
         port: 587,

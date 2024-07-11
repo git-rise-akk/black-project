@@ -34,6 +34,7 @@ export default defineNuxtConfig({
         mailUser: '%MU%',
         mailPass: '%MP%',
         mailTo: '%MT%',
+        botToken: '%BT%',
     },
     devServer: {
         host: '0.0.0.0',

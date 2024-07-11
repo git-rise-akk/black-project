@@ -31,6 +31,7 @@ jobs:
             cd /var/www/bp && sed -i 's/%MU%/${{ secrets.MAIL_USER }}/' nuxt.config.ts
             cd /var/www/bp && sed -i 's/%MP%/${{ secrets.MAIL_PASS }}/' nuxt.config.ts
             cd /var/www/bp && sed -i 's/%MT%/${{ secrets.MAIL_TO }}/' nuxt.config.ts
+            cd /var/www/bp && sed -i 's/%BT%/${{ secrets.TG_TOKEN }}/' nuxt.config.ts
             cd /var/www/bp && npm run build
             pm2 restart BlackProject
             # cd /var/www/bp && node .output/server/index.mjs
