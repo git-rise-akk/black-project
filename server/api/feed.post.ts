@@ -1,4 +1,4 @@
-import mailer from '@/modules/mailer.ts';
+import mailer from '@/modules/mailer';
 
 const {
     mailUser,
