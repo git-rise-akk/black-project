@@ -1,5 +1,6 @@
 <template>
-  <header :class="{ visible: headerStore.state }">
+  <header :class="[{ visible: headerStore.state }, { start: startClass }]">
+    <div class="header_wrapper">
       <nuxt-icon class="logo" name="logo" filled />
       <nav class="menu">
           <div class="menu__item">О компании</div>
@@ -13,17 +14,32 @@
             <a class="messenger messenger_whatsapp" href="https://wa.me/79969225087" target="_blank">whatsapp</a>
         </div>
       </div>
+    </div>
   </header>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 export default {
+  // props: {
+  //   startClass: {
+  //     type: Boolean,
+  //     default: true,
+  //   },
+  // },
+  data() {
+      return {
+        startClass: true,
+      };
+  },
   computed: {
     ...mapStores(headerState)
   },
   mounted() {
-    console.log(this.headerStore.state);
+    setTimeout(() => {
+      this.startClass = false;
+    }, 2100);
+    // console.log(this.headerStore.state);
   }
 }
 </script>
@@ -31,16 +47,28 @@ export default {
 <style lang="scss">
   header {
     position: absolute;
-    top: 5.4rem;
-    left: 10rem;
-    right: 10rem;
-    height: 4.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 10;
-    transform: translateY(calc(-100% - 5.4rem));
-    transition: transform .4s;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-100%);
+    // transition: transform .4s;
+    transition: transform 1s;
+    padding: 5.4rem 0;
+    background: linear-gradient(0deg, rgba(30,30,30,0) 0%, rgba(30,30,30,0.6) 60%);
+    backdrop-filter: blur(1px);
+    &.start {
+      animation: anim-header 1s 2s both;
+    }
+    .header_wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.7rem;
+      width: calc(100% - 20rem);
+    }
     &.visible {
       transform: translateY(0);
     }
@@ -108,6 +136,14 @@ export default {
             }
           }
         }
+      }
+    }
+    @keyframes anim-header {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
       }
     }
   }

@@ -2,7 +2,8 @@
   <div ref="page" class="page page_home">
     <div class="scroll">
       <section class="section section_n0">
-      <nuxt-icon class="big-logo" name="big-logo" filled />
+      <!-- <nuxt-icon class="big-logo" name="big-logo" filled /> -->
+      <Logo />
       <video ref="video" class="video" src="/pages/home/major.mp4" poster="/pages/home/major.jpg" playsinline loop muted autoplay></video>
       <div class="info">
         Мы — светотехническая компания,<br />
@@ -10,7 +11,7 @@
         вашей задачи и запроса
       </div>
       <StandardButton text="заказать проект" />
-      <div class="scroll-down">
+      <div class="scroll-down" @click="scrollDown">
         <nuxt-icon class="arrow" name="arrow-down" filled />
       </div>
       <div
@@ -149,7 +150,7 @@
                 вашим требованиям и современным
                 стандартам
               </p>
-              <div class="more">детальнее</div>
+              <div class="more" @click="opensPopupService(0)" >подробнее</div>
               <StandardButton text="обсудить проект" width="42.5" height="12"/>
           </li>
           <li class="service">
@@ -167,7 +168,7 @@
                 уровня надежности и качества,
                 контроль качества на каждом этапе.
               </p>
-              <div class="more">детальнее</div>
+              <div class="more" @click="opensPopupService(1)">подробнее</div>
               <StandardButton text="обсудить поставку" width="42.5" height="12"/>
           </li>
           <li class="service">
@@ -182,7 +183,7 @@
                 установим и подключим любое,
                 даже самое специфичное оборудование
               </p>
-              <div class="more">детальнее</div>
+              <div class="more" @click="opensPopupService(2)">подробнее</div>
               <StandardButton text="обсудить монтаж" width="42.5" height="12"/>
           </li>
           <li class="service">
@@ -199,7 +200,7 @@
                 протокол позволит исполнить любые
                 ваши задумки
               </p>
-              <div class="more">детальнее</div>
+              <div class="more" @click="opensPopupService(3)">подробнее</div>
               <StandardButton text="обсудить пнр" width="42.5" height="12"/>
           </li>
           <li class="service">
@@ -216,7 +217,7 @@
                 настройка, мы всегда с радостью
                 придем вам на помощь
               </p>
-              <div class="more">детальнее</div>
+              <div class="more" @click="opensPopupService(4)">подробнее</div>
               <StandardButton text="обсудить ремонт" width="42.5" height="12"/>
           </li>
           <li class="service">
@@ -231,7 +232,7 @@
                 — консультация по выбору освещения
                 и технико-экономическое обоснование
               </p>
-              <div class="more">детальнее</div>
+              <div class="more" @click="opensPopupService(5)">подробнее</div>
               <StandardButton text="обсудить задачу" width="42.5" height="12"/>
           </li>
         </ul>
@@ -297,6 +298,11 @@
           v-if="openPopup"
         />
       </transition>
+      <PopupService
+        :id="idPopupService" 
+        :class="{'PopupService_active': openPopupService }"  
+        @closePopup="openPopupService = false" 
+      /> 
     </div>
   </div>
 </template>
@@ -309,6 +315,8 @@ export default {
     return {
       sound: false,
       openPopup: false,
+      openPopupService: false,
+      idPopupService: 0,
     };
   },
   computed: {
@@ -361,6 +369,13 @@ export default {
       } else {
         this.$refs.video.muted = true;
       }
+    },
+    scrollDown() {
+      console.log('test');
+    },
+    opensPopupService(id) {
+      this.openPopupService = true;
+      this.idPopupService = id;
     },
   }
 }
@@ -790,6 +805,7 @@ export default {
               top: 50%;
               transform: translate(-50%, -50%) scale(1);
               width: 100%;
+              height: 100%;
               object-fit: cover;
               transition: transform 1.5s;
             }
