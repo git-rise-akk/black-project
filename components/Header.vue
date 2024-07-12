@@ -1,5 +1,5 @@
 <template>
-  <header :class="[{ visible: headerStore.state }, { start: startClass }]">
+  <header :class="[{ visible: headerStore.state }, { start: headerStore.startClass }]">
     <div class="header_wrapper">
       <nuxt-icon class="logo" name="logo" filled />
       <nav class="menu">
@@ -21,25 +21,14 @@
 <script>
 import { mapStores } from 'pinia'
 export default {
-  // props: {
-  //   startClass: {
-  //     type: Boolean,
-  //     default: true,
-  //   },
-  // },
   data() {
-      return {
-        startClass: true,
-      };
+    return {
+    };
   },
   computed: {
     ...mapStores(headerState)
   },
   mounted() {
-    setTimeout(() => {
-      this.startClass = false;
-    }, 2100);
-    // console.log(this.headerStore.state);
   }
 }
 </script>

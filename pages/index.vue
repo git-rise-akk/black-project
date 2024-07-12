@@ -2,7 +2,6 @@
   <div ref="page" class="page page_home">
     <div class="scroll">
       <section class="section section_n0">
-      <!-- <nuxt-icon class="big-logo" name="big-logo" filled /> -->
       <Logo />
       <video ref="video" class="video" src="/pages/home/major.mp4" poster="/pages/home/major.jpg" playsinline loop muted autoplay></video>
       <div class="info">
@@ -10,7 +9,7 @@
         которая настроена на решение любой<br />
         вашей задачи и запроса
       </div>
-      <StandardButton text="заказать проект" />
+      <Btn text="заказать проект" />
       <div class="scroll-down" @click="scrollDown">
         <nuxt-icon class="arrow" name="arrow-down" filled />
       </div>
@@ -302,14 +301,16 @@
         :id="idPopupService" 
         :class="{'PopupService_active': openPopupService }"  
         @closePopup="openPopupService = false" 
-      /> 
+      />
     </div>
   </div>
 </template>
 
 <script>
 import Lenis from "lenis";
+import gsap from 'gsap';
 import { mapStores } from 'pinia'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export default {
   data() {
     return {
@@ -328,38 +329,67 @@ export default {
       content: this.$refs.page.querySelector('.scroll')
     })
 
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
+    // function raf(time) {
+    //   lenis.raf(time);
+    //   requestAnimationFrame(raf);
+    // }
 
-    requestAnimationFrame(raf)
+    // requestAnimationFrame(raf);
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
 
     lenis.on('scroll', (e) => {
+      ScrollTrigger.update
+      if(e.animatedScroll > 0) {
+        this.headerStore.startClass = false;
+      }
+
       if (e.direction === 1) {
         this.headerStore.state = false;
-        console.log(this.headerStore.state);
       } else {
         this.headerStore.state = true;
       }
     })
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        },
-        {
-          rootMargin: '0px 0px 100px 0px',
-          threshold: 0.5,
+    // const observer = new IntersectionObserver(
+    //     (entries) => {
+    //       entries.forEach((entry) => {
+    //         if (entry.isIntersecting) {
+    //           entry.target.classList.add('visible');
+    //         }
+    //       });
+    //     },
+    //     {
+    //       rootMargin: '0px 0px 100px 0px',
+    //       threshold: 0.5,
+    //     }
+    // );
+    // if (this.$refs.SectionN1) {
+    //   this.$refs.SectionN1.querySelectorAll('.img').forEach((el) => observer.observe(el))
+    // }
+
+    const imgs = gsap.utils.toArray('.section_n1 .img');
+    imgs.forEach((img, index) => {
+      gsap.to(img, {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        delay: this.returnsDelayTime(index),
+        scrollTrigger: {
+          trigger: img,
+          start: 'center bottom',
+          scroller: '.page_home',
+          end: 'center top',
+          markers: true,
         }
-    );
-    if (this.$refs.SectionN1) {
-      this.$refs.SectionN1.querySelectorAll('.img').forEach((el) => observer.observe(el))
-    }
+      });
+    });
   },
   methods: {
     switchesSound() {
@@ -376,6 +406,15 @@ export default {
     opensPopupService(id) {
       this.openPopupService = true;
       this.idPopupService = id;
+    },
+    returnsDelayTime(index) {
+      let time = 0;
+      if (index === 2) {
+        time = 0.2;
+      } else if (index === 3) {
+        time = 0.4
+      }
+      return time;
     },
   }
 }
@@ -399,6 +438,22 @@ export default {
       transform: translateY(-50%);
     }
   }
+  @keyframes text-show {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes show-elem {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes anim-scale {
+    to {
+      transform: scale(1);
+    }
+  }
   .page.page_home {
     height: 100vh;
     width: 100vw;
@@ -414,14 +469,6 @@ export default {
         padding-top: 19rem;
         height: 100vh;
         width: 100vw;
-        .big-logo {
-          position: relative;
-          width: 100%;
-          z-index: 1;
-          svg {
-            width: 100%;
-          }
-        }
         .video {
           position: absolute;
           left: 0;
@@ -429,6 +476,8 @@ export default {
           height: 100vh;
           width: 100vw;
           object-fit: cover;
+          transform: scale(1.1);
+          animation: anim-scale 2.2s forwards;
         }
         .info {
           position: relative;
@@ -436,6 +485,9 @@ export default {
           font-weight: 300;
           margin-top: 4.6rem;
           line-height: 3.6rem;
+          transform: translateY(15rem);
+          opacity: 0;
+          animation: text-show 1s 2s forwards;
         }
         .scroll-down {
           position: absolute;
@@ -449,7 +501,8 @@ export default {
           align-items: center;
           justify-content: center;
           cursor: pointer;
-
+          opacity: 0;
+          animation: show-elem .3s 2s forwards;
           &::after {
             content: '';
             position: absolute;
@@ -479,6 +532,8 @@ export default {
           width: 3rem;
           height: 2.8rem;
           cursor: pointer;
+          opacity: 0;
+          animation: show-elem .3s 2s forwards;
           .line {
             position: absolute;
             top: 2.6rem;
@@ -504,8 +559,12 @@ export default {
             }
           }
         }
-        .StandardButton {
+        .StandardButton,
+        .Btn {
           margin-top: 4.6rem;
+          transform: translateY(15rem);
+          opacity: 0;
+          animation: text-show 1s 2s forwards;
         }
       }
       &_n1 {
@@ -513,10 +572,11 @@ export default {
         .section__left {
           position: relative;
           flex: 1;
-          z-index: 1;
+          z-index: 2;
           .title {
             padding-top: 22.6rem;
             line-height: 11rem;
+            z-index: 1;
           }
           .info {
             font-size: 4rem;
@@ -535,16 +595,11 @@ export default {
             object-fit: cover;
             transform: scale(0);
             opacity: 0;
-            &.visible {
-              transform: scale(1);
-              opacity: 1;
-            }
             &_n0 {
               top: 10rem;
               right: 0;
               widows:  65.9rem;
               height: 28rem;
-              transition: transform 1.2s .4s, opacity 1.2s .4s;
             }
             &_n1 {
               top: 32.8rem;
@@ -552,14 +607,12 @@ export default {
               widows:  34.3rem;
               height: 29.2rem;
               z-index: 1;
-              transition: transform 1.2s, opacity 1.2s;
             }
             &_n2 {
               top: 56.3rem;
               right: 0;
               widows:  29.4rem;
               height: 35.4rem;
-              transition: transform 1.2s .6s, opacity 1.2s .6s;
             }
             &_n3 {
               top: 52.7rem;
@@ -567,7 +620,6 @@ export default {
               widows:  65.4rem;
               height: 50rem;
               z-index: 2;
-              transition: transform 1.2s, opacity 1.2s;
             }
           }
           .description {

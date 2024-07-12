@@ -44,6 +44,7 @@ export default {
       font-size: 2.3rem;
       overflow: hidden;
       clip-path: polygon(100% 0, 100% 64%, 92% 100%, 0 100%, 0 0);
+      transition: box-shadow .6s;
       cursor: pointer;
       .arrow-btn {
         height: 1.8rem;
