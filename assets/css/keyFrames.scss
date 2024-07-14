@@ -1,0 +1,24 @@
+@keyframes animation-up-down {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+@keyframes text-show {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes show-elem {
+    to {
+        opacity: 1;
+    }
+}
+@keyframes anim-scale {
+    to {
+        transform: scale(1);
+    }
+}
