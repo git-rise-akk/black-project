@@ -1,5 +1,5 @@
 <template>
-  <div ref="page" class="page page_home" @wheel="wheelEvent">
+  <div ref="page" :class="['page page_home', {'page_first-download': firstDownloadStore.active }]" @wheel="wheelEvent">
     <Logo />
       <video ref="video" class="video" src="/pages/home/major.mp4" poster="/pages/home/major.jpg" playsinline loop muted autoplay></video>
       <div class="info">
@@ -31,9 +31,13 @@ export default {
     };
   },
   computed: {
-    ...mapStores(headerState)
+    ...mapStores(firstDownload)
   },
-  mounted() {},
+  mounted() {
+    setTimeout(() => {
+      this.firstDownloadStore.active = false;
+    }, 6000);
+  },
   methods: {
     switchesSound() {
       this.sound = !this.sound;
@@ -61,6 +65,7 @@ export default {
 
 <style lang="scss">
   .page.page_home {
+    position: absolute;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -72,8 +77,6 @@ export default {
       height: 100vh;
       width: 100vw;
       object-fit: cover;
-      transform: scale(1.1);
-      animation: anim-scale 2.2s forwards;
     }
     .info {
       position: relative;
@@ -81,9 +84,6 @@ export default {
       font-weight: 300;
       margin-top: 4.6rem;
       line-height: 3.6rem;
-      transform: translateY(15rem);
-      opacity: 0;
-      animation: text-show 1s 2s forwards;
     }
     .scroll-down {
       position: absolute;
@@ -97,8 +97,6 @@ export default {
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      opacity: 0;
-      animation: show-elem .3s 2s forwards;
       &::after {
         content: '';
         position: absolute;
@@ -128,8 +126,6 @@ export default {
       width: 3rem;
       height: 2.8rem;
       cursor: pointer;
-      opacity: 0;
-      animation: show-elem .3s 2s forwards;
       .line {
         position: absolute;
         top: 2.6rem;
@@ -155,12 +151,32 @@ export default {
         }
       }
     }
-    .StandardButton,
     .Btn {
       margin-top: 4.6rem;
-      transform: translateY(15rem);
-      opacity: 0;
-      animation: text-show 1s 2s forwards;
+    }
+    &.page_first-download {
+      .video {
+        transform: scale(1.1);
+        animation: anim-scale 2.2s forwards;
+      }
+      .sound_wrapper {
+        opacity: 0;
+        animation: show-elem .3s 2s forwards;
+      }
+      .scroll-down {
+        opacity: 0;
+        animation: show-elem .3s 2s forwards;
+      }
+      .Btn {
+        opacity: 0;
+        transform: translateY(15rem);
+        animation: text-show 1s 2s forwards;
+      }
+      .info {
+        transform: translateY(15rem);
+        opacity: 0;
+        animation: text-show 1s 2s forwards;
+      }
     }
   }
 </style>

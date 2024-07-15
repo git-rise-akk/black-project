@@ -8,7 +8,7 @@ export default defineNuxtConfig({
             },
             charset: "utf-8",
         },
-        pageTransition: { name: 'page'}
+        pageTransition: { name: 'page' }
     },
     modules: [
         '@pinia/nuxt',
@@ -40,8 +40,5 @@ export default defineNuxtConfig({
     devServer: {
         host: '0.0.0.0',
         port: 80,
-    },
-    app: {
-        pageTransition: { name: 'page'}
     },
 })

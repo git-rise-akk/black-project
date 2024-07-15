@@ -1,5 +1,5 @@
 <template>
-  <header :class="[{ visible: headerStore.state }, { start: headerStore.startClass }]">
+  <header :class="[{ visible: headerStore.state }, { start: this.$route.fullPath === '/' && firstDownloadStore.active }]">
     <div class="header_wrapper">
       <nuxt-icon class="logo" name="logo" filled />
       <nav class="menu">
@@ -26,7 +26,7 @@ export default {
     };
   },
   computed: {
-    ...mapStores(headerState)
+    ...mapStores(headerState, firstDownload)
   },
   mounted() {
   }

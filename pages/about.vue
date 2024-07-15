@@ -302,6 +302,7 @@
       ...mapStores(headerState)
     },
     mounted() {
+      let targetScrollOld = 0;
       const lenis = new Lenis({
         wrapper: this.$refs.page,
         content: this.$refs.page.querySelector('.scroll')
@@ -317,9 +318,13 @@
   
       lenis.on('scroll', (e) => {
         ScrollTrigger.update
-        if(e.animatedScroll > 0) {
-          this.headerStore.startClass = false;
+        console.log(e.direction, e.targetScroll, targetScrollOld);
+        
+        if(e.targetScroll === 0  && targetScrollOld === e.targetScroll && e.direction === -1) {
+            this.$router.push('/');
         }
+
+        targetScrollOld = e.targetScroll;
   
         if (e.direction === 1) {
           this.headerStore.state = false;
@@ -328,7 +333,7 @@
         }
       })
   
-      const imgs = gsap.utils.toArray('.section_n1 .img');
+      const imgs = gsap.utils.toArray('.section_n0 .img');
       imgs.forEach((img, index) => {
         gsap.to(img, {
           scale: 1,
@@ -338,7 +343,7 @@
           scrollTrigger: {
             trigger: img,
             start: 'center bottom',
-            scroller: '.page_home',
+            scroller: '.page_about',
             end: 'center top',
             markers: true,
           }
@@ -377,6 +382,7 @@
       opacity: 0;
     }
     .page.page_about {
+      position: absolute;
       height: 100vh;
       width: 100vw;
       overflow: hidden;
