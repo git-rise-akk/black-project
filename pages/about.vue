@@ -1,7 +1,7 @@
 <template>
-    <div ref="page" class="page page_about">
+    <div ref="page" class="page page_about page_up" @wheel="wheelEvent">
       <div class="scroll">
-        <section class="section section_n0">
+        <section class="section section_start">
           <div class="section__left">
             <div class="title">
             Мы —<br />
@@ -32,7 +32,7 @@
             </div>
           </div>
         </section>
-        <section class="section section_n1">
+        <section class="section section_about">
           <h2 class="title title_page">О компании</h2>
           <ul class="about">
             <li class="about__item about__item_n0">
@@ -55,7 +55,7 @@
                 <img class="img img_n1" src="/pages/home/section_2/01.jpg" />
               </div>
             </li>
-            <li class="about__item about__item_n2">
+            <li class="about__item about__item_n1">
               <div class="text-content">
                 <div class="title">
                   Мы стремимся дать нашим<br />
@@ -73,7 +73,7 @@
                 <img class="img img_n2" src="/pages/home/section_2/04.jpg" />
               </div>
             </li>
-            <li class="about__item about__item_n3">
+            <li class="about__item about__item_n2">
               <div class="text-content">
                 <div class="title">
                   Предоставляем качественную<br />
@@ -90,7 +90,7 @@
                 <img class="img img_n2" src="/pages/home/section_2/07.jpg" />
               </div>
             </li>
-            <li class="about__item about__item_n4">
+            <li class="about__item about__item_n3">
               <div class="text-content">
                 <div class="title">
                   Мы — команда инженеров,<br />
@@ -111,7 +111,7 @@
             </li>
           </ul>
         </section>
-        <section class="section section_n2">
+        <section class="section section_services">
           <h2 class="title title_page">Услуги</h2>
           <ul class="services">
             <li class="service">
@@ -215,7 +215,7 @@
             </li>
           </ul>
         </section>
-        <section class="section section_n3">
+        <section class="section section_portfolio">
           <h2 class="title title_page">Портфолио</h2>
           <ul class="projects">
             <li class="project project_n0" @click="openPopup = true">
@@ -241,7 +241,7 @@
             </li>
           </ul>
         </section>
-        <section class="section section_n4">
+        <section class="section section_contacts">
           <div class="contacts">
             <div class="contacts__left">
               <div class="feature">
@@ -290,20 +290,25 @@
   import gsap from 'gsap';
   import { mapStores } from 'pinia'
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Logo from "~/components/Logo.vue";
   export default {
     data() {
       return {
         openPopup: false,
         openPopupService: false,
         idPopupService: 0,
+        posScroll: 0,
+        nextPage: false,
+        lenis: null,
       };
     },
     computed: {
-      ...mapStores(headerState)
+      ...mapStores(headerState, firstDownload)
     },
     mounted() {
+      this.firstDownloadStore.active = false;
       let targetScrollOld = 0;
-      const lenis = new Lenis({
+      this.lenis = new Lenis({
         wrapper: this.$refs.page,
         content: this.$refs.page.querySelector('.scroll')
       })
@@ -311,17 +316,19 @@
       gsap.registerPlugin(ScrollTrigger);
   
       gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
+        this.lenis.raf(time * 1000);
       });
   
       gsap.ticker.lagSmoothing(0);
   
-      lenis.on('scroll', (e) => {
+      this.lenis.on('scroll', (e) => {
         ScrollTrigger.update
-        console.log(e.direction, e.targetScroll, targetScrollOld);
         
-        if(e.targetScroll === 0  && targetScrollOld === e.targetScroll && e.direction === -1) {
-            this.$router.push('/');
+        if(e.targetScroll === 0) {
+          setTimeout(() => {
+            this.lenis.stop();
+            this.nextPage = true;
+          }, 500)
         }
 
         targetScrollOld = e.targetScroll;
@@ -333,7 +340,7 @@
         }
       })
   
-      const imgs = gsap.utils.toArray('.section_n0 .img');
+      const imgs = gsap.utils.toArray('.section_start .img');
       imgs.forEach((img, index) => {
         gsap.to(img, {
           scale: 1,
@@ -351,9 +358,6 @@
       });
     },
     methods: {
-      scrollDown() {
-        console.log('test');
-      },
       opensPopupService(id) {
         this.openPopupService = true;
         this.idPopupService = id;
@@ -367,6 +371,19 @@
         }
         return time;
       },
+      wheelEvent(e) {
+        if (this.nextPage && e.deltaY <= this.posScroll) {
+          this.$router.push('/');
+        } else {
+          this.nextPage = false;
+        }
+        setTimeout(() => {
+          this.posScroll = e.deltaY;
+        }, 600);
+      }
+    },
+    beforeUnmount() {
+      window.removeEventListener('wheel', this.$refs.page)
     }
   }
   </script>
@@ -393,7 +410,7 @@
           text-align: center;
           padding-top: 27.7rem;
         }
-        &_n0 {
+        &_start {
           display: flex;
           .section__left {
             position: relative;
@@ -458,7 +475,7 @@
             }
           }
         }
-        &_n1 {
+        &_about {
           .about {
             padding-top: 8.5rem;
             .about__item {
@@ -593,7 +610,7 @@
             }
           }
         }
-        &_n2 {
+        &_services {
           .services {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -647,7 +664,7 @@
             }
           }
         }
-        &_n3 {
+        &_portfolio {
           .projects {
             margin-top: 9.7rem;
             .project {
@@ -711,7 +728,7 @@
             }
           }
         }
-        &_n4 {
+        &_contacts {
           padding: 30.1rem 10rem 30.4rem;
           .contacts {
             display: flex;

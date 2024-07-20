@@ -11,12 +11,24 @@
                 </div>
             </div>
             <div class="PopupService__right">
-                <img
-                    v-for="(img, key) in info[id].images"
-                    :key="key"
-                    :src="`/popups/popup-service/${id}/${img}.jpg`"
-                    :class="`image image_n${key}`"
-                />
+                <div class="part part_n0">
+                    <img 
+                        :src="`/popups/popup-service/${id}/${info[id].images[0]}.jpg`"
+                        class="image"
+                    />
+                </div>
+                <div class="part part_n1">
+                    <img 
+                        :src="`/popups/popup-service/${id}/${info[id].images[1]}.jpg`"
+                        class="image"
+                    />
+                </div>
+                <div class="part part_n2">
+                    <img 
+                        :src="`/popups/popup-service/${id}/${info[id].images[2]}.jpg`"
+                        class="image"
+                    />
+                </div>
             </div>
             <Close @click="closingEvent()"/>
         </div>
@@ -105,6 +117,7 @@
   align-items: center;
   pointer-events: none;
   &_active {
+    opacity: 1;
     pointer-events: auto;
     .PopupService_bg {
         background-color: rgba($color: #000000, $alpha: .2);
@@ -112,6 +125,8 @@
     }
     .PopupService_wrapper {
         transform: translateY(0);
+        opacity: 1;
+        transition: transform .5s;
     }
   }
   &_bg {
@@ -134,7 +149,8 @@
     justify-content: space-between;
     background: $popup;
     transform: translateY(calc(100% + 1.6rem));
-    transition: transform .5s;
+    opacity: 0;
+    transition: transform .5s, opacity .1s .6s;
     .Close {
         width: 10rem;
         height: 10rem;
@@ -173,26 +189,32 @@
     position: relative;
     width: 73.6rem;
     height: 100%;
-    .image {
-        position: absolute;
-        object-fit: cover;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1.7fr 1fr;
+    grid-column-gap: 0.6rem;
+    grid-row-gap: 0.6rem;
+    .part {
+        position: relative;
+        .image {
+            position: absolute;
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        } 
         &_n0 {
-            top: 0;
-            right: 0;
-            width: 44.2rem;
-            height: calc(62% - 0.3rem);
+            grid-area: 1 / 1 / 3 / 2;
+            .image {
+                top: 10.1rem;
+                height: 65%;
+            } 
         }
         &_n1 {
-            top: 10.1rem;
-            right: 44.8rem;
-            width: 28.4rem;
-            height: 55.7rem;
         }
         &_n2 {
-            bottom: 0;
-            right: 5.8rem;
-            width: 38.4rem;
-            height: calc(38% - 0.3rem);
+            .image {
+                width: 81%;
+            } 
         }
     }
   }

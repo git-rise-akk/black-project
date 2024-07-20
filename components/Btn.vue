@@ -1,7 +1,7 @@
 <template>
     <div ref="btn" class="Btn" :style="{ width: `${width}rem`, height: `${height}rem` }">
       <svg width="100%" height="100%" viewBox="0 0 520 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M520 0H0V110H492.284L520 82.2841V0Z" fill="#2D3331" stroke="white" stroke-width="3" :stroke-dasharray="`218rem`" :stroke-dashoffset="`218rem`" />
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M520 0H0V110H492.284L520 82.2841V0Z" fill="#2D3331" stroke="white" stroke-width="3" :stroke-dasharray="`${countsLengthContour}px`" :stroke-dashoffset="`${countsLengthContour}px`" />
       </svg>
       <div class="Btn_content">
         <div class="StandardButton__text">{{ text }}</div>
@@ -32,11 +32,10 @@ export default {
   },
   computed: {
     countsLengthContour() {
-      // setTimeout(() => {
-      //   console.log(this.$refs.btn);
-      // }, 1000);
-      console.log(this.$refs?.btn);
-      return this.$refs?.btn?.getTotalLength();
+      const corner = 40; // длина угла
+      const width = +this.width * 10;
+      const height = +this.height * 10;
+      return (width + height + corner) * 2;
     },
   },
   mounted() {

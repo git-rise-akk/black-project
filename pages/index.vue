@@ -1,5 +1,5 @@
 <template>
-  <div ref="page" :class="['page page_home', {'page_first-download': firstDownloadStore.active }]" @wheel="wheelEvent">
+  <div ref="page" :class="['page page_home page_down', {'page_first-download': firstDownloadStore.active }]" @wheel="wheelEvent">
     <Logo />
       <video ref="video" class="video" src="/pages/home/major.mp4" poster="/pages/home/major.jpg" playsinline loop muted autoplay></video>
       <div class="info">
@@ -54,11 +54,14 @@ export default {
       this.openPopupService = true;
       this.idPopupService = id;
     },
-    wheelEvent(direction) {
-      if(direction.deltaY === 100) {
+    wheelEvent(e) {
+      if(e.deltaY >= 1 ) {
         this.$router.push('/about');
       }
     },
+  },
+  beforeUnmount() {
+    window.removeEventListener('wheel', this.$refs.page)
   }
 }
 </script>

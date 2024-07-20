@@ -3,7 +3,7 @@
     <div class="header_wrapper">
       <nuxt-icon class="logo" name="logo" filled />
       <nav class="menu">
-          <div class="menu__item">О компании</div>
+          <NuxtLink class="menu__item" to="/about">О компании</NuxtLink>
           <div class="menu__item">Услуги</div>
           <div class="menu__item">Портфолио</div>
       </nav>

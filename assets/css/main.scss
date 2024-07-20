@@ -79,10 +79,12 @@ html.lenis, html.lenis body {
   transition: transform 1s;
 }
 
-.page-enter-from {
-  transform: translateY(100%);
+.page-enter-from.page_down,
+.page-leave-to.page_down {
+  transform: translateY(-100%);
 }
 
-.page-leave-to {
-  transform: translateY(-100%);
+.page-enter-from.page_up,
+.page-leave-to.page_up {
+  transform: translateY(100%);
 }
