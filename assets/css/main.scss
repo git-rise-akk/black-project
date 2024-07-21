@@ -98,3 +98,29 @@ html.lenis, html.lenis body {
 .show-leave-to {
   opacity: 0;
 }
+
+.toggle-letter-wrapper {
+  display: inline-flex;
+  overflow: hidden;
+  .text-anim & {
+    height: 12rem;
+  }
+  .text-anim-line & {
+    height: 4.7rem;
+  }
+  .title.title_company.text-anim-line & {
+    height: 4.7rem;
+  }
+  .title.text-anim-line & {
+    height: 10rem;
+  }
+  .description.text-anim-line & {
+    height: 2.6rem;
+  }
+  .toggle-letter {
+    display: block;
+    position: relative;
+    will-change: opacity, transform;
+    transform-origin: 0 50%;
+  }
+}

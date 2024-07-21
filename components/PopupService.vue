@@ -151,15 +151,6 @@
     transform: translateY(calc(100% + 1.6rem));
     opacity: 0;
     transition: transform .5s, opacity .1s .6s;
-    .Close {
-        width: 10rem;
-        height: 10rem;
-        top: 0;
-        right: 0;
-        svg {
-            width: 3.7rem;
-        }
-    }
   }
   &__left {
     width: 54.4rem;

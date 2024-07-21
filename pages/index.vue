@@ -160,6 +160,7 @@ export default {
     &.page_first-download {
       .video {
         transform: scale(1.1);
+        will-change: transform;
         animation: anim-scale 2.2s forwards;
       }
       .sound_wrapper {

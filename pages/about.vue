@@ -3,12 +3,12 @@
       <div class="scroll">
         <section class="section section_start">
           <div class="section__left">
-            <div class="title">
+            <div class="title text-anim-line">
             Мы —<br />
             светотехническая<br />
             компания
           </div>
-          <div class="info">
+          <div class="info text-anim-line">
             Предлагаем комплексные<br />
             решения для жилых<br />
             и коммерческих объектов,<br />
@@ -19,10 +19,18 @@
           <StandardButton text="посмотреть решения" width="52" />
           </div>
           <div class="section__right">
-            <img class="img img_n0" src="/pages/home/section_1/00.jpg" />
-            <img class="img img_n1" src="/pages/home/section_1/01.jpg" />
-            <img class="img img_n2" src="/pages/home/section_1/02.jpg" />
-            <img class="img img_n3" src="/pages/home/section_1/03.jpg" />
+            <div class="img_wrapper img_wrapper_n0">
+              <img class="img" src="/pages/home/section_1/00.jpg" />
+            </div>
+            <div class="img_wrapper img_wrapper_n1">
+              <img class="img" src="/pages/home/section_1/01.jpg" />
+            </div>
+            <div class="img_wrapper img_wrapper_n2">
+              <img class="img" src="/pages/home/section_1/02.jpg" />
+            </div>
+            <div class="img_wrapper img_wrapper_n3">
+              <img class="img" src="/pages/home/section_1/03.jpg" />
+            </div>
             <div class="description">
               Опыт в области<br />
               проектирования,<br />
@@ -33,11 +41,11 @@
           </div>
         </section>
         <section class="section section_company">
-          <h2 class="title title_page">О компании</h2>
+          <h2 class="title title_page text-anim">О компании</h2>
           <ul class="about">
             <li class="about__item about__item_n0">
               <div class="text-content">
-                <div class="title">
+                <div class="title title_company text-anim-line">
                   Компания Black Project<br />
                   уникальна своим<br />
                   инженерным подходом<br />
@@ -51,8 +59,12 @@
                 </p>
               </div>
               <div class="images">
-                <img class="img img_n0" src="/pages/home/section_2/00.jpg" />
-                <img class="img img_n1" src="/pages/home/section_2/01.jpg" />
+                <div class="img_wrapper img_wrapper_n0">
+                  <img class="img" src="/pages/about/company/00.jpg" />
+                </div>
+                <div class="img_wrapper img_wrapper_n1">
+                  <img class="img" src="/pages/about/company/01.jpg" />
+                </div>
               </div>
             </li>
             <li class="about__item about__item_n1">
@@ -68,9 +80,15 @@
                 </p>
               </div>
               <div class="images">
-                <img class="img img_n0" src="/pages/home/section_2/02.jpg" />
-                <img class="img img_n1" src="/pages/home/section_2/03.jpg" />
-                <img class="img img_n2" src="/pages/home/section_2/04.jpg" />
+                <div class="img_wrapper img_wrapper_n0">
+                  <img class="img img_n0" src="/pages/about/company/02.jpg" />
+                </div>
+                <div class="img_wrapper img_wrapper_n1">
+                  <img class="img img_n1" src="/pages/about/company/03.jpg" />
+                </div>
+                <div class="img_wrapper img_wrapper_n2">
+                  <img class="img img_n2" src="/pages/about/company/04.jpg" />
+                </div>
               </div>
             </li>
             <li class="about__item about__item_n2">
@@ -85,9 +103,15 @@
                 </p>
               </div>
               <div class="images">
-                <img class="img img_n0" src="/pages/home/section_2/05.jpg" />
-                <img class="img img_n1" src="/pages/home/section_2/06.jpg" />
-                <img class="img img_n2" src="/pages/home/section_2/07.jpg" />
+                <div class="img_wrapper img_wrapper_n0">
+                  <img class="img img_n0" src="/pages/about/company/05.jpg" />
+                </div>
+                <div class="img_wrapper img_wrapper_n1">
+                  <img class="img img_n1" src="/pages/about/company/06.jpg" />
+                </div>
+                <div class="img_wrapper img_wrapper_n2">
+                  <img class="img img_n2" src="/pages/about/company/07.jpg" />
+                </div>
               </div>
             </li>
             <li class="about__item about__item_n3">
@@ -105,8 +129,12 @@
                 </p>
               </div>
               <div class="images">
-                <img class="img img_n0" src="/pages/home/section_2/08.jpg" />
-                <img class="img img_n1" src="/pages/home/section_2/09.jpg" />
+                <div class="img_wrapper img_wrapper_n0">
+                  <img class="img img_n0" src="/pages/about/company/08.jpg" />
+                </div>
+                <div class="img_wrapper img_wrapper_n1">
+                  <img class="img img_n1" src="/pages/about/company/09.jpg" />
+                </div>
               </div>
             </li>
           </ul>
@@ -291,8 +319,10 @@
   import gsap from 'gsap';
   import { mapStores } from 'pinia'
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { toggleLetters } from '@/mixins/textAnim.js';
 
   export default {
+    mixins: [toggleLetters],
     data() {
       return {
         openPopup: false,
@@ -362,10 +392,11 @@
         ScrollTrigger.update
         
         if(e.targetScroll === 0) {
-          setTimeout(() => {
-            this.lenis.stop();
-            this.nextPage = true;
-          }, 500)
+          // setTimeout(() => {
+          //   this.lenis.stop();
+          //   this.nextPage = true;
+          // }, 500)
+          this.$router.push('/');
         }
   
         if (e.direction === 1) {
@@ -376,10 +407,47 @@
       })
   
       const imgs = gsap.utils.toArray('.section_start .img');
+      const imgsCompany = gsap.utils.toArray('.section_company .img');
+      const imgsWrapper = gsap.utils.toArray('.section_start .img_wrapper');
+      const imgsCompanyWrapper = gsap.utils.toArray('.section_company .img_wrapper');
+      const titleCompany = gsap.utils.toArray('.section_company .about__item .title');
+      const services = gsap.utils.toArray('.section_services .service');
+      const projects = gsap.utils.toArray('.section_portfolio .project');
+      console.log(projects);
+      
+      const elTextAnim = document.querySelectorAll('.text-anim');
+
+      const elTextAnimLine = document.querySelectorAll('.section_start .text-anim-line');
+      const elTextAnimLine1 = document.querySelectorAll('.section_start .title.text-anim-line');
+
+      const elTextAnimCompany = document.querySelectorAll('.section_company .text-anim-line');
+      
+      let showTitle = null;
+      let showTextLine = null;
+      let showTextLine1 = null;
+      let showTextLineCompany = null;
+
+      // start
+
       imgs.forEach((img, index) => {
         gsap.to(img, {
           scale: 1,
-          opacity: 1,
+          duration: 1.2,
+          delay: this.returnsDelayTime(index),
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: img,
+            start: 'center bottom',
+            scroller: '.page_about',
+            end: 'center top',
+            // markers: true,
+          }
+        });
+      });
+
+      imgsWrapper.forEach((img, index) => {
+        gsap.to(img, {
+          y: 0,
           duration: 1.2,
           delay: this.returnsDelayTime(index),
           scrollTrigger: {
@@ -387,10 +455,158 @@
             start: 'center bottom',
             scroller: '.page_about',
             end: 'center top',
-            markers: true,
+            scrub: true,
           }
         });
       });
+
+      elTextAnim.forEach(el => {
+        showTitle = new toggleLetters({
+          frame: el,
+          duration: 400,
+        });
+      });
+      
+      elTextAnimLine1.forEach(el => {
+        showTextLine1 = new toggleLetters({
+          frame: el,
+          duration: 900,
+          delay: 100,
+          useStrings: true,
+        });
+      });
+
+      elTextAnimLine.forEach(el => {
+        showTextLine = new toggleLetters({
+          frame: el,
+          duration: 900,
+          delay: 100,
+          useStrings: true,
+        }, showTextLine1.toggle(true));
+      });
+
+      gsap.to('.section_start', {
+        scrollTrigger: {
+          trigger: '.section_start',
+          start: 'center bottom',
+          scroller: '.page_about',
+          end: 'center top',
+          onEnter: () => {
+            showTextLine.toggle(true);
+          }
+        }
+      });
+
+      gsap.to('.section_start .StandardButton', {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: '.section_start .StandardButton',
+          start: 'top bottom',
+          scroller: '.page_about',
+          end: 'top top',
+        }
+      });
+
+      // company
+
+      elTextAnimCompany.forEach(el => {
+        showTextLineCompany = new toggleLetters({
+          frame: el,
+          duration: 900,
+          delay: 100,
+          useStrings: true,
+        });
+      });
+
+      gsap.to('.section_company .title', {
+        scrollTrigger: {
+          trigger: '.section_company .title',
+          start: 'center 90%',
+          scroller: '.page_about',
+          end: 'center top',
+          onEnter: () => {
+            showTitle.toggle(true);
+          }
+        }
+      });
+
+      titleCompany.forEach((title, index) => {
+        gsap.to(title, {
+          scrollTrigger: {
+            trigger: '.about__item .title',
+            start: 'center bottom',
+            scroller: '.page_about',
+            end: 'center top',
+            onEnter: () => {
+              showTextLineCompany.toggle(true);
+            }
+          }
+        });
+      });
+
+      imgsCompany.forEach((img, index) => {
+        gsap.to(img, {
+          scale: 1,
+          duration: 1.2,
+          delay: index % 2 !== 0 ? 0.4 : 0,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: img,
+            start: 'center bottom',
+            scroller: '.page_about',
+            end: 'center top',
+          }
+        });
+      });
+
+      imgsCompanyWrapper.forEach((img, index) => {
+        gsap.to(img, {
+          y: 0,
+          duration: 1.2,
+          delay: index % 2 !== 0 ? 0.4 : 0,
+          scrollTrigger: {
+            trigger: img,
+            start: 'center bottom',
+            scroller: '.page_about',
+            end: 'center top',
+            scrub: true,
+          }
+        });
+      });
+
+      // services
+      services.forEach((service, index) => {
+        gsap.to(service, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          scrollTrigger: {
+            trigger: service,
+            start: 'top bottom',
+            scroller: '.page_about',
+            end: 'bottom top',
+          }
+        });
+      });
+
+      // portfolio
+      projects.forEach((project, index) => {
+        gsap.to(project, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: project,
+            start: 'top bottom',
+            scroller: '.page_about',
+            end: 'bottom top',
+            // markers: true,
+          }
+        });
+      });
+      // contacts
     },
     methods: {
       opensPopupService(id) {
@@ -413,32 +629,34 @@
       },
       returnsDelayTime(index) {
         let time = 0;
-        if (index === 2) {
-          time = 0.2;
+        if (index === 1) {
+          time = 0.6
+        } else if (index === 2) {
+          time = 0.3
         } else if (index === 3) {
-          time = 0.4
+          time = 0.9
         }
         return time;
       },
       wheelEvent(e) {
-        if (this.nextPage && e.deltaY <= this.posScroll) {
-          this.$router.push('/');
-        } else {
-          this.nextPage = false;
-        }
-        setTimeout(() => {
-          this.posScroll = e.deltaY;
-        }, 600);
-      },
+        // if (this.nextPage && e.deltaY <= this.posScroll) {
+        //   this.$router.push('/');
+        // } else {
+        //   this.nextPage = false;
+        // }
+        // setTimeout(() => {
+        //   this.posScroll = e.deltaY;
+        // }, 600);
+      },  
       switchesSections(parametr, animation) {
         if ( parametr === 'services') {
-          this.lenis.scrollTo('.section_services', {immediate: animation, lock: true,});
+          this.lenis.scrollTo('.section_services', {immediate: animation, lock: true, offset: 100});
         } else if(parametr === 'portfolio') {
-          this.lenis.scrollTo('.section_portfolio', {immediate: animation, lock: true,});
+          this.lenis.scrollTo('.section_portfolio', {immediate: animation, lock: true, offset: 100});
         } else if (parametr === 'company') {
-          this.lenis.scrollTo('.section_company', {immediate: animation, lock: true,});
+          this.lenis.scrollTo('.section_company', {immediate: animation, lock: true, offset: 100});
         }
-      }
+      },
     },
     beforeUnmount() {
       window.removeEventListener('wheel', this.$refs.page)
@@ -487,40 +705,49 @@
             }
             .StandardButton {
               margin-top: 11.1rem;
+              opacity: 0;
+              transform: translateY(100%);
             }
           }
           .section__right {
             position: relative;
-            .img {
+            .img_wrapper {
               position: absolute;
-              object-fit: cover;
-              transform: scale(0);
-              opacity: 0;
+              transform: translateY(20%);
+              display: flex;
+              align-items: center;
+              justify-content: center;
               &_n0 {
                 top: 10rem;
                 right: 0;
-                widows:  65.9rem;
+                width: 65.9rem;
                 height: 28rem;
               }
               &_n1 {
                 top: 32.8rem;
                 right: 5.8rem;
-                widows:  34.3rem;
+                width: 34.3rem;
                 height: 29.2rem;
                 z-index: 1;
               }
               &_n2 {
                 top: 56.3rem;
                 right: 0;
-                widows:  29.4rem;
+                width: 29.4rem;
                 height: 35.4rem;
               }
               &_n3 {
                 top: 52.7rem;
                 right: 28.2rem;
-                widows:  65.4rem;
+                width: 65.4rem;
                 height: 50rem;
                 z-index: 2;
+              }
+              .img {
+                object-fit: cover;
+                transform: scale(0);
+                width: 100%;
+                height: 100%;
               }
             }
             .description {
@@ -555,9 +782,22 @@
               .images {
                 height: 100%;
                 position: relative;
-                object-fit: contain;
-                .img {
+                object-fit: contain;  
+                .img_wrapper {
                   position: absolute;
+                  transform: translateY(50%);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  &_n1 {
+                    transform: translateY(30%);
+                  }
+                  .img {
+                    object-fit: cover;
+                    transform: scale(0);
+                    width: 100%;
+                    height: 100%;
+                  }
                 }
               }
               &:last-child {
@@ -567,7 +807,7 @@
                 height: 35.1rem;
                 .images {
                   width: 77.2rem;
-                  .img {
+                  .img_wrapper {
                     &_n0 {
                       top: 0;
                       left: 0;
@@ -592,7 +832,7 @@
                 }
                 .images {
                   width: 67.8rem;
-                  .img {
+                  .img_wrapper {
                     &_n0 {
                       top: 0;
                       left: 0;
@@ -618,7 +858,7 @@
                 height: 38.8rem;
                 .images {
                   width: 73.8rem;
-                  .img {
+                  .img_wrapper {
                     &_n0 {
                       top: 7.1rem;
                       right: 0;
@@ -649,7 +889,7 @@
                 }
                 .images {
                   width: 68.1rem;
-                  .img {
+                  .img_wrapper {
                     &_n0 {
                       top: 0;
                       left: 0;
@@ -678,6 +918,8 @@
             .service {
               display: flex;
               flex-direction: column;
+              opacity: 0;
+              transform: translateY(40%);
               .number {
                 font-size: 15rem;
                 font-weight: 400;
@@ -735,6 +977,8 @@
               justify-content: center;
               cursor: pointer;
               overflow: hidden;
+              opacity: 0;
+              transform: translateY(40%);
               &::after {
                 content: '';
                 position: absolute;
