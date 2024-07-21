@@ -4,8 +4,8 @@
       <nuxt-icon class="logo" name="logo" filled />
       <nav class="menu">
           <NuxtLink class="menu__item" to="/about">О компании</NuxtLink>
-          <div class="menu__item">Услуги</div>
-          <div class="menu__item">Портфолио</div>
+          <NuxtLink class="menu__item" to="/about?section=services">Услуги</NuxtLink>
+          <NuxtLink class="menu__item" to="/about?section=portfolio">Портфолио</NuxtLink>
       </nav>
       <div class="contacts">
         <a class="number" href="tel:+79990009900">+7 999 000 99 00</a>

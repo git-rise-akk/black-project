@@ -218,22 +218,22 @@
         <section class="section section_portfolio">
           <h2 class="title title_page">Портфолио</h2>
           <ul class="projects">
-            <li class="project project_n0" @click="openPopup = true">
-              <img class="project__cover" src="/pages/home/section_3/room-lighting/cover.jpg" />
+            <li class="project project_n0" @click="opensPopupGallery(1)">
+              <img class="project__cover" src="/pages/about/portfolio/room-lighting/cover.jpg" />
               <div class="project__name">
                 <div class="title">room lighting</div>
                 <div class="subtitle">освещение комнаты</div>
               </div>
             </li>
-            <li class="project project_n1">
-              <img class="project__cover" src="/pages/home/section_3/bright-horizons-office/cover.jpg" />
+            <li class="project project_n1" @click="opensPopupGallery(2)">
+              <img class="project__cover" src="/pages/about/portfolio/bright-horizons-office/cover.jpg" />
               <div class="project__name">
                 <div class="title">Bright Horizons Office</div>
                 <div class="subtitle">освещение офиса</div>
               </div>
             </li>
-            <li class="project project_n2">
-              <img class="project__cover" src="/pages/home/section_3/architectural-lighting/cover.jpg" />
+            <li class="project project_n2" @click="opensPopupGallery(3)">
+              <img class="project__cover" src="/pages/about/portfolio/architectural-lighting/cover.jpg" />
               <div class="project__name">
                 <div class="title">architectural lighting<br />of the house</div>
                 <div class="subtitle">освещение дома</div>
@@ -272,14 +272,15 @@
         <Footer />
         <transition appear name="popup-fade">
           <PopupGallery
-            @closePopup="openPopup = false"
+            @closePopup="closesPopupGallery()"
+            :content="portfolioContent[typeInfoGallery]"
             v-if="openPopup"
           />
         </transition>
         <PopupService
-          :id="idPopupService" 
+          :id="idPopupService"
           :class="{'PopupService_active': openPopupService }"  
-          @closePopup="openPopupService = false" 
+          @closePopup="closesPopupService()" 
         />
       </div>
     </div>
@@ -290,7 +291,7 @@
   import gsap from 'gsap';
   import { mapStores } from 'pinia'
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Logo from "~/components/Logo.vue";
+
   export default {
     data() {
       return {
@@ -298,8 +299,35 @@ import Logo from "~/components/Logo.vue";
         openPopupService: false,
         idPopupService: 0,
         posScroll: 0,
-        nextPage: false,
+        nextPage: true,
         lenis: null,
+        portfolioContent: {
+          1: {
+            photos: [ '/pages/about/portfolio/room-lighting/00.jpg',
+                      '/pages/about/portfolio/room-lighting/01.jpg',
+                      '/pages/about/portfolio/room-lighting/02.jpg'
+                    ],
+            title: 'room lighting',
+            text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI'
+          },
+          2: {
+            photos: [ '/pages/about/portfolio/bright-horizons-office/00.jpg',
+                      '/pages/about/portfolio/bright-horizons-office/01.jpg',
+                      '/pages/about/portfolio/bright-horizons-office/02.jpg'
+                    ],
+            title: 'bright horizons office',
+            text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI'
+          },
+          3: {
+            photos: [ '/pages/about/portfolio/architectural-lighting/00.jpg',
+                      '/pages/about/portfolio/architectural-lighting/01.jpg',
+                      '/pages/about/portfolio/architectural-lighting/02.jpg'
+                    ],
+            title: 'architectural lighting',
+            text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI'
+          },
+        },
+        typeInfoGallery: '',
       };
     },
     computed: {
@@ -307,12 +335,11 @@ import Logo from "~/components/Logo.vue";
     },
     mounted() {
       this.firstDownloadStore.active = false;
-      let targetScrollOld = 0;
       this.lenis = new Lenis({
         wrapper: this.$refs.page,
         content: this.$refs.page.querySelector('.scroll')
       })
-  
+
       gsap.registerPlugin(ScrollTrigger);
   
       gsap.ticker.add((time) => {
@@ -330,8 +357,6 @@ import Logo from "~/components/Logo.vue";
             this.nextPage = true;
           }, 500)
         }
-
-        targetScrollOld = e.targetScroll;
   
         if (e.direction === 1) {
           this.headerStore.state = false;
@@ -361,6 +386,20 @@ import Logo from "~/components/Logo.vue";
       opensPopupService(id) {
         this.openPopupService = true;
         this.idPopupService = id;
+        this.lenis.stop();
+      },
+      closesPopupService() {
+        this.openPopupService = false;
+        this.lenis.start();
+      },
+      opensPopupGallery(type) {
+        this.openPopup = true;
+        this.typeInfoGallery = type;
+        this.lenis.stop();
+      },
+      closesPopupGallery() {
+        this.openPopup = false;
+        this.lenis.start();
       },
       returnsDelayTime(index) {
         let time = 0;

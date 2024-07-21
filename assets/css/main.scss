@@ -88,3 +88,13 @@ html.lenis, html.lenis body {
 .page-leave-to.page_up {
   transform: translateY(100%);
 }
+
+.show-enter-active,
+.show-leave-active {
+  transition: opacity .7s;
+}
+
+.show-enter-from,
+.show-leave-to {
+  opacity: 0;
+}
