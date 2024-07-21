@@ -1,9 +1,9 @@
 <template>
   <header :class="[{ visible: headerStore.state }, { start: this.$route.fullPath === '/' && firstDownloadStore.active }]">
     <div class="header_wrapper">
-      <nuxt-icon class="logo" name="logo" filled />
+      <NuxtLink to="/"><nuxt-icon class="logo" name="logo" filled /></NuxtLink>
       <nav class="menu">
-          <NuxtLink class="menu__item" to="/about">О компании</NuxtLink>
+          <NuxtLink class="menu__item" to="/about?section=company">О компании</NuxtLink>
           <NuxtLink class="menu__item" to="/about?section=services">Услуги</NuxtLink>
           <NuxtLink class="menu__item" to="/about?section=portfolio">Портфолио</NuxtLink>
       </nav>

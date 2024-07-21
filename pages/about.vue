@@ -32,7 +32,7 @@
             </div>
           </div>
         </section>
-        <section class="section section_about">
+        <section class="section section_company">
           <h2 class="title title_page">О компании</h2>
           <ul class="about">
             <li class="about__item about__item_n0">
@@ -333,12 +333,22 @@
     computed: {
       ...mapStores(headerState, firstDownload)
     },
+    watch: {
+      '$route.query': {
+        handler(query) {
+          this.switchesSections(query.section, false);
+        },
+      },
+    },
     mounted() {
+      const getParametr = this.$route.query.section;
       this.firstDownloadStore.active = false;
       this.lenis = new Lenis({
         wrapper: this.$refs.page,
         content: this.$refs.page.querySelector('.scroll')
       })
+
+      this.switchesSections(getParametr, true);
 
       gsap.registerPlugin(ScrollTrigger);
   
@@ -419,6 +429,15 @@
         setTimeout(() => {
           this.posScroll = e.deltaY;
         }, 600);
+      },
+      switchesSections(parametr, animation) {
+        if ( parametr === 'services') {
+          this.lenis.scrollTo('.section_services', {immediate: animation, lock: true,});
+        } else if(parametr === 'portfolio') {
+          this.lenis.scrollTo('.section_portfolio', {immediate: animation, lock: true,});
+        } else if (parametr === 'company') {
+          this.lenis.scrollTo('.section_company', {immediate: animation, lock: true,});
+        }
       }
     },
     beforeUnmount() {
@@ -514,7 +533,7 @@
             }
           }
         }
-        &_about {
+        &_company {
           .about {
             padding-top: 8.5rem;
             .about__item {
