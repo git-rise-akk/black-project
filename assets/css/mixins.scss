@@ -1,1 +1,29 @@
 @import 'colors';
+
+@mixin textCrop($line-height: 1, $top-adjustment: 0px, $bottom-adjustment: 0px) {
+  $top-crop: 10;
+  $bottom-crop: 6;
+  $crop-font-size: 36;
+  $crop-line-height: 1.2;
+
+  $dynamic-top-crop: calc(max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size);
+  $dynamic-bottom-crop: calc(max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size);
+
+  line-height: $line-height;
+
+  &::before,
+  &::after {
+	content: '';
+	display: block;
+	height: 0;
+	width: 0;
+  }
+
+  &::before {
+	margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+  }
+
+  &::after {
+	margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+  }
+}
