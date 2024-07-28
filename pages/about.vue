@@ -22,7 +22,7 @@
           </div>
           <StandardButton
               text="посмотреть решения"
-              width="52"
+              :width="52"
           />
         </div>
         <div class="section__right">
@@ -212,8 +212,8 @@
             </div>
             <StandardButton
                 text="обсудить проект"
-                width="42.5"
-                height="12"
+                :width="42.5"
+                :height="12"
             />
           </li>
           <li class="service">
@@ -238,8 +238,8 @@
             </div>
             <StandardButton
                 text="обсудить поставку"
-                width="42.5"
-                height="12"
+                :width="42.5"
+                :height="12"
             />
           </li>
           <li class="service">
@@ -261,8 +261,8 @@
             </div>
             <StandardButton
                 text="обсудить монтаж"
-                width="42.5"
-                height="12"
+                :width="42.5"
+                :height="12"
             />
           </li>
           <li class="service">
@@ -286,8 +286,8 @@
             </div>
             <StandardButton
                 text="обсудить пнр"
-                width="42.5"
-                height="12"
+                :width="42.5"
+                :height="12"
             />
           </li>
           <li class="service">
@@ -311,8 +311,8 @@
             </div>
             <StandardButton
                 text="обсудить ремонт"
-                width="42.5"
-                height="12"
+                :width="42.5"
+                :height="12"
             />
           </li>
           <li class="service">
@@ -334,8 +334,8 @@
             </div>
             <StandardButton
                 text="обсудить задачу"
-                width="42.5"
-                height="12"
+                :width="42.5"
+                :height="12"
             />
           </li>
         </ul>

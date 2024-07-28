@@ -7,14 +7,30 @@
     <svg
         width="100%"
         height="100%"
-        viewBox="0 0 520 110"
+        :viewBox="`0 0 ${width * fz} ${height * fz}`"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
+      <!--<path-->
+      <!--    fill-rule="evenodd"-->
+      <!--    clip-rule="evenodd"-->
+      <!--    d="M 520 0-->
+      <!--    H 0-->
+      <!--    V 110-->
+      <!--    H 492.284-->
+      <!--    L 520 82.2841-->
+      <!--    V 0-->
+      <!--    Z"-->
+      <!--    fill="#2D3331"-->
+      <!--    stroke="white"-->
+      <!--    stroke-width="3"-->
+      <!--    :stroke-dasharray="`${countsLengthContour}px`"-->
+      <!--    :stroke-dashoffset="`${countsLengthContour}px`"-->
+      <!--/>-->
       <path
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M520 0H0V110H492.284L520 82.2841V0Z"
+          :d="buttonPath"
           fill="#2D3331"
           stroke="white"
           stroke-width="3"
@@ -34,15 +50,17 @@
 </template>
 
 <script>
+import { useWindowStore } from '@/stores/windowStore.js';
+
 export default {
   props: {
     width: {
-      type: String,
-      default: '48',
+      type: Number,
+      default: 48,
     },
     height: {
-      type: String,
-      default: '11',
+      type: Number,
+      default: 11,
     },
     text: {
       type: String,
@@ -50,17 +68,37 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      windowStore: null,
+    };
   },
   computed: {
+    fz() {
+      return this.windowStore?.fontSize ?? 10;
+    },
     countsLengthContour() {
-      const corner = 40; // длина угла
-      const width = +this.width * 10;
-      const height = +this.height * 10;
-      return (width + height + corner) * 2;
+      const ANGLE = 4 * this.fz; // длина угла
+      const width = this.width * this.fz;
+      const height = this.height * this.fz;
+
+      const angleLineLength = Math.sqrt(2 * ANGLE ** 2);
+      return (width + height) * 2 + angleLineLength;
+    },
+    buttonPath() {
+      const ANGLE = 4 * this.fz;
+      return `
+        M 0 0
+        h ${this.width * this.fz}
+        v ${this.height * this.fz - ANGLE}
+        l ${-ANGLE} ${ANGLE}
+        h ${-this.width * this.fz + ANGLE}
+        z
+      `;
+
     },
   },
   mounted() {
+    this.windowStore = useWindowStore();
   },
   methods: {},
 };
