@@ -20,10 +20,10 @@
       которая настроена на решение любой<br />
       вашей задачи и запроса
     </div>
-    <!--<Btn text="заказать проект" />-->
     <StandardButton
-        :width="42.5"
-        :height="12"
+      :width="42.5"
+      :height="12"
+      text="заказать проект"
     />
     <div
         class="scroll-down"
@@ -194,7 +194,7 @@ export default {
     }
   }
 
-  .Btn {
+  .StandardButton {
     margin-top: 4.6rem;
   }
 
@@ -215,7 +215,7 @@ export default {
       animation: show-elem .3s 2s forwards;
     }
 
-    .Btn {
+    .StandardButton {
       opacity: 0;
       transform: translateY(15rem);
       animation: text-show 1s 2s forwards;

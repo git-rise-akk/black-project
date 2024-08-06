@@ -5,45 +5,29 @@
       :style="{ width: `${width}rem`, height: `${height}rem` }"
   >
     <svg
-        width="100%"
-        height="100%"
-        :viewBox="`0 0 ${width * fz} ${height * fz}`"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      width="100%"
+      height="100%"
+      :viewBox="`0 0 ${width * fz} ${height * fz}`"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <!--<path-->
-      <!--    fill-rule="evenodd"-->
-      <!--    clip-rule="evenodd"-->
-      <!--    d="M 520 0-->
-      <!--    H 0-->
-      <!--    V 110-->
-      <!--    H 492.284-->
-      <!--    L 520 82.2841-->
-      <!--    V 0-->
-      <!--    Z"-->
-      <!--    fill="#2D3331"-->
-      <!--    stroke="white"-->
-      <!--    stroke-width="3"-->
-      <!--    :stroke-dasharray="`${countsLengthContour}px`"-->
-      <!--    :stroke-dashoffset="`${countsLengthContour}px`"-->
-      <!--/>-->
       <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          :d="buttonPath"
-          fill="#2D3331"
-          stroke="white"
-          stroke-width="3"
-          :stroke-dasharray="`${countsLengthContour}px`"
-          :stroke-dashoffset="`${countsLengthContour}px`"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        :d="buttonPath"
+        fill="#2D3331"
+        stroke="white"
+        stroke-width="3"
+        :stroke-dasharray="`${countsLengthContour}px`"
+        :stroke-dashoffset="`${countsLengthContour}px`"
       />
     </svg>
     <div class="StandardButton_content">
       <div class="StandardButton__text">{{ text }}</div>
       <nuxt-icon
-          class="arrow-btn"
-          name="arrow-btn"
-          filled
+        class="arrow-btn"
+        name="arrow-btn"
+        filled
       />
     </div>
   </div>

@@ -10,16 +10,12 @@ import { useWindowStore } from '@/stores/windowStore.js';
 
 const windowStore = useWindowStore();
 
-// console.log(windowStore);
-
 function resizeHandler() {
-  console.log('resize', innerHeight, innerWidth);
   windowStore.updateWindowSize(innerWidth, innerHeight);
 }
 
 onMounted(() => {
   resizeHandler();
-  // console.log(windowStore.fontSize);
   window.addEventListener('resize', resizeHandler);
 });
 
@@ -27,5 +23,16 @@ onMounted(() => {
 
 <style lang="scss">
 .layout-default {
+  .nuxt-icon {
+    position: relative;
+    display: block;
+
+    svg {
+      width: initial;
+      height: initial;
+      margin-bottom: 0;
+      vertical-align: initial;
+    }
+  }
 }
 </style>

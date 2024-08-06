@@ -18,29 +18,35 @@
           ></div>
           <StandardButton
               :text="info[id].btn"
-              :width="42.5"
+              :width="52"
               :height="12"
           />
         </div>
       </div>
       <div class="PopupService__right">
         <div class="part part_n0">
-          <img
+          <div class="image_wrapper">
+            <img
               :src="`/popups/popup-service/${id}/${info[id].images[0]}.jpg`"
               class="image"
-          />
+            />
+          </div>
         </div>
         <div class="part part_n1">
-          <img
+          <div class="image_wrapper">
+            <img
               :src="`/popups/popup-service/${id}/${info[id].images[1]}.jpg`"
               class="image"
-          />
+            />
+          </div>
         </div>
         <div class="part part_n2">
-          <img
+          <div class="image_wrapper">
+            <img
               :src="`/popups/popup-service/${id}/${info[id].images[2]}.jpg`"
               class="image"
-          />
+            />
+          </div>
         </div>
       </div>
       <Close @click="closingEvent()" />
@@ -212,27 +218,36 @@ export default {
     .part {
       position: relative;
 
-      .image {
+      .image_wrapper {
         position: absolute;
-        object-fit: cover;
         height: 100%;
         width: 100%;
+        overflow: hidden;
+
+        .image {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+          transition: transform .7s;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
       }
+
 
       &_n0 {
         grid-area: 1 / 1 / 3 / 2;
 
-        .image {
+        .image_wrapper {
           top: 10.1rem;
           height: 65%;
         }
       }
 
-      &_n1 {
-      }
-
       &_n2 {
-        .image {
+        .image_wrapper {
           width: 81%;
         }
       }

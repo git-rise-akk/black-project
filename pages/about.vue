@@ -50,7 +50,7 @@
                 src="/pages/home/section_1/03.jpg"
             />
           </div>
-          <div class="description">
+          <div class="description text-anim-line">
             Опыт в области<br />
             проектирования,<br />
             монтажа<br />
@@ -70,7 +70,7 @@
                 инженерным подходом<br />
                 к решению задач
               </div>
-              <p class="text">
+              <p class="text text-anim-line">
                 в эру маркетинга мы заинтересованы в том, чтобы<br />
                 выбранное вами оборудование или решение проработало<br />
                 как можно дольше и принесло как можно больше<br />
@@ -94,12 +94,12 @@
           </li>
           <li class="about__item about__item_n1">
             <div class="text-content">
-              <div class="title">
+              <div class="title text-anim-line">
                 Мы стремимся дать нашим<br />
                 клиентам максимально<br />
                 возможное качество на рынке
               </div>
-              <p class="text">
+              <p class="text text-anim-line">
                 решаем любые, даже самые смелые и сложные задачи,<br />
                 когда остальные считают это невозможным
               </p>
@@ -127,11 +127,11 @@
           </li>
           <li class="about__item about__item_n2">
             <div class="text-content">
-              <div class="title">
+              <div class="title text-anim-line">
                 Предоставляем качественную<br />
                 продукцию и решения
               </div>
-              <p class="text">
+              <p class="text text-anim-line">
                 чтобы дальнейшая эксплуатация приносила<br />
                 вам только отдых и хорошее настроение
               </p>
@@ -159,12 +159,12 @@
           </li>
           <li class="about__item about__item_n3">
             <div class="text-content">
-              <div class="title">
+              <div class="title text-anim-line">
                 Мы — команда инженеров,<br />
                 которая настроена на решение<br />
                 любой вашей задачи и проблемы
               </div>
-              <p class="text">
+              <p class="text text-anim-line">
                 в отличии от других компаний, мы знаем как устроен каждый<br />
                 светильник начиная от выращивания светодиодного кристалла<br />
                 до расчёта необходимого теплоотвода и сборки светильника,<br />
@@ -341,7 +341,7 @@
         </ul>
       </section>
       <section class="section section_portfolio">
-        <h2 class="title title_page">Портфолио</h2>
+        <h2 class="title title_page text-anim-letters">Портфолио</h2>
         <ul class="projects">
           <li
               class="project project_n0"
@@ -387,14 +387,14 @@
       <section class="section section_contacts">
         <div class="contacts">
           <div class="contacts__left">
-            <div class="feature">
+            <div class="feature text-anim-line">
               Опыт в области<br />
               проектирования,<br />
               монтажа<br />
               и автоматизации<br />
               более 10 лет
             </div>
-            <div class="feature">
+            <div class="feature text-anim-line">
               обеспечиваем<br />
               высокое качество<br />
               на каждом этапе<br />
@@ -402,17 +402,19 @@
             </div>
           </div>
           <div class="contacts__right">
-            Нужна консультация<br />
-            или хотите обсудить<br />
-            ваш проект?
+            <div class="text-anim-line">
+              Нужна консультация<br />
+              или хотите обсудить<br />
+              ваш проект?
+            </div>
             <div class="contacts__info">
               <a
-                  class="number"
-                  href="tel:+79990009900"
+                class="number text-anim-line"
+                href="tel:+79990009900"
               >+7 999 000 99 00</a>
               <a
-                  class="email"
-                  href="mailto:blackproject@gmail.com"
+                class="email text-anim-line"
+                href="mailto:blackproject@gmail.com"
               >blackproject@gmail.com</a>
             </div>
           </div>
@@ -497,6 +499,8 @@ export default {
   },
   mounted() {
     this.animateTextByLetters();
+    this.animateCardsPrtfolio();
+    this.animateCardsServices();
 
     const getParameter = this.$route.query.section;
     this.firstDownloadStore.active = false;
@@ -507,14 +511,6 @@ export default {
     const imgsCompany = gsap.utils.toArray('.section_company .img');
     const imgsWrapper = gsap.utils.toArray('.section_start .img_wrapper');
     const imgsCompanyWrapper = gsap.utils.toArray('.section_company .img_wrapper');
-    // const titleCompany = gsap.utils.toArray('.section_company .about__item .title');
-    const services = gsap.utils.toArray('.section_services .service');
-    const projects = gsap.utils.toArray('.section_portfolio .project');
-
-    let showTitle = null;
-    let showTextLine = null;
-    let showTextLine1 = null;
-    let showTextLineCompany = null;
 
     // start
 
@@ -592,35 +588,7 @@ export default {
     });
 
     // services
-    services.forEach((service, index) => {
-      gsap.to(service, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        scrollTrigger: {
-          trigger: service,
-          start: 'top bottom',
-          scroller: '.page_about',
-          end: 'bottom top',
-        },
-      });
-    });
 
-    // portfolio
-    projects.forEach((project, index) => {
-      gsap.to(project, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: project,
-          start: 'top bottom',
-          scroller: '.page_about',
-          end: 'bottom top',
-          // markers: true,
-        },
-      });
-    });
     // contacts
   },
   methods: {
@@ -638,19 +606,57 @@ export default {
         gsap.from(spansArray, {
           yPercent: 110,
           stagger: 0.1,
-          duration: 1,
+          duration: .4,
           scrollTrigger: {
             scroller: this.scroller,
             trigger: el,
             /** once - вкл, toggle - выкл */
-            // once: true,
-            toggleActions: 'play play reverse reverse',
-            start: () => 'top 50%',
+            once: true,
+            // toggleActions: 'play play reverse reverse',
+            start: () => 'top 85%',
             end: () => ' top 40%',
+            // markers: true,
           },
         });
 
       });
+    },
+    animateCardsPrtfolio() {
+      const projects = gsap.utils.toArray('.section_portfolio .project');
+
+      projects.forEach((project, index) => {
+      gsap.to(project, {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        scrollTrigger: {
+          trigger: project,
+          scroller: '.page_about',
+          start: 'top 90%',
+          end: 'bottom top',
+          onEnter: () => {
+            const name = project.querySelector('.project__name');
+            gsap.to(name, { x: 1,  duration: 1.2 });
+          },
+        },
+      });
+    });
+    },
+    animateCardsServices() {
+      const services = gsap.utils.toArray('.section_services .service');
+      services.forEach((service, index) => {
+      gsap.to(service, {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        scrollTrigger: {
+          trigger: service,
+          start: 'top bottom',
+          scroller: '.page_about',
+          end: 'bottom top',
+        },
+      });
+    });
     },
     opensPopupService(id) {
       this.openPopupService = true;
@@ -681,16 +687,6 @@ export default {
       }
       return time;
     },
-    wheelEvent(e) {
-      // if (this.nextPage && e.deltaY <= this.posScroll) {
-      //   this.$router.push('/');
-      // } else {
-      //   this.nextPage = false;
-      // }
-      // setTimeout(() => {
-      //   this.posScroll = e.deltaY;
-      // }, 600);
-    },
     switchesSections(parametr, animation) {
       if (parametr === 'services') {
         this.lenis.scrollTo('.section_services', { immediate: animation, lock: true, offset: 100 });
@@ -701,9 +697,7 @@ export default {
       }
     },
   },
-  beforeUnmount() {
-    window.removeEventListener('wheel', this.$refs.page);
-  },
+  beforeUnmount() {},
 };
 </script>
 
@@ -747,10 +741,10 @@ export default {
           line-height: 11rem;
           z-index: 1;
 
-          > span {
-            height: 0.8em;
+          // > span {
+          //   height: 0.8em;
             // @include textCrop;
-          }
+          // }
         }
 
         .info {
@@ -1082,8 +1076,8 @@ export default {
           justify-content: center;
           cursor: pointer;
           overflow: hidden;
-          opacity: 0;
-          transform: translateY(40%);
+          opacity: 0.1;
+          transform: translateX(20%);
 
           &::after {
             content: '';
@@ -1094,12 +1088,16 @@ export default {
           }
 
           &_n1 {
+            transform: translateX(-20%);
             &::after {
               opacity: .6;
             }
+            .project__name {
+              transform: translateX(80%);
+            }
           }
 
-          &_n1 {
+          &_n2 {
             &::after {
               opacity: .7;
             }
@@ -1120,6 +1118,7 @@ export default {
             position: relative;
             text-align: center;
             z-index: 1;
+            transform: translateX(-80%);
 
             .title {
               font-size: 7rem;
