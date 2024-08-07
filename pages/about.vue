@@ -432,9 +432,9 @@
         />
       </transition>
       <PopupService
-          :id="idPopupService"
-          :class="{'PopupService_active': openPopupService }"
-          @closePopup="closesPopupService()"
+        :id="idPopupService"
+        :class="{'PopupService_active': openPopupService }"
+        @closePopup="closesPopupService()"
       />
     </div>
   </Lenis>
@@ -445,8 +445,6 @@
 import { mapStores } from 'pinia';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// import { useTextSeparate } from '#build/composables/useTextSeparate.js';
 
 export default {
   data() {
