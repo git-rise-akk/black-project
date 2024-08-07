@@ -156,11 +156,11 @@
         background: $popup;
         z-index: 1;
         padding: 6.2rem;
-        display: flex;
-        flex-direction: column;
         .screen {
             width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         .title {
             font-size: 2.1rem;
@@ -172,12 +172,23 @@
             font-size: 1.4rem;
             text-transform: initial;
         }
+        .fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
         .StandardButton {
             margin-top: auto;
         }
         .policy {
             font-size: 1rem;
             text-transform: initial;
+            text-align: center;
+            margin-top: 2.4rem;
+            a {
+                text-decoration: underline;
+                text-underline-offset: .2rem;
+            }
         }
     }
 }

@@ -77,6 +77,15 @@ export default {
   input {
     width: 100%;
     height: 100%;
+    background: $popup;
+    padding-left: 4.1rem;
+    border: 0.1rem solid #fff;
+    font-size: 1.5rem;
+    font-family: ArtegraSans;
+    color: #fff;
+    &:focus {
+      outline: none;
+    }
   }
 }
 </style>
