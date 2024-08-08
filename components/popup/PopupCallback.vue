@@ -72,7 +72,7 @@
                 nameComponent: {
                     type: 'text',
                     placeholder: 'Введите свое имя',
-                    errorMessage: null,
+                    errorMessage: false,
                     pattern: '',
                     mask: '',
                     minLength: 2,

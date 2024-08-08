@@ -436,6 +436,7 @@
         :class="{'PopupService_active': openPopupService }"
         @closePopup="closesPopupService()"
       />
+      <PopupCallback v-if="false" />
     </div>
   </Lenis>
 </template>

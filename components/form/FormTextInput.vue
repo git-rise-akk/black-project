@@ -5,7 +5,7 @@
       :placeholder="componentData.placeholder"
       :type="componentData.type"
       :value="modelValue"
-      v-mask="'+7 (###) ###-##-##'"
+      v-mask="componentData.mask"
       @input="handleInput"
       @blur="validate"
     />
@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import { VueMaskDirective } from 'v-mask';
+import { mask } from 'vue-the-mask'
 export default {
   directives: {
-		mask: VueMaskDirective,
-	},
+    mask
+  },
   props: {
     modelValue: {
       type: String,
@@ -71,7 +71,7 @@ export default {
   width: 100%;
   &_error {
     input {
-      background: red;
+      border: 0.1rem solid red;
     }
   }
   input {
