@@ -4,8 +4,7 @@
       class="input"
       :placeholder="componentData.placeholder"
       :type="componentData.type"
-      :value="modelValue"
-      v-mask="componentData.mask"
+      v-mask="`${componentData.mask}`"
       @input="handleInput"
       @blur="validate"
     />
@@ -15,6 +14,7 @@
 
 <script>
 import { mask } from 'vue-the-mask'
+
 export default {
   directives: {
     mask
@@ -44,15 +44,17 @@ export default {
       localError: false,
     };
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'form-validate'],
   methods: {
     handleInput(event) {
       this.$emit('update:modelValue', event.target.value);
     },
     validate(event) {
-      console.log(event.target.value, this.componentData.pattern);
       const isPatternValid = this.componentData.pattern ? !!event.target.value.match(this.componentData.pattern) : true;
       const isLengthValid = event.target.value.length >= this.componentData.minLength && event.target.value.length <= this.componentData.maxLength;
+      setTimeout(() => {
+        console.log(event.target.value.match(this.componentData.pattern));
+      }, 1000)
       
       if (!isPatternValid || !isLengthValid) {
         this.localError = true;
@@ -69,7 +71,7 @@ export default {
 .FormTextInput {
   height: 7.5rem;
   width: 100%;
-  &_error {
+  &.FormTextInput_error {
     input {
       border: 0.1rem solid red;
     }

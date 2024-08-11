@@ -487,24 +487,14 @@ export default {
     };
   },
   computed: {
-    ...mapStores(headerState, firstDownload),
-  },
-  watch: {
-    '$route.query': {
-      handler(query) {
-        this.switchesSections(query.section, false);
-      },
-    },
+    ...mapStores(firstDownload),
   },
   mounted() {
     this.animateTextByLetters();
     this.animateCardsPrtfolio();
     this.animateCardsServices();
 
-    const getParameter = this.$route.query.section;
     this.firstDownloadStore.active = false;
-
-    this.switchesSections(getParameter, true);
 
     const imgs = gsap.utils.toArray('.section_start .img');
     const imgsCompany = gsap.utils.toArray('.section_company .img');
@@ -585,10 +575,6 @@ export default {
         },
       });
     });
-
-    // services
-
-    // contacts
   },
   methods: {
     cornerHandler(direction) {
@@ -685,15 +671,6 @@ export default {
         time = 0.9;
       }
       return time;
-    },
-    switchesSections(parametr, animation) {
-      if (parametr === 'services') {
-        this.lenis.scrollTo('.section_services', { immediate: animation, lock: true, offset: 100 });
-      } else if (parametr === 'portfolio') {
-        this.lenis.scrollTo('.section_portfolio', { immediate: animation, lock: true, offset: 100 });
-      } else if (parametr === 'company') {
-        this.lenis.scrollTo('.section_company', { immediate: animation, lock: true, offset: 100 });
-      }
     },
   },
   beforeUnmount() {},

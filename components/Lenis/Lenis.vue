@@ -13,7 +13,7 @@
 </template>
 
 <script>
-
+import { mapStores } from 'pinia';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -40,8 +40,20 @@ export default {
     'scroll',
     'corner',
   ],
+  computed: {
+    ...mapStores(headerState),
+  },
+  watch: {
+    '$route.query': {
+      handler(query) {
+        this.switchesSections(query.section, false);
+      },
+    },
+  },
   mounted() {
     this.create();
+    const getParameter = this.$route.query.section;
+    this.switchesSections(getParameter, true);
   },
   methods: {
     create() {
@@ -54,7 +66,7 @@ export default {
         ScrollTrigger.update();
 
         /*вынести наружу*/
-        // this.headerStore.state = e.direction !== 1;
+        this.headerStore.state = e.direction !== 1;
       });
       this.handleGsap();
     },
@@ -93,6 +105,15 @@ export default {
         this.cornerEventEmitted = true;
 
         setTimeout(() => (this.cornerEventEmitted = false), this.cornerEventDelay * 2);
+      }
+    },
+    switchesSections(parameter, animation) {
+      if (parameter === 'services') {
+        this.instance.scrollTo('.section_services', { immediate: animation, lock: true, offset: 100 });
+      } else if (parameter === 'portfolio') {
+        this.instance.scrollTo('.section_portfolio', { immediate: animation, lock: true, offset: 100 });
+      } else if (parameter === 'company') {
+        this.instance.scrollTo('.section_company', { immediate: animation, lock: true, offset: 100 });
       }
     },
   },

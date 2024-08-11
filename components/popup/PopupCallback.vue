@@ -74,7 +74,7 @@
                     placeholder: 'Введите свое имя',
                     errorMessage: false,
                     pattern: '',
-                    mask: '',
+                    mask: null,
                     minLength: 2,
                     maxLength: 30
                 },
@@ -82,17 +82,17 @@
                     type: 'text',
                     placeholder: 'Введите свой номер*',
                     errorMessage: null,
-                    pattern: '/\+7\(\d{3}\)\d{3}-\d{2}-\d{2}/',
+                    pattern: '/\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/',
                     mask: '+7 (###) ###-##-##',
-                    minLength: 11,
-                    maxLength: 13
+                    minLength: 18,
+                    maxLength: 18
                 },
                 emailComponent: {
                     type: 'email',
                     placeholder: 'Введите свой e-mail',
                     errorMessage: null,
                     pattern: '/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',
-                    mask: '',
+                    mask: null,
                     minLength: 2,
                     maxLength: 50
                 },
@@ -101,7 +101,7 @@
                     placeholder: 'Комментарий',
                     errorMessage: null,
                     pattern: '',
-                    mask: '',
+                    mask: null,
                     minLength: 0,
                     maxLength: 1000
                 },
@@ -113,7 +113,7 @@
             },
             validateForm(isValid) {
                 this.isFormValid = isValid;
-                console.log('this.isFormValid', this.isFormValid);
+                // console.log('this.isFormValid', this.isFormValid);
             },
             submit() {
                 if (!this.isFormValid) {
