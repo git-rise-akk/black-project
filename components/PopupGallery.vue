@@ -1,52 +1,61 @@
 <template>
-    <div class="PopupGallery">
-      <div class="PopupGallery__controls">
-        <transition name="show">
-          <div
-            v-show="currentPhoto !== 0"
-            class="control-element control-element__left"
-            @click="changesCurrentPhoto(-1)"
-          >
-            <nuxt-icon class="arrow-left" name="arrow-left" filled />
+  <ClientOnly>
+    <Teleport to="body">
+        <Transition
+            appear
+            name="popup-fade"
+        >
+        <div v-if="active" class="PopupGallery">
+          <div class="PopupGallery__controls">
+            <transition name="show">
+              <div
+                v-show="currentPhoto !== 0"
+                class="control-element control-element__left"
+                @click="changesCurrentPhoto(-1)"
+              >
+                <nuxt-icon class="arrow-left" name="arrow-left" filled />
+              </div>
+            </transition>
+            <transition name="show">
+              <div
+                v-show="currentPhoto !== content.photos.length - 1"
+                class="control-element control-element__right"
+                @click="changesCurrentPhoto(1)"
+              >
+                <nuxt-icon class="arrow-right" name="arrow-right" filled />
+              </div>
+            </transition>
           </div>
-        </transition>
-        <transition name="show">
-          <div
-            v-show="currentPhoto !== content.photos.length - 1"
-            class="control-element control-element__right"
-            @click="changesCurrentPhoto(1)"
-          >
-            <nuxt-icon class="arrow-right" name="arrow-right" filled />
+          <div class="PopupGallery__photos">
+            <template v-for="(photo, key) in content.photos" :key="`photo${key}`">
+              <transition :name="getDynamicTransitionName">
+                <div v-show="currentPhoto === key" class="photo-wrapper">
+                  <nuxt-img :src="photo" class="photo" loading="lazy" />
+                </div>
+              </transition>
+            </template>
           </div>
-        </transition>
-      </div>
-      <div class="PopupGallery__photos">
-        <template v-for="(photo, key) in content.photos" :key="`photo${key}`">
-          <transition :name="getDynamicTransitionName">
-            <div v-show="currentPhoto === key" class="photo-wrapper">
-              <nuxt-img :src="photo" class="photo" loading="lazy" />
+          <transition name="show">
+            <div class="PopupGallery__text" v-show="currentPhoto === 0">
+              <div class="title">{{ content.title }}</div>
+              <div class="text" v-html="content.text"></div>
             </div>
           </transition>
-        </template>
-      </div>
-      <transition name="show">
-        <div class="PopupGallery__text" v-show="currentPhoto === 0">
-          <div class="title">{{ content.title }}</div>
-          <div class="text" v-html="content.text"></div>
+          <div class="PopupGallery__counter-photos">
+            <div class="current-photo" :style="{ width: widthNumber }">
+              <transition :name="getTransitionNameNumber">
+                <div :key="currentPhoto" class="number">{{ currentPhoto + 1 }}</div>
+              </transition>
+            </div>
+            <div class="separator">/</div>
+            <div class="total-photos" :style="{ width: widthNumber }">{{ content.photos.length }}</div>
+          </div>
+          <Close :blur="true" @click="closingEvent()"/>
         </div>
-      </transition>
-      <div class="PopupGallery__counter-photos">
-        <div class="current-photo" :style="{ width: widthNumber }">
-          <transition :name="getTransitionNameNumber">
-            <div :key="currentPhoto" class="number">{{ currentPhoto + 1 }}</div>
-          </transition>
-        </div>
-        <div class="separator">/</div>
-        <div class="total-photos" :style="{ width: widthNumber }">{{ content.photos.length }}</div>
-      </div>
-      <Close :blur="true" @click="closingEvent()"/>
-    </div>
-  </template>
+      </Transition>
+    </Teleport>
+  </ClientOnly>
+</template>
   
 <script>
     export default {
@@ -54,6 +63,10 @@
           content: {
               type: Object,
               default: () => ({}),
+          },
+          active: {
+              type: Boolean,
+              default: false,
           },
         },
         data() {

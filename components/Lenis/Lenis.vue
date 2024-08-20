@@ -1,11 +1,12 @@
 <template>
   <div
-      class="Lenis"
-      @wheel="checkCorner"
+    class="Lenis"
+    ref="Lenis"
+    @wheel="checkCorner"
   >
     <div
-        class="Lenis__content"
-        ref="content"
+      class="Lenis__content"
+      ref="content"
     >
       <slot></slot>
     </div>
@@ -34,6 +35,8 @@ export default {
       lastWheelDirection: 1,
       cornerEventEmitted: false,
       /* end corner */
+
+      // blockScrol: flase,
     };
   },
   emits: [
@@ -44,9 +47,9 @@ export default {
     ...mapStores(headerState),
   },
   watch: {
-    '$route.query': {
-      handler(query) {
-        this.switchesSections(query.section, false);
+    '$route.query.section': {
+      handler(value) {
+        this.switchesSections(value, false);
       },
     },
   },
@@ -66,7 +69,7 @@ export default {
         ScrollTrigger.update();
 
         /*вынести наружу*/
-        this.headerStore.state = e.direction !== 1;
+        // this.headerStore.state = e.direction !== 1;
       });
       this.handleGsap();
     },
@@ -82,8 +85,8 @@ export default {
     checkCorner({ deltaY }) {
       const currentWheelDirection = Math.sign(deltaY);
 
-      const cornerTermZero = this.instance.progress < 0.02 && currentWheelDirection === -1;
-      const cornerTermOne = this.instance.progress > 0.98 && currentWheelDirection === 1;
+      const cornerTermZero = this.instance?.progress < 0.02 && currentWheelDirection === -1;
+      const cornerTermOne = this.instance?.progress > 0.98 && currentWheelDirection === 1;
 
       if (!this.corneredTime && (cornerTermZero || cornerTermOne)) {
         this.corneredTime = Date.now();
@@ -108,13 +111,15 @@ export default {
       }
     },
     switchesSections(parameter, animation) {
-      if (parameter === 'services') {
-        this.instance.scrollTo('.section_services', { immediate: animation, lock: true, offset: 100 });
-      } else if (parameter === 'portfolio') {
-        this.instance.scrollTo('.section_portfolio', { immediate: animation, lock: true, offset: 100 });
-      } else if (parameter === 'company') {
-        this.instance.scrollTo('.section_company', { immediate: animation, lock: true, offset: 100 });
+      const target = document.querySelector(`#${parameter}`);
+      if (!target) {
+        return
       }
+      
+      this.instance?.scrollTo(target, {
+        immediate: animation,
+        offset: 100
+      });
     },
   },
 

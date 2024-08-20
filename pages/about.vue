@@ -21,8 +21,9 @@
             этапе работы
           </div>
           <StandardButton
-              text="посмотреть решения"
-              :width="52"
+            text="посмотреть решения"
+            :width="52"
+            @click="opensPopupCallback()"
           />
         </div>
         <div class="section__right">
@@ -59,7 +60,7 @@
           </div>
         </div>
       </section>
-      <section class="section section_company">
+      <section id="company" class="section section_company">
         <h2 class="title title_page text-anim-letters">О компании</h2>
         <ul class="about">
           <li class="about__item about__item_n0">
@@ -188,7 +189,7 @@
           </li>
         </ul>
       </section>
-      <section class="section section_services">
+      <section id="services" class="section section_services">
         <h2 class="title title_page text-anim-letters">Услуги</h2>
         <ul class="services">
           <li class="service">
@@ -211,9 +212,10 @@
             >подробнее
             </div>
             <StandardButton
-                text="обсудить проект"
-                :width="42.5"
-                :height="12"
+              text="обсудить проект"
+              :width="42.5"
+              :height="12"
+              @click="opensPopupCallback()"
             />
           </li>
           <li class="service">
@@ -232,14 +234,15 @@
               контроль качества на каждом этапе.
             </p>
             <div
-                class="more"
-                @click="opensPopupService(1)"
+              class="more"
+              @click="opensPopupService(1)"
             >подробнее
             </div>
             <StandardButton
-                text="обсудить поставку"
-                :width="42.5"
-                :height="12"
+              text="обсудить поставку"
+              :width="42.5"
+              :height="12"
+              @click="opensPopupCallback()"
             />
           </li>
           <li class="service">
@@ -255,14 +258,15 @@
               даже самое специфичное оборудование
             </p>
             <div
-                class="more"
-                @click="opensPopupService(2)"
+              class="more"
+              @click="opensPopupService(2)"
             >подробнее
             </div>
             <StandardButton
-                text="обсудить монтаж"
-                :width="42.5"
-                :height="12"
+              text="обсудить монтаж"
+              :width="42.5"
+              :height="12"
+              @click="opensPopupCallback()"
             />
           </li>
           <li class="service">
@@ -280,14 +284,15 @@
               ваши задумки
             </p>
             <div
-                class="more"
-                @click="opensPopupService(3)"
+              class="more"
+              @click="opensPopupService(3)"
             >подробнее
             </div>
             <StandardButton
-                text="обсудить пнр"
-                :width="42.5"
-                :height="12"
+              text="обсудить пнр"
+              :width="42.5"
+              :height="12"
+              @click="opensPopupCallback()"
             />
           </li>
           <li class="service">
@@ -305,14 +310,15 @@
               придем вам на помощь
             </p>
             <div
-                class="more"
-                @click="opensPopupService(4)"
+              class="more"
+              @click="opensPopupService(4)"
             >подробнее
             </div>
             <StandardButton
-                text="обсудить ремонт"
-                :width="42.5"
-                :height="12"
+              text="обсудить ремонт"
+              :width="42.5"
+              :height="12"
+              @click="opensPopupCallback()"
             />
           </li>
           <li class="service">
@@ -328,19 +334,20 @@
               и технико-экономическое обоснование
             </p>
             <div
-                class="more"
-                @click="opensPopupService(5)"
+              class="more"
+              @click="opensPopupService(5)"
             >подробнее
             </div>
             <StandardButton
-                text="обсудить задачу"
-                :width="42.5"
-                :height="12"
+              text="обсудить задачу"
+              :width="42.5"
+              :height="12"
+              @click="opensPopupCallback()"
             />
           </li>
         </ul>
       </section>
-      <section class="section section_portfolio">
+      <section id="portfolio" class="section section_portfolio">
         <h2 class="title title_page text-anim-letters">Портфолио</h2>
         <ul class="projects">
           <li
@@ -421,22 +428,21 @@
         </div>
       </section>
       <Footer />
-      <transition
-          appear
-          name="popup-fade"
-      >
-        <PopupGallery
-            @closePopup="closesPopupGallery()"
-            :content="portfolioContent[typeInfoGallery]"
-            v-if="openPopup"
-        />
-      </transition>
+
+      <PopupGallery
+          @closePopup="closesPopupGallery()"
+          :content="portfolioContent[typeInfoGallery]"
+          :active="openPopup"
+      />
       <PopupService
         :id="idPopupService"
         :class="{'PopupService_active': openPopupService }"
         @closePopup="closesPopupService()"
       />
-      <PopupCallback v-if="false" />
+      <PopupCallback 
+       :class="{'PopupCallback_active': openPopupCallback }"
+       @closePopup="closesPopupCallback ()"
+      />
     </div>
   </Lenis>
 </template>
@@ -452,6 +458,7 @@ export default {
     return {
       openPopup: false,
       openPopupService: false,
+      openPopupCallback: false,
       idPopupService: 0,
       posScroll: 0,
       nextPage: true,
@@ -545,6 +552,8 @@ export default {
         end: 'top top',
       },
     });
+
+    // company
 
     imgsCompany.forEach((img, index) => {
       gsap.to(img, {
@@ -646,20 +655,24 @@ export default {
     opensPopupService(id) {
       this.openPopupService = true;
       this.idPopupService = id;
-      this.lenis.stop();
     },
     closesPopupService() {
       this.openPopupService = false;
-      this.lenis.start();
     },
     opensPopupGallery(type) {
       this.openPopup = true;
-      this.typeInfoGallery = type;
-      this.lenis.stop();
+      this.typeInfoGallery = type; 
+      // this.$refs?.Lenis.stop();
     },
     closesPopupGallery() {
       this.openPopup = false;
-      this.lenis.start();
+      // this.$refs?.Lenis.start();
+    },
+    opensPopupCallback() {
+      this.openPopupCallback = true;
+    },
+    closesPopupCallback() {
+      this.openPopupCallback = false;
     },
     returnsDelayTime(index) {
       let time = 0;

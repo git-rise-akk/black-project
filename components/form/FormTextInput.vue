@@ -1,10 +1,19 @@
 <template>
   <div :class="['FormTextInput', {'FormTextInput_error': localError}]">
     <input
+      v-if="componentData.mask"
       class="input"
       :placeholder="componentData.placeholder"
       :type="componentData.type"
       v-mask="`${componentData.mask}`"
+      @input="handleInput"
+      @blur="validate"
+    />
+    <input
+      v-else
+      class="input"
+      :placeholder="componentData.placeholder"
+      :type="componentData.type"
       @input="handleInput"
       @blur="validate"
     />
@@ -50,11 +59,12 @@ export default {
       this.$emit('update:modelValue', event.target.value);
     },
     validate(event) {
-      const isPatternValid = this.componentData.pattern ? !!event.target.value.match(this.componentData.pattern) : true;
+      const pattern = this.componentData.pattern;
+      const regEx = new RegExp(pattern);
+      console.log(event.target.value, regEx.test(event.target.value), regEx);
+      
+      const isPatternValid = this.componentData.pattern ? regEx.test(event.target.value) : true;
       const isLengthValid = event.target.value.length >= this.componentData.minLength && event.target.value.length <= this.componentData.maxLength;
-      setTimeout(() => {
-        console.log(event.target.value.match(this.componentData.pattern));
-      }, 1000)
       
       if (!isPatternValid || !isLengthValid) {
         this.localError = true;

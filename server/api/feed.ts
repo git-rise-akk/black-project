@@ -28,6 +28,7 @@ export default defineEventHandler(async (event) => {
 
     } catch (err) {
         return {
+            err: err,
             status: false,
             message: 'Произошла ошибка!',
         };

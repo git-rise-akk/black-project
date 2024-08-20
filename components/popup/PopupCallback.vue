@@ -73,8 +73,9 @@
                     type: 'text',
                     placeholder: 'Введите свое имя',
                     errorMessage: false,
-                    pattern: '',
-                    mask: null,
+                    pattern: false,
+                    mask: false,
+                    masked: false,
                     minLength: 2,
                     maxLength: 30
                 },
@@ -82,7 +83,7 @@
                     type: 'text',
                     placeholder: 'Введите свой номер*',
                     errorMessage: null,
-                    pattern: '/\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/',
+                    pattern: '\\+7\\s\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}',
                     mask: '+7 (###) ###-##-##',
                     minLength: 18,
                     maxLength: 18
@@ -91,7 +92,7 @@
                     type: 'email',
                     placeholder: 'Введите свой e-mail',
                     errorMessage: null,
-                    pattern: '/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',
+                    pattern: '^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
                     mask: null,
                     minLength: 2,
                     maxLength: 50
@@ -115,12 +116,19 @@
                 this.isFormValid = isValid;
                 // console.log('this.isFormValid', this.isFormValid);
             },
-            submit() {
-                if (!this.isFormValid) {
-                    alert('неправильно заполнена');
-                } else {
-                    alert('отправлено');
-                }
+            async submit() {
+                // if (!this.isFormValid) {
+                //     alert('неправильно заполнена');
+                // } else {
+                //     alert('отправлено');
+                // }
+
+                const response = await $fetch('/api/feed', {
+                    title: 'test',
+                    text: '2983479183hidnjj,jhkil812y'
+                });
+                console.log(response);
+                
             },
         },
     }    
@@ -137,25 +145,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
+    &_active {
+        opacity: 1;
+        pointer-events: auto;
+
+        .PopupCallback_bg {
+            background-color: rgba($color: #000000, $alpha: .2);
+            backdrop-filter: blur(5px);
+        }
+
+        .PopupCallback_form {
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform .5s;
+        }
+    }
     &_bg {
         position: absolute;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        // background-color: rgba($color: #000000, $alpha: 0);
-        // backdrop-filter: blur(0px);
-        background-color: rgba($color: #000000, $alpha: .2);
-        backdrop-filter: blur(5px);
+        background-color: rgba($color: #000000, $alpha: 0);
+        backdrop-filter: blur(0px);
         transition: backdrop-filter .4s, background-color .4s;
     }
     &_form {
         position: relative;
-        width: 48rem;
-        height: 77.8rem;
+        width: 49rem;
+        height: 78.8rem;
         background: $popup;
         z-index: 1;
-        padding: 6.2rem;
+        padding: 7.2rem;
+        transform: translateY(calc(100% + 20rem));
+        opacity: 0;
+        transition: transform .5s, opacity .1s .6s;
         .screen {
             width: 100%;
             height: 100%;
@@ -189,6 +214,10 @@
                 text-decoration: underline;
                 text-underline-offset: .2rem;
             }
+        }
+        .Close {
+            top: 3rem;
+            right: 3rem;
         }
     }
 }

@@ -24,6 +24,7 @@
       :width="42.5"
       :height="12"
       text="заказать проект"
+      @click="opensPopupCallback()"
     />
     <div
         class="scroll-down"
@@ -47,6 +48,10 @@
       />
       <div class="line"></div>
     </div>
+    <PopupCallback 
+      :class="{'PopupCallback_active': openPopupCallback }"
+      @closePopup="closesPopupCallback ()"
+    />
   </div>
 </template>
 
@@ -57,6 +62,7 @@ export default {
   data() {
     return {
       sound: false,
+      openPopupCallback: false,
     };
   },
   computed: {
@@ -87,6 +93,12 @@ export default {
       if (e.deltaY >= 1) {
         this.$router.push('/about');
       }
+    },
+    opensPopupCallback() {
+      this.openPopupCallback = true;
+    },
+    closesPopupCallback() {
+      this.openPopupCallback = false;
     },
   },
   beforeUnmount() {
