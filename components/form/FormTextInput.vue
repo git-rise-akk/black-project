@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import { mask } from 'vue-the-mask'
+import vueTheMask from 'vue-the-mask'
 
 export default {
   directives: {
-    mask
+    mask: vueTheMask.mask
   },
   props: {
     modelValue: {
