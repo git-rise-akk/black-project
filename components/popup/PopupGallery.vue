@@ -120,6 +120,12 @@
     width: 100vw;
     height: 100vh;
     user-select: none;
+    .nuxt-icon svg {
+      width: initial;
+      height: initial;
+      margin-bottom: 0;
+      vertical-align: initial;
+    }
     &::after {
       content: '';
       position: absolute;

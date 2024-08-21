@@ -19,16 +19,15 @@ const tgBot = botler({
 });
 
 export default defineEventHandler(async (event) => {
-
+    const body = await readBody(event);
+    
     try {
-        const body = await readBody(event);
 
-        await yandexMail(body?.text, body?.title ?? "Untitled message");
         await tgBot(body?.text, body?.title ?? "Untitled message");
+        // await yandexMail(body?.text, body?.title ?? "Untitled message");
 
     } catch (err) {
         return {
-            err: err,
             status: false,
             message: 'Произошла ошибка!',
         };

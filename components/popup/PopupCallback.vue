@@ -124,8 +124,11 @@
                 // }
 
                 const response = await $fetch('/api/feed', {
-                    title: 'test',
-                    text: '2983479183hidnjj,jhkil812y'
+                    method: 'POST',
+                    body: {
+                        title: 'test',
+                        text: '2983479183hidnjj,jhkil812y'
+                    },
                 });
                 console.log(response);
                 
