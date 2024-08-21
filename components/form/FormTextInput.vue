@@ -5,7 +5,6 @@
       class="input"
       :placeholder="componentData.placeholder"
       :type="componentData.type"
-      v-mask="`${componentData.mask}`"
       @input="handleInput"
       @blur="validate"
     />
@@ -22,12 +21,8 @@
 </template>
 
 <script>
-import { mask } from 'vue-the-mask'
 
 export default {
-  directives: {
-    mask
-  },
   props: {
     modelValue: {
       type: String,
