@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     try {
 
         await tgBot(body?.text, body?.title ?? "Untitled message");
-        // await yandexMail(body?.text, body?.title ?? "Untitled message");
+        await yandexMail(body?.text, body?.title ?? "Untitled message");
 
     } catch (err) {
         return {
