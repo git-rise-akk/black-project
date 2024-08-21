@@ -126,7 +126,7 @@
                 const response = await $fetch('/api/feed', {
                     method: 'POST',
                     body: {
-                        title: '',
+                        title: 'Заявка с сайта',
                         text: `
                             <h1>Заголовок</h1>
                             <p>Текст письма</p>
