@@ -126,8 +126,11 @@
                 const response = await $fetch('/api/feed', {
                     method: 'POST',
                     body: {
-                        title: 'test',
-                        text: '2983479183hidnjj,jhkil812y'
+                        title: '',
+                        text: `
+                            <h1>Заголовок</h1>
+                            <p>Текст письма</p>
+                        `,
                     },
                 });
                 console.log(response);
