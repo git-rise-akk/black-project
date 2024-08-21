@@ -12,9 +12,10 @@ export default function (opt: any) {
     };
 
     const transporter = nodemailer.createTransport({
-        host: opt.host,
-        port: opt.port,
-        secure: false,
+        service: 'yandex',
+        // host: opt.host,
+        // port: opt.port,
+        // secure: false,
         auth: {
             user: opt.user,
             pass: opt.pass,
