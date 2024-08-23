@@ -29,6 +29,10 @@
         .nuxt-icon {
             transition: transform .3s;
             z-index: 1;
+            svg {
+                width: 5.6rem;
+                height: 5.9rem;
+            }
         }
         &:hover .nuxt-icon {
             transform: rotate(-180deg);

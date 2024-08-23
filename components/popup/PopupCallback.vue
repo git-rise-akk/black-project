@@ -2,14 +2,14 @@
     <div class="PopupCallback">
         <div class="PopupCallback_bg"></div>
         <div class="PopupCallback_form">
-            <Transition>
-                <div v-show="result === 'error'" class="screen screen-error">Произошла ошибка, пожалуйcта попробуйте позже.</div>
+            <Transition name="show">
+                <div v-show="result === false" class="screen screen-error"><div>Произошла ошибка, пожалуйcта попробуйте позже.</div></div>
             </Transition>
-            <Transition>
-                <div v-show="result === 'success'" class="screen screen-success">Заявка отправлена, мы свяжемся с Вами в ближайшее время.</div>
+            <Transition name="show">
+                <div v-show="result === true" class="screen screen-success">Заявка отправлена, мы свяжемся с Вами в ближайшее время.</div>
             </Transition>
-            <Transition>
-                <div v-show="!(['error', 'success'].includes(result))" class="screen screen-fields">
+            <Transition name="show">
+                <div v-show="!([false, true].includes(result))" class="screen screen-fields">
                     <div class="title">Заказать обратный<br />звонок</div>
                     <div class="description">Пожалуйста, заполните форму ниже и мы<br />с вами свяжемся для уточнения деталей:</div>
                     <div class="fields">
@@ -18,6 +18,14 @@
                             :component-data="nameComponent"
                             @form-validate="validateForm"
                         />
+                        <!-- <div class="FormTextInput">
+                            <InputMask
+                                v-model="user.phone" 
+                                :invalid="true"
+                                mask="+7 (999) 999-99-99" 
+                                placeholder="+7"
+                            />
+                        </div> -->
                         <FormTextInput
                             v-model="user.phone"
                             :component-data="phoneComponent"
@@ -51,6 +59,7 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia';
     export default {
         props: {
             blur: {
@@ -108,6 +117,9 @@
                 },
             };
         },
+        computed: {
+            ...mapStores(openPopup),
+        },
         methods: {
             closingEvent() {
                 this.$emit('closePopup');
@@ -122,18 +134,25 @@
                 // } else {
                 //     alert('отправлено');
                 // }
-
+            
                 const response = await $fetch('/api/feed', {
                     method: 'POST',
                     body: {
                         title: 'Заявка с сайта',
-                        text: `
-                            <h1>Заголовок</h1>
-                            <p>Текст письма</p>
-                        `,
+                        text: this.user,
                     },
                 });
-                console.log(response);
+                
+                if (response.status) {
+                    this.result = true;
+                } else {
+                    this.result = false;
+                }
+
+                setTimeout(() => {
+                    this.openPopupStore.popupCallback = false;
+                    this.result = null;
+                }, 2000);
                 
             },
         },
@@ -188,10 +207,16 @@
         opacity: 0;
         transition: transform .5s, opacity .1s .6s;
         .screen {
-            width: 100%;
-            height: 100%;
+            position: absolute;
+            inset: 7.2rem;
             display: flex;
             flex-direction: column;
+            &.screen-error,
+            &.screen-success {
+                text-align: center;
+                justify-content: center;
+                font-size: 2rem;
+            }
         }
         .title {
             font-size: 2.1rem;

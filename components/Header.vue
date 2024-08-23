@@ -1,11 +1,11 @@
 <template>
   <header :class="[{ visible: headerStore.state }, { start: $route.fullPath === '/' && firstDownloadStore.active }]">
     <div class="header_wrapper">
-      <NuxtLink to="/">
+      <NuxtLink to="/" class="logo_link">
         <nuxt-icon
-            class="logo"
-            name="logo"
-            filled
+          class="logo"
+          name="logo"
+          filled
         />
       </NuxtLink>
       <nav class="menu">
@@ -88,18 +88,22 @@ header {
     justify-content: space-between;
     height: 4.7rem;
     width: calc(100% - 20rem);
+    .logo_link {
+      height: 100%;
+
+      .logo {
+        height: 100%;
+
+        svg {
+          height: 100%;
+          width: auto;
+        }
+      }
+    }
   }
 
   &.visible {
     transform: translateY(0);
-  }
-
-  .logo {
-    height: 100%;
-
-    svg {
-      height: 100% !important;
-    }
   }
 
   .menu {

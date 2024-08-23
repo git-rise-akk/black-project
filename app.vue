@@ -8,10 +8,6 @@
 
 <script>
 
-onMounted(() => {
-  // const wStore = import('#build/stores/windowStore.js');
-});
-
 </script>
 <style lang="scss">
 </style>

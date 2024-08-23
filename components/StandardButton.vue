@@ -1,8 +1,8 @@
 <template>
   <div
-      ref="StandardButton"
-      class="StandardButton"
-      :style="{ width: `${width}rem`, height: `${height}rem` }"
+    ref="StandardButton"
+    class="StandardButton"
+    :style="{ width: `${width}rem`, height: `${height}rem` }"
   >
     <svg
       width="100%"

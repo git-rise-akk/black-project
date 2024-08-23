@@ -33,7 +33,8 @@
       .logo {
         height: 100%;
         svg {
-            height: 100% !important;
+            height: 100%;
+            width: auto;
         }
       }
       .social-network {
@@ -46,6 +47,7 @@
                 height: 100%;
                 svg {
                     height: 100%;
+                    width: auto;
                 }
             }
         }

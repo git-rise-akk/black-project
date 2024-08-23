@@ -2,17 +2,18 @@
     <section class="SectionStart section">
         <div class="section__left">
           <div class="title text-anim-line">
-            Мы —<br />
-            светотехническая<br />
-            компания
+            <span>Мы —<br /></span>
+            <span>светотехническая<br /></span>
+            <span>компания</span>
           </div>
+
           <div class="info text-anim-line">
-               Предлагаем комплексные<br />
-                решения для жилых<br />
-                и коммерческих объектов,<br />
-                обеспечивая высокое<br />
-                качество на каждом<br />
-                этапе работы
+                <span>Предлагаем комплексные<br /></span>
+                <span>решения для жилых<br /></span>
+                <span>и коммерческих объектов,<br /></span>
+                <span>обеспечивая высокое<br /></span>
+                <span>качество на каждом<br /></span>
+                <span>этапе работы</span>
           </div>
           <StandardButton
               text="посмотреть решения"
@@ -23,33 +24,33 @@
           <div class="img_wrapper img_wrapper_n0">
             <img
                 class="img"
-                src="/pages/home/section_1/00.jpg"
+                src="/assets/pages/home/section_1/00.jpg"
             />
           </div>
           <div class="img_wrapper img_wrapper_n1">
             <img
                 class="img"
-                src="/pages/home/section_1/01.jpg"
+                src="/assets/pages/home/section_1/01.jpg"
             />
           </div>
           <div class="img_wrapper img_wrapper_n2">
             <img
                 class="img"
-                src="/pages/home/section_1/02.jpg"
+                src="/assets/pages/home/section_1/02.jpg"
             />
           </div>
           <div class="img_wrapper img_wrapper_n3">
             <img
                 class="img"
-                src="/pages/home/section_1/03.jpg"
+                src="/assets/pages/home/section_1/03.jpg"
             />
           </div>
           <div class="description text-anim-line">
-                Опыт в области<br />
-                проектирования,<br />
-                монтажа<br />
-                и автоматизации<br />
-                более 10 лет
+                <span>Опыт в области<br /></span>
+                <span>проектирования,<br /></span>
+                <span>монтажа<br /></span>
+                <span>и автоматизации<br /></span>
+                <span>более 10 лет</span>
           </div>
         </div>
     </section>

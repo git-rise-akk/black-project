@@ -5,408 +5,28 @@
       @corner="cornerHandler"
   >
     <div class="scroll">
-      <section class="section section_start">
-        <div class="section__left">
-          <div class="title text-anim-line">
-            Мы —<br />
-            светотехническая<br />
-            компания
-          </div>
-          <div class="info text-anim-line">
-            Предлагаем комплексные<br />
-            решения для жилых<br />
-            и коммерческих объектов,<br />
-            обеспечивая высокое<br />
-            качество на каждом<br />
-            этапе работы
-          </div>
-          <StandardButton
-            text="посмотреть решения"
-            :width="52"
-            @click="opensPopupCallback()"
-          />
-        </div>
-        <div class="section__right">
-          <div class="img_wrapper img_wrapper_n0">
-            <img
-                class="img"
-                src="/pages/home/section_1/00.jpg"
-            />
-          </div>
-          <div class="img_wrapper img_wrapper_n1">
-            <img
-                class="img"
-                src="/pages/home/section_1/01.jpg"
-            />
-          </div>
-          <div class="img_wrapper img_wrapper_n2">
-            <img
-                class="img"
-                src="/pages/home/section_1/02.jpg"
-            />
-          </div>
-          <div class="img_wrapper img_wrapper_n3">
-            <img
-                class="img"
-                src="/pages/home/section_1/03.jpg"
-            />
-          </div>
-          <div class="description text-anim-line">
-            Опыт в области<br />
-            проектирования,<br />
-            монтажа<br />
-            и автоматизации<br />
-            более 10 лет
-          </div>
-        </div>
-      </section>
-      <section id="company" class="section section_company">
-        <h2 class="title title_page text-anim-letters">О компании</h2>
-        <ul class="about">
-          <li class="about__item about__item_n0">
-            <div class="text-content">
-              <div class="title title_company text-anim-line">
-                Компания Black Project<br />
-                уникальна своим<br />
-                инженерным подходом<br />
-                к решению задач
-              </div>
-              <p class="text text-anim-line">
-                в эру маркетинга мы заинтересованы в том, чтобы<br />
-                выбранное вами оборудование или решение проработало<br />
-                как можно дольше и принесло как можно больше<br />
-                положительных эмоций
-              </p>
-            </div>
-            <div class="images">
-              <div class="img_wrapper img_wrapper_n0">
-                <img
-                    class="img"
-                    src="/pages/about/company/00.jpg"
-                />
-              </div>
-              <div class="img_wrapper img_wrapper_n1">
-                <img
-                    class="img"
-                    src="/pages/about/company/01.jpg"
-                />
-              </div>
-            </div>
-          </li>
-          <li class="about__item about__item_n1">
-            <div class="text-content">
-              <div class="title text-anim-line">
-                Мы стремимся дать нашим<br />
-                клиентам максимально<br />
-                возможное качество на рынке
-              </div>
-              <p class="text text-anim-line">
-                решаем любые, даже самые смелые и сложные задачи,<br />
-                когда остальные считают это невозможным
-              </p>
-            </div>
-            <div class="images">
-              <div class="img_wrapper img_wrapper_n0">
-                <img
-                    class="img img_n0"
-                    src="/pages/about/company/02.jpg"
-                />
-              </div>
-              <div class="img_wrapper img_wrapper_n1">
-                <img
-                    class="img img_n1"
-                    src="/pages/about/company/03.jpg"
-                />
-              </div>
-              <div class="img_wrapper img_wrapper_n2">
-                <img
-                    class="img img_n2"
-                    src="/pages/about/company/04.jpg"
-                />
-              </div>
-            </div>
-          </li>
-          <li class="about__item about__item_n2">
-            <div class="text-content">
-              <div class="title text-anim-line">
-                Предоставляем качественную<br />
-                продукцию и решения
-              </div>
-              <p class="text text-anim-line">
-                чтобы дальнейшая эксплуатация приносила<br />
-                вам только отдых и хорошее настроение
-              </p>
-            </div>
-            <div class="images">
-              <div class="img_wrapper img_wrapper_n0">
-                <img
-                    class="img img_n0"
-                    src="/pages/about/company/05.jpg"
-                />
-              </div>
-              <div class="img_wrapper img_wrapper_n1">
-                <img
-                    class="img img_n1"
-                    src="/pages/about/company/06.jpg"
-                />
-              </div>
-              <div class="img_wrapper img_wrapper_n2">
-                <img
-                    class="img img_n2"
-                    src="/pages/about/company/07.jpg"
-                />
-              </div>
-            </div>
-          </li>
-          <li class="about__item about__item_n3">
-            <div class="text-content">
-              <div class="title text-anim-line">
-                Мы — команда инженеров,<br />
-                которая настроена на решение<br />
-                любой вашей задачи и проблемы
-              </div>
-              <p class="text text-anim-line">
-                в отличии от других компаний, мы знаем как устроен каждый<br />
-                светильник начиная от выращивания светодиодного кристалла<br />
-                до расчёта необходимого теплоотвода и сборки светильника,<br />
-                за счётэтих знаний и опыта вы получаете лучший продукт на рынке
-              </p>
-            </div>
-            <div class="images">
-              <div class="img_wrapper img_wrapper_n0">
-                <img
-                    class="img img_n0"
-                    src="/pages/about/company/08.jpg"
-                />
-              </div>
-              <div class="img_wrapper img_wrapper_n1">
-                <img
-                    class="img img_n1"
-                    src="/pages/about/company/09.jpg"
-                />
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-      <section id="services" class="section section_services">
-        <h2 class="title title_page text-anim-letters">Услуги</h2>
-        <ul class="services">
-          <li class="service">
-            <div class="number">.01</div>
-            <div class="title">
-              Проектирование<br />
-              систем<br />
-              освещения<br />
-              и управления
-            </div>
-            <p class="text">
-              наши специалисты разработают
-              уникальный проект, соответствующие
-              вашим требованиям и современным
-              стандартам
-            </p>
-            <div
-                class="more"
-                @click="opensPopupService(0)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить проект"
-              :width="42.5"
-              :height="12"
-              @click="opensPopupCallback()"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.02</div>
-            <div class="title">
-              Поставка и продажа<br />
-              светильников,<br />
-              комплектующих,<br />
-              устройств управления<br />
-              освещением (Алиса, Siri)
-            </div>
-            <p class="text">
-              производство светильников и систем
-              освещения из комплектующих высокого
-              уровня надежности и качества,
-              контроль качества на каждом этапе.
-            </p>
-            <div
-              class="more"
-              @click="opensPopupService(1)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить поставку"
-              :width="42.5"
-              :height="12"
-              @click="opensPopupCallback()"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.03</div>
-            <div class="title">
-              Монтаж и подключение<br />
-              светильников, систем<br />
-              освещения и управления,<br />
-              сборка слаботочных щитов
-            </div>
-            <p class="text">
-              установим и подключим любое,
-              даже самое специфичное оборудование
-            </p>
-            <div
-              class="more"
-              @click="opensPopupService(2)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить монтаж"
-              :width="42.5"
-              :height="12"
-              @click="opensPopupCallback()"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.04</div>
-            <div class="title">
-              Пуско-наладочные<br />
-              работы – настройка<br />
-              систем управления<br />
-              светом по вашему ТЗ
-            </div>
-            <p class="text">
-              настройка систем освещения на основе
-              протокола управления DALI - данный
-              протокол позволит исполнить любые
-              ваши задумки
-            </p>
-            <div
-              class="more"
-              @click="opensPopupService(3)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить пнр"
-              :width="42.5"
-              :height="12"
-              @click="opensPopupCallback()"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.05</div>
-            <div class="title">
-              Сервисное<br />
-              обслуживание и ремонт<br />
-              оборудования
-            </div>
-            <p class="text">
-              бывает, что ваш любимый светильник
-              или система управления сломалась
-              или потребовалась дополнительна
-              настройка, мы всегда с радостью
-              придем вам на помощь
-            </p>
-            <div
-              class="more"
-              @click="opensPopupService(4)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить ремонт"
-              :width="42.5"
-              :height="12"
-              @click="opensPopupCallback()"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.06</div>
-            <div class="title">
-              нужны дополнительные<br />
-              услуги?
-            </div>
-            <p class="text">
-              — светодизайн;
-              — светотехнический расчет;
-              — консультация по выбору освещения
-              и технико-экономическое обоснование
-            </p>
-            <div
-              class="more"
-              @click="opensPopupService(5)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить задачу"
-              :width="42.5"
-              :height="12"
-              @click="opensPopupCallback()"
-            />
-          </li>
-        </ul>
-      </section>
-      <section id="portfolio" class="section section_portfolio">
-        <h2 class="title title_page text-anim-letters">Портфолио</h2>
-        <ul class="projects">
-          <li
-              class="project project_n0"
-              @click="opensPopupGallery(1)"
-          >
-            <img
-                class="project__cover"
-                src="/pages/about/portfolio/room-lighting/cover.jpg"
-            />
-            <div class="project__name">
-              <div class="title">room lighting</div>
-              <div class="subtitle">освещение комнаты</div>
-            </div>
-          </li>
-          <li
-              class="project project_n1"
-              @click="opensPopupGallery(2)"
-          >
-            <img
-                class="project__cover"
-                src="/pages/about/portfolio/bright-horizons-office/cover.jpg"
-            />
-            <div class="project__name">
-              <div class="title">Bright Horizons Office</div>
-              <div class="subtitle">освещение офиса</div>
-            </div>
-          </li>
-          <li
-              class="project project_n2"
-              @click="opensPopupGallery(3)"
-          >
-            <img
-                class="project__cover"
-                src="/pages/about/portfolio/architectural-lighting/cover.jpg"
-            />
-            <div class="project__name">
-              <div class="title">architectural lighting<br />of the house</div>
-              <div class="subtitle">освещение дома</div>
-            </div>
-          </li>
-        </ul>
-      </section>
-      <SectionContacts />
-      <Footer />
+      <SectionStart2 
+        @viewSolutions="viewSolutions"
+      />
 
+      <SectionCompany />
+
+      <SectionServices 
+        @popupServices="opensPopupService"
+        @callback="opensPopupCallback"
+      />
+
+      <SectionPortfolio
+        @openGallery="opensPopupGallery"
+      />
+
+      <SectionContacts />
+
+      <Footer />
       <PopupGallery
           @closePopup="closesPopupGallery()"
           :content="portfolioContent[typeInfoGallery]"
           :active="openPopup"
-      />
-      <PopupService
-        :id="idPopupService"
-        :class="{'PopupService_active': openPopupService }"
-        @closePopup="closesPopupService()"
-      />
-      <PopupCallback 
-       :class="{'PopupCallback_active': openPopupCallback }"
-       @closePopup="closesPopupCallback ()"
       />
     </div>
   </Lenis>
@@ -423,33 +43,31 @@ export default {
     return {
       openPopup: false,
       openPopupService: false,
-      openPopupCallback: false,
-      idPopupService: 0,
       posScroll: 0,
       nextPage: true,
       lenis: null,
       scroller: '.page_about',
       portfolioContent: {
         1: {
-          photos: ['/pages/about/portfolio/room-lighting/00.jpg',
-            '/pages/about/portfolio/room-lighting/01.jpg',
-            '/pages/about/portfolio/room-lighting/02.jpg',
+          photos: ['/assets/pages/about/portfolio/room-lighting/00.jpg',
+            '/assets/pages/about/portfolio/room-lighting/01.jpg',
+            '/assets/pages/about/portfolio/room-lighting/02.jpg',
           ],
           title: 'room lighting',
           text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI',
         },
         2: {
-          photos: ['/pages/about/portfolio/bright-horizons-office/00.jpg',
-            '/pages/about/portfolio/bright-horizons-office/01.jpg',
-            '/pages/about/portfolio/bright-horizons-office/02.jpg',
+          photos: ['/assets/pages/about/portfolio/bright-horizons-office/00.jpg',
+            '/assets/pages/about/portfolio/bright-horizons-office/01.jpg',
+            '/assets/pages/about/portfolio/bright-horizons-office/02.jpg',
           ],
           title: 'bright horizons office',
           text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI',
         },
         3: {
-          photos: ['/pages/about/portfolio/architectural-lighting/00.jpg',
-            '/pages/about/portfolio/architectural-lighting/01.jpg',
-            '/pages/about/portfolio/architectural-lighting/02.jpg',
+          photos: ['/assets/pages/about/portfolio/architectural-lighting/00.jpg',
+            '/assets/pages/about/portfolio/architectural-lighting/01.jpg',
+            '/assets/pages/about/portfolio/architectural-lighting/02.jpg',
           ],
           title: 'architectural lighting',
           text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI',
@@ -459,7 +77,7 @@ export default {
     };
   },
   computed: {
-    ...mapStores(firstDownload),
+    ...mapStores(firstDownload, openPopup),
   },
   mounted() {
     this.animateTextByLetters();
@@ -556,11 +174,16 @@ export default {
         this.$router.push('/');
       }
     },
-    animateTextByLetters() {
+    async animateTextByLetters() {
+      await this.$nextTick();
+
+      // const textAnimLetters = document.querySelectorAll('.text-anim-line');
       const textAnimLetters = document.querySelectorAll('.text-anim-letters, .text-anim-line');
+
 
       textAnimLetters?.forEach((el) => {
         const spansArray = useTextSeparate(el, { byLetters: el.classList.contains('text-anim-letters') });
+        // const spansArray = gsap.utils.toArray(el.querySelectorAll('span'));        
 
         gsap.from(spansArray, {
           yPercent: 110,
@@ -618,26 +241,19 @@ export default {
     });
     },
     opensPopupService(id) {
-      this.openPopupService = true;
-      this.idPopupService = id;
-    },
-    closesPopupService() {
-      this.openPopupService = false;
+      this.openPopupStore.popupService = [];
+      this.openPopupStore.popupService.push(id);
+      this.openPopupStore.popupService.push(true);
     },
     opensPopupGallery(type) {
       this.openPopup = true;
       this.typeInfoGallery = type; 
-      // this.$refs?.Lenis.stop();
     },
     closesPopupGallery() {
       this.openPopup = false;
-      // this.$refs?.Lenis.start();
     },
     opensPopupCallback() {
-      this.openPopupCallback = true;
-    },
-    closesPopupCallback() {
-      this.openPopupCallback = false;
+      this.openPopupStore.popupCallback = true;
     },
     returnsDelayTime(index) {
       let time = 0;
@@ -650,6 +266,9 @@ export default {
       }
       return time;
     },
+    viewSolutions() {
+      this.$router.push('/about?section=services')
+    }
   },
   beforeUnmount() {},
 };
@@ -665,6 +284,12 @@ export default {
 .popup-fade-leave-to {
   transform: scale(.9);
   opacity: 0;
+}
+
+.text-anim-line {
+  span {
+    display: block;
+  }
 }
 
 .page.page_about {

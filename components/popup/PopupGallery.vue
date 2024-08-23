@@ -121,10 +121,11 @@
     height: 100vh;
     user-select: none;
     .nuxt-icon svg {
-      width: initial;
-      height: initial;
       margin-bottom: 0;
       vertical-align: initial;
+    }
+    .Close {
+      right: 7rem;
     }
     &::after {
       content: '';
@@ -153,6 +154,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        svg {
+          width: 4.8rem;
+          height: 4rem;
+        }
         &::after {
           content: '';
           position: absolute;
@@ -168,13 +173,13 @@
           z-index: 1;
         }
         &__left {
-          left: 0;
+          left: 2rem;
           &:hover .arrow-left {
             transform: translateX(-20%)
           }
         }
         &__right {
-          right: 0;
+          right: 2rem;
           &:hover .arrow-right {
             transform: translateX(20%)
           }

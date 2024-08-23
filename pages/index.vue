@@ -8,8 +8,8 @@
     <video
         ref="video"
         class="video"
-        src="/pages/home/major.mp4"
-        poster="/pages/home/major.jpg"
+        src="/assets/pages/home/major.mp4"
+        poster="/assets/pages/home/major.jpg"
         playsinline
         loop
         muted
@@ -48,10 +48,6 @@
       />
       <div class="line"></div>
     </div>
-    <PopupCallback 
-      :class="{'PopupCallback_active': openPopupCallback }"
-      @closePopup="closesPopupCallback ()"
-    />
   </div>
 </template>
 
@@ -62,11 +58,10 @@ export default {
   data() {
     return {
       sound: false,
-      openPopupCallback: false,
     };
   },
   computed: {
-    ...mapStores(firstDownload),
+    ...mapStores(firstDownload, openPopup),
   },
   mounted() {
     setTimeout(() => {
@@ -95,10 +90,7 @@ export default {
       }
     },
     opensPopupCallback() {
-      this.openPopupCallback = true;
-    },
-    closesPopupCallback() {
-      this.openPopupCallback = false;
+      this.openPopupStore.popupCallback = true;
     },
   },
   beforeUnmount() {
