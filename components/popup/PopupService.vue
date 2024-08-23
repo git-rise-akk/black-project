@@ -17,9 +17,10 @@
               v-html="`от ${separateThousands(info[id].price)}`"
           ></div>
           <StandardButton
-              :text="info[id].btn"
-              :width="52"
-              :height="12"
+            :text="info[id].btn"
+            :width="52"
+            :height="12"
+           @click="opensPopupCallback"
           />
         </div>
       </div>
@@ -55,6 +56,7 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia';
 export default {
   props: {
     id: {
@@ -110,13 +112,18 @@ export default {
       ],
     };
   },
-  computed: {},
+  computed: {
+    ...mapStores(openPopup),
+  },
   methods: {
     closingEvent() {
       this.$emit('closePopup');
     },
     separateThousands(number) {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    opensPopupCallback() {
+      this.openPopupStore.popupCallback = true;
     },
   },
 }

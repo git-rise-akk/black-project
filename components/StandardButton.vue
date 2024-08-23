@@ -94,6 +94,7 @@ export default {
   font-weight: 400;
   font-size: 2.3rem;
   gap: 1.1rem;
+  cursor: pointer;
 
   svg {
     width: 100%;
@@ -117,8 +118,6 @@ export default {
       white-space: nowrap;
     }
   }
-
-  cursor: pointer;
 
   .arrow-btn {
     height: 1.8rem;
