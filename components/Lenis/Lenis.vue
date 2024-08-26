@@ -49,7 +49,7 @@ export default {
   watch: {
     '$route.query.section': {
       handler(value) {
-        this.switchesSections(value, false);
+        this.switchesSections(value);
       },
     },
   },
@@ -110,15 +110,16 @@ export default {
         setTimeout(() => (this.cornerEventEmitted = false), this.cornerEventDelay * 2);
       }
     },
-    switchesSections(parameter, animation) {
-      const target = document.querySelector(`#${parameter}`);
-      if (!target) {
+    switchesSections(parameter, animation = false) {
+      
+      const target = document.getElementById(`${parameter}`);
+      if (!target || !this.instance) {
         return
       }
-      
-      this.instance?.scrollTo(target, {
-        immediate: animation,
-        offset: 100
+
+      this.instance.scrollTo(target, {
+        immediate: Boolean(animation),
+        offset: 100,
       });
     },
   },

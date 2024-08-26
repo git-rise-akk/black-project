@@ -1,11 +1,11 @@
 <template>
   <Lenis
-      ref="page"
-      class="page page_about page_up"
-      @corner="cornerHandler"
+    ref="page"
+    class="page page_about page_up"
+    @corner="cornerHandler"
   >
     <div class="scroll">
-      <section class="section section_start">
+      <section id="start" class="section section_start">
         <div class="section__left">
           <div class="title text-anim-line">
             Мы —<br />
@@ -488,7 +488,7 @@ export default {
     this.animateTextByLetters();
     this.animateCardsPrtfolio();
     this.animateCardsServices();
-
+    
     this.firstDownloadStore.active = false;
 
     const imgs = gsap.utils.toArray('.section_start .img');
