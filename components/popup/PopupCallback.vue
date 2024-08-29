@@ -182,7 +182,7 @@ export default {
 					method: 'POST',
 					body: {
 						title: 'Заявка с сайта',
-						text: JSON.stringify(this.user),
+						text: this.user.name,
 					},
 				})
 
