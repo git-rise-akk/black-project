@@ -82,7 +82,7 @@ export default {
   }
   input {
     width: 100%;
-    height: 100%;
+    height: 7.5rem;
     background: $popup;
     padding-left: 4.1rem;
     border: 0.1rem solid #fff;

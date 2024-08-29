@@ -3,34 +3,33 @@ export default defineNuxtConfig({
 
   app: {
       head: {
-          title: "Black Project",
-          htmlAttrs: {
-              lang: "ru",
-          },
-          charset: "utf-8",
+        title: "Black Project",
+        htmlAttrs: {
+            lang: "ru",
+        },
+        charset: "utf-8",
       },
       pageTransition: { name: 'page' }
   },
 
   modules: [
-      '@pinia/nuxt',
-      'nuxt-icons',
-      '@nuxt/image',
-      '@nuxtjs/device',
-      '@primevue/nuxt-module'
+    '@pinia/nuxt',
+    'nuxt-icons',
+    '@nuxt/image',
+    '@nuxtjs/device',
+    '@primevue/nuxt-module',
   ],
 
   css: ["@/assets/css/main.scss"],
 
   vite: {
-      css: {
-          preprocessorOptions: {
-              scss: {
-                  additionalData:
-                      '@import "@/assets/css/mixins.scss";',
-              },
-          },
-      },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: '@import "@/assets/css/mixins.scss";',
+            },
+        },
+    },
   },
 
   image: {
