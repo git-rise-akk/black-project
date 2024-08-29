@@ -28,18 +28,30 @@
 							type="text"
 							v-model="user.name"
 							placeholder="Введите свое имя"
+							:class="{
+								'p-invalid':
+									unavaliableField !== true && unavaliableField === 'name',
+							}"
 						/>
 						<InputMask
 							id="phone"
 							v-model="user.phone"
 							mask="+7 (999) 999-99-99"
 							placeholder="Введите свой номер*"
+							:class="{
+								'p-invalid':
+									unavaliableField !== true && unavaliableField === 'phone',
+							}"
 						/>
 						<InputText
 							id="email"
 							type="text"
 							v-model="user.email"
 							placeholder="Введите свой e-mail"
+							:class="{
+								'p-invalid':
+									unavaliableField !== true && unavaliableField === 'email',
+							}"
 						/>
 						<InputText
 							id="comment"
@@ -49,7 +61,7 @@
 						/>
 					</div>
 					<StandardButton
-						:text="available"
+						text="Отправить"
 						:width="35.6"
 						:height="7.5"
 						@click="submit()"
@@ -126,21 +138,7 @@ export default {
 				minLength: 0,
 				maxLength: 1000,
 			},
-			schema: yup.object({
-				phone: yup
-					.string()
-					.matches(
-						/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/,
-						'Invalid phone number format'
-					)
-					.required(),
-				email: yup
-					.string()
-					.matches(
-						'^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
-						'Invalid email number format'
-					),
-			}),
+			unavaliableField: true,
 		}
 	},
 	computed: {
@@ -148,19 +146,25 @@ export default {
 		available() {
 			return Object.keys(this.user).every(item => {
 				const value = this.user[item]
-				if (value) {
-					if (
-						item === 'phone' &&
-						!/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/.test(value)
-					) {
-						return false
-					}
-					if (item === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-						return false
-					}
+				if (this.unavaliableField === true) {
 					return true
 				}
-				return false
+				if (item === 'name' && !value) {
+					this.unavaliableField = 'name'
+					return false
+				}
+				if (
+					item === 'phone' &&
+					!/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/.test(value)
+				) {
+					this.unavaliableField = 'phone'
+					return false
+				}
+				if (item === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+					this.unavaliableField = 'email'
+					return false
+				}
+				return true
 			})
 		},
 	},
@@ -172,6 +176,7 @@ export default {
 			this.isFormValid = isValid
 		},
 		async submit() {
+			this.unavaliableField = null
 			if (this.available) {
 				const response = await $fetch('/api/feed', {
 					method: 'POST',
@@ -190,6 +195,7 @@ export default {
 				setTimeout(() => {
 					this.openPopupStore.popupCallback = false
 					this.result = null
+					this.unavaliableField = true
 				}, 2000)
 			}
 		},
