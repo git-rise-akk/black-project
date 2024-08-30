@@ -94,7 +94,14 @@ export default {
   font-weight: 400;
   font-size: 2.3rem;
   gap: 1.1rem;
+  opacity: 1;
+  transition: opacity .3s;
   cursor: pointer;
+
+  &.disabled {
+    opacity: 0.7;
+    cursor: no-drop;
+  }
 
   svg {
     width: 100%;
@@ -129,7 +136,7 @@ export default {
     }
   }
 
-  &:hover svg {
+  &:not(.disabled):hover svg {
     path {
       stroke-dashoffset: 0;
       transition: stroke-dashoffset 1.1s;

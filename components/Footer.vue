@@ -3,17 +3,17 @@
         <nuxt-icon class="logo" name="logo" filled />
         <ul class="social-network">
             <li>
-                <a class="link" href="#">
+                <a class="link" href="https://www.instagram.com/" target="_blank">
                     <nuxt-icon class="social social-instagram" name="instagram" filled />
                 </a>
             </li>
             <li>
-                <a class="link" href="#">
+                <a class="link" href="https://tiktok.com/" target="_blank">
                     <nuxt-icon class="social social-tik-tok" name="tik-tok" filled />
                 </a>
             </li>
             <li>
-                <a class="link" href="#">
+                <a class="link" href="https://vk.com/" target="_blank">
                     <nuxt-icon class="social social-vk" name="vk" filled />
                 </a>
             </li>

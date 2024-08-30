@@ -95,6 +95,7 @@
         },
         methods: {
           closingEvent() {
+            this.currentPhoto = 0;
             this.$emit('closePopup');
           },
           changesCurrentPhoto(number) {

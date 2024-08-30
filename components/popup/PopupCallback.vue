@@ -3,23 +3,13 @@
 		<div class="PopupCallback_bg"></div>
 		<div class="PopupCallback_form">
 			<Transition name="show">
-				<div v-show="result === false" class="screen screen-error">
-					<div>Произошла ошибка, пожалуйcта попробуйте позже.</div>
-				</div>
-			</Transition>
-			<Transition name="show">
-				<div v-show="result === true" class="screen screen-success">
-					Заявка отправлена, мы свяжемся с Вами в ближайшее время.
-				</div>
-			</Transition>
-			<Transition name="show">
 				<div
 					v-show="![false, true].includes(result)"
 					class="screen screen-fields"
 				>
 					<div class="title">Заказать обратный<br />звонок</div>
 					<div class="description">
-						Пожалуйста, заполните форму ниже и мы<br />с вами свяжемся для
+						Пожалуйста, заполните форму ниже и мы с вами свяжемся для
 						уточнения деталей:
 					</div>
 					<div class="fields">
@@ -28,30 +18,20 @@
 							type="text"
 							v-model="user.name"
 							placeholder="Введите свое имя"
-							:class="{
-								'p-invalid':
-									unavaliableField !== true && unavaliableField === 'name',
-							}"
 						/>
 						<InputMask
 							id="phone"
 							v-model="user.phone"
 							mask="+7 (999) 999-99-99"
 							placeholder="Введите свой номер*"
-							:class="{
-								'p-invalid':
-									unavaliableField !== true && unavaliableField === 'phone',
-							}"
+							:invalid="validationFields.phone"
 						/>
 						<InputText
 							id="email"
 							type="text"
 							v-model="user.email"
-							placeholder="Введите свой e-mail"
-							:class="{
-								'p-invalid':
-									unavaliableField !== true && unavaliableField === 'email',
-							}"
+							placeholder="Введите свой e-mail*"
+							:invalid="validationFields.email"
 						/>
 						<InputText
 							id="comment"
@@ -63,16 +43,25 @@
 					<StandardButton
 						text="Отправить"
 						:width="35.6"
-						:height="7.5"
+						:height="8"
 						@click="submit()"
 					/>
-					<div class="policy">
-						Нажимая кнопку «Отправить» Вы соглашаетесь<br /><a
-							href="#"
-							target="_blank"
-							>с политикой обработки персональных данных</a
-						>
+					<div 
+						class="policy"
+					>
+						Нажимая кнопку «Отправить» Вы соглашаетесь
+						<a href="#" target="_blank">с политикой обработки персональных данных</a>
 					</div>
+				</div>
+			</Transition>
+			<Transition name="show">
+				<div v-show="result === false" class="screen screen-error">
+					<div>Произошла ошибка, пожалуйcта попробуйте позже.</div>
+				</div>
+			</Transition>
+			<Transition name="show">
+				<div v-show="result === true" class="screen screen-success">
+					Заявка отправлена, мы свяжемся с Вами в ближайшее время.
 				</div>
 			</Transition>
 			<Close @click="closingEvent()" />
@@ -81,7 +70,6 @@
 </template>
 
 <script>
-import * as yup from 'yup'
 import { mapStores } from 'pinia'
 export default {
 	props: {
@@ -100,89 +88,87 @@ export default {
 				email: '',
 				comment: '',
 			},
-			isFormValid: true,
-			nameComponent: {
-				type: 'text',
-				placeholder: 'Введите свое имя',
-				errorMessage: false,
-				pattern: false,
-				mask: false,
-				masked: false,
-				minLength: 2,
-				maxLength: 30,
+			validationFields: {
+				phone: false,
+				email: false,
 			},
-			phoneComponent: {
-				type: 'text',
-				placeholder: 'Введите свой номер*',
-				errorMessage: null,
-				pattern: '\\+7\\s\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}',
-				mask: '+7 (###) ###-##-##',
-				minLength: 18,
-				maxLength: 18,
-			},
-			emailComponent: {
-				type: 'email',
-				placeholder: 'Введите свой e-mail',
-				errorMessage: null,
-				pattern: '^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
-				mask: null,
-				minLength: 2,
-				maxLength: 50,
-			},
-			commentComponent: {
-				type: 'text',
-				placeholder: 'Комментарий',
-				errorMessage: null,
-				pattern: '',
-				mask: null,
-				minLength: 0,
-				maxLength: 1000,
-			},
-			unavaliableField: true,
+			secondAttempt: false,
 		}
 	},
 	computed: {
 		...mapStores(openPopup),
-		available() {
-			return Object.keys(this.user).every(item => {
-				const value = this.user[item]
-				if (this.unavaliableField === true) {
-					return true
+	},
+	watch: {
+		'user.phone'(value) {
+			if(this.secondAttempt) {
+				const regExPhone = new RegExp('\\+7\\s\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}');
+				if(regExPhone.test(value)) {
+					this.validationFields.phone = false;
 				}
-				if (item === 'name' && !value) {
-					this.unavaliableField = 'name'
-					return false
+			}
+		},
+		'user.email'(value) {
+			if(this.secondAttempt) {
+				const regExEmail = new RegExp('/^[^\s@]+@[^\s@]+\.[^\s@]+$/');
+				if(regExEmail.test(value)) {
+					this.validationFields.email = false;
 				}
-				if (
-					item === 'phone' &&
-					!/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/.test(value)
-				) {
-					this.unavaliableField = 'phone'
-					return false
-				}
-				if (item === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-					this.unavaliableField = 'email'
-					return false
-				}
-				return true
-			})
+			}
 		},
 	},
 	methods: {
 		closingEvent() {
+			this.resetInput();
 			this.$emit('closePopup')
 		},
-		validateForm(isValid) {
-			this.isFormValid = isValid
+		available() {
+			Object.keys(this.validationFields).forEach((item) => {
+				const value = this.user[item]
+				const regExPhone = new RegExp('\\+7\\s\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}');
+				const regExEmail = new RegExp('/^[^\s@]+@[^\s@]+\.[^\s@]+$/');
+			
+
+				if (item === 'phone') {
+					if (!regExPhone.test(value)) {
+						this.validationFields.phone = true;
+					} else {
+						this.validationFields.phone = false;
+					}
+				}
+
+				if (item === 'email') {
+					if (!regExEmail.test(value)) {
+						this.validationFields.email = true;
+					} else {
+						this.validationFields.email = false;
+					}
+				}
+				
+			})
+			this.secondAttempt = true;
+			return !(this.validationFields.phone && this.validationFields.email);
+		},
+		resetInput() {
+			Object.keys(this.user).forEach((item) => {
+				this.user[item] = '';
+			})
+			Object.keys(this.validationFields).forEach((item) => {
+				this.validationFields[item] = false;
+			})
 		},
 		async submit() {
-			this.unavaliableField = null
-			if (this.available) {
+			const text = `
+				<strong>Имя</strong>: ${this.user.name ? this.user.name : 'нет'}<br />
+				<strong>Телефон</strong>: ${this.user.phone}<br />
+				<strong>Почта</strong>: ${this.user.email}<br />
+				<strong>Комментарий</strong>: ${this.user.comment ? this.user.comment : 'нет'}
+			`;
+			if (this.available()) {
 				const response = await $fetch('/api/feed', {
 					method: 'POST',
 					body: {
 						title: 'Заявка с сайта',
-						text: this.user.name,
+						text: text,
 					},
 				})
 
@@ -195,7 +181,7 @@ export default {
 				setTimeout(() => {
 					this.openPopupStore.popupCallback = false
 					this.result = null
-					this.unavaliableField = true
+					this.resetInput();
 				}, 2000)
 			}
 		},
@@ -242,17 +228,17 @@ export default {
 	}
 	&_form {
 		position: relative;
-		width: 49rem;
-		height: 78.8rem;
+		width: 52rem;
+    	height: 83rem;
 		background: $popup;
 		z-index: 1;
-		padding: 7.2rem;
+		padding: 5.2rem;
 		transform: translateY(calc(100% + 20rem));
 		opacity: 0;
 		transition: transform 0.5s, opacity 0.1s 0.6s;
 		.screen {
 			position: absolute;
-			inset: 7.2rem;
+			inset: 5.2rem;
 			display: flex;
 			flex-direction: column;
 			&.screen-error,
@@ -263,12 +249,13 @@ export default {
 			}
 			.p-inputtext {
 				width: 100%;
-				height: 7.5rem;
+				height: 7.3rem;
 				background: $popup;
 				padding-left: 4.1rem;
 				border: 0.1rem solid #fff;
-				font-size: 1.5rem;
+				font-size: 1.4rem;
 				font-family: ArtegraSans;
+				text-transform: uppercase;
 				color: #fff;
 				&:focus {
 					outline: none;
@@ -277,32 +264,48 @@ export default {
 					color: #fff;
 					opacity: 0.3;
 				}
+
+				&:-webkit-autofill,
+				&:-webkit-autofill:hover,
+				&:-webkit-autofill:focus,
+				&:-webkit-autofill:active {
+					-webkit-box-shadow: 0 0 0 7.3rem $popup inset;
+					-webkit-text-fill-color: #fff;
+					border: 0.1rem solid #fff;
+				}
+				
+				&:autofill {
+					box-shadow: 0 0 0 7.3rem $popup inset;
+					color:  #fff;
+					border: 0.1rem solid #fff;
+				}
 			}
 			.p-invalid {
 				border: 0.1rem solid red;
+				&:hover {
+					border: 0.1rem solid red;
+				}
 			}
 		}
 		.title {
-			font-size: 2.1rem;
-			margin-bottom: 2.4rem;
+			font-size: 2.7rem;
+			margin-bottom: 5.4rem;
 			text-align: center;
 		}
 		.description {
 			margin-bottom: 2.7rem;
 			font-size: 1.4rem;
-			text-transform: initial;
 		}
 		.fields {
 			display: flex;
 			flex-direction: column;
-			gap: 1.1rem;
+			gap: 1.4rem;
 		}
 		.StandardButton {
-			margin-top: auto;
+			margin: auto auto 0;
 		}
 		.policy {
-			font-size: 1rem;
-			text-transform: initial;
+			font-size: 1.3rem;
 			text-align: center;
 			margin-top: 2.4rem;
 			a {
@@ -311,8 +314,8 @@ export default {
 			}
 		}
 		.Close {
-			top: 3rem;
-			right: 3rem;
+			top: 2rem;
+			right: 2rem;
 		}
 	}
 }

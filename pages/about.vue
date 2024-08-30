@@ -23,7 +23,7 @@
           <StandardButton
             text="посмотреть решения"
             :width="52"
-            @click="opensPopupCallback()"
+            @click="viewSolutions()"
           />
         </div>
         <div class="section__right">
@@ -1008,10 +1008,9 @@ export default {
           }
 
           .text {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             line-height: 2.2rem;
             font-weight: 300;
-            text-transform: lowercase;
           }
 
           .more {
