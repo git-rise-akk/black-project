@@ -14,7 +14,7 @@
   </div>
   <div v-else class="layout-mobile">
     <div class="info">
-      <img src="/mob.gif" class="light-bulb" alt="">
+      <div class="glowing-circle"></div>
       <div class="text">мобильная версия<br />скоро засветиться</div>
     </div>
   </div>
@@ -56,15 +56,33 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
   .info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .light-bulb {
-      width: 30rem;
-      height: auto
+    .glowing-circle {
+      position: relative;
+      width: 20rem;
+      height: 20rem;
+      margin-bottom: 5rem;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 15rem;
+        height: 15rem;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 2rem #fff, 0 0 4rem #fff, 0 0 6rem #fff;
+        animation: glow 3s infinite alternate;
+      }
+    }
+    .text {
+      text-align: center;
     }
   }
 }
@@ -77,6 +95,17 @@ onMounted(() => {
       margin-bottom: 0;
       vertical-align: initial;
     }
+  }
+}
+
+@keyframes glow {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 2rem #fff, 0 0 4rem #fff, 0 0 6rem #fff;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.3);
+    box-shadow: 0 0 3rem #fff, 0 0 6rem #fff, 0 0 9rem #fff;
   }
 }
 </style>
