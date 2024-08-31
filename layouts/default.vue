@@ -15,7 +15,7 @@
   <div v-else class="layout-mobile">
     <div class="info">
       <div class="glowing-circle"></div>
-      <div class="text">мобильная версия<br />скоро засветиться</div>
+      <div class="text">мобильная версия<br />скоро засветится</div>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@ onMounted(() => {
 .layout-mobile {
   position: absolute;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
   display: flex;
