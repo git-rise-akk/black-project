@@ -202,8 +202,9 @@ export default {
       height: 100%;
 
       .text {
-        font-size: 1.8rem;
-        text-transform: initial;
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        font-weight: 300;
       }
 
       .price {

@@ -67,7 +67,6 @@ export default {
 
       this.instance.on('scroll', (e) => {
         ScrollTrigger.update();
-
         /*вынести наружу*/
         // this.headerStore.state = e.direction !== 1;
       });
@@ -121,6 +120,7 @@ export default {
         immediate: Boolean(animation),
         offset: 100,
       });
+      this.$router.replace({ query: {} });
     },
   },
 

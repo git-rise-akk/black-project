@@ -17,7 +17,7 @@
     "@vueform/nuxt": "^1.7.0",
     "@vueform/vueform": "^1.10.3",
     "gsap": "^3.12.5",
-    "lenis": "1.1.9",
+    "lenis": "^1.1.13",
     "node-telegram-bot-api": "^0.66.0",
     "nodemailer": "^6.9.14",
     "nuxt": "^3.12.2",

@@ -672,7 +672,7 @@ export default {
       return time;
     },
     viewSolutions() {
-      this.$router.push('/about?section=services')
+      this.$router.push('/about?section=portfolio')
     }
   },
   beforeUnmount() {},
