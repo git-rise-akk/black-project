@@ -61,7 +61,7 @@
         </div>
       </section>
       <section id="company" class="section section_company">
-        <h2 class="title title_page text-anim-letters">О компании</h2>
+        <h2 class="title title_page text-anim-letters">О&nbsp;компании</h2>
         <ul class="about">
           <li class="about__item about__item_n0">
             <div class="text-content">
