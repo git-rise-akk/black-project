@@ -1,6 +1,6 @@
 <template>
-      <section id="services" class="section section_services">
-        <h2 class="title title_page text-anim-letters">Услуги</h2>
+      <section id="services" class="SectionServices section">
+        <h2 class="title title_page text-anim-letters" v-text-separate="{ byLetters: true }">Услуги</h2>
         <ul class="services">
           <li class="service">
             <div class="number">.01</div>
@@ -163,6 +163,69 @@ export default {
     
 }
 </script>
-<style>
-    
+
+<style lang="scss">
+.SectionServices {
+  .services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 21rem;
+    grid-row-gap: 9.7rem;
+    margin-top: 10.7rem;
+
+    .service {
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(40%);
+
+      .number {
+        font-size: 15rem;
+        font-weight: 400;
+        line-height: 12rem;
+      }
+
+      .title {
+        font-size: 2.5rem;
+        line-height: 3.1rem;
+        margin: 7.7rem 0 4.4rem;
+      }
+
+      .text {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        font-weight: 300;
+      }
+
+      .more {
+        position: relative;
+        margin: 5.5rem 0 6.6rem;
+        font-size: 2.4rem;
+        width: fit-content;
+        cursor: pointer;
+
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0rem;
+          width: 100%;
+          height: 0.1rem;
+          background: #fff;
+          transition: width .3s;
+        }
+
+        &:hover {
+          &:after {
+            width: 0;
+          }
+        }
+      }
+
+      .StandardButton {
+        margin-top: auto;
+      }
+    }
+  }
+}
 </style>

@@ -52,6 +52,10 @@ export default defineNuxtConfig({
     '@primevue/nuxt-module',
   ],
 
+  plugins: [
+    '@/plugins/directives.js',
+  ],
+
   css: ["@/assets/css/main.scss"],
 
   vite: {

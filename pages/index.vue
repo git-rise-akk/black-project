@@ -8,8 +8,8 @@
     <video
         ref="video"
         class="video"
-        src="/assets/pages/home/major.mp4"
-        poster="/assets/pages/home/major.jpg"
+        src="/assets/webpages/home/major.mp4"
+        poster="/assets/webpages/home/major.jpg"
         playsinline
         loop
         muted

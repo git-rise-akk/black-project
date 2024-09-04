@@ -10,7 +10,7 @@ export const useTextSeparate = (node, options) => {
 
 	if (opt.byLetters) {
 		/* по буквам */
-		itemsArray = node.innerText.split('');
+		itemsArray = node.innerHTML.split('');
 	} else if (!opt.byLetters) {
 		/* по строкам */
 		itemsArray = node.innerHTML.replace(/<br\s\/>|<br>/gi, '<br/>').split('<br/>');
@@ -23,6 +23,7 @@ export const useTextSeparate = (node, options) => {
 		const spanWrapper = document.createElement('span');
 		const span = document.createElement('span');
 		spanWrapper.appendChild(span);
+console.log('item', item);
 
 		span.innerText = item;
 

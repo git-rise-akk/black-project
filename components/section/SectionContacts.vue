@@ -2,34 +2,45 @@
     <section class="SectionContacts section">
         <div class="contacts">
             <div class="contacts__left">
-                <div class="feature text-anim-line">
-                Опыт в области<br />
-                проектирования,<br />
-                монтажа<br />
-                и автоматизации<br />
-                более 10 лет
+                <div 
+                    class="feature text-anim-line" 
+                    v-text-separate="{ byLetters: false }"
+                >
+                    Опыт в области<br />
+                    проектирования,<br />
+                    монтажа<br />
+                    и автоматизации<br />
+                    более 10 лет
                 </div>
-                <div class="feature text-anim-line">
-                обеспечиваем<br />
-                высокое качество<br />
-                на каждом этапе<br />
-                работы
+                <div
+                    class="feature text-anim-line"
+                    v-text-separate="{ byLetters: false }"
+                >
+                    обеспечиваем<br />
+                    высокое качество<br />
+                    на каждом этапе<br />
+                    работы
                 </div>
             </div>
             <div class="contacts__right">
-                <div class="text-anim-line">
-                Нужна консультация<br />
-                или хотите обсудить<br />
-                ваш проект?
+                <div
+                    class="text-anim-line"
+                    v-text-separate="{ byLetters: false }"
+                >
+                    Нужна консультация<br />
+                    или хотите обсудить<br />
+                    ваш проект?
                 </div>
                 <div class="contacts__info">
                 <a
                     class="number text-anim-line"
                     href="tel:+79990009900"
+                    v-text-separate="{ byLetters: false }"
                 >+7 999 000 99 00</a>
                 <a
                     class="email text-anim-line"
                     href="mailto:blackproject@gmail.com"
+                    v-text-separate="{ byLetters: false }"
                 >blackproject@gmail.com</a>
                 </div>
             </div>
