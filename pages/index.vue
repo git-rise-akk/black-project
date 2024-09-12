@@ -4,7 +4,8 @@
       :class="['page page_home page_down', {'page_first-download': firstDownloadStore.active }]"
       @wheel="wheelEvent"
   >
-    <Logo />
+    <Logo v-if="!tablet"/>
+    <MobLogo v-else />
     <video
         ref="video"
         class="video"
@@ -58,6 +59,7 @@ export default {
   data() {
     return {
       sound: false,
+      tablet: false,
     };
   },
   computed: {
@@ -67,6 +69,8 @@ export default {
     setTimeout(() => {
       this.firstDownloadStore.active = false;
     }, 6000);
+    window.innerWidth <= 720 ? this.tablet = true : this.tablet = false;
+    console.log(window.innerWidth);
   },
   methods: {
     switchesSound() {

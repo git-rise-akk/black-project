@@ -9,8 +9,8 @@
 }
 
 :root {
-  --width: 1920;
-  --height: 1080;
+  --width: 375;
+  --height: 812;
   --index: calc((100vw / var(--width)) + (100vh / var(--height)));
 }
 

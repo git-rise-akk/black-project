@@ -63,6 +63,7 @@ export default {
       this.instance = new Lenis({
         wrapper: this.$el,
         content: this.$refs.content,
+        syncTouch: true,
       });
 
       this.instance.on('scroll', (e) => {

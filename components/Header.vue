@@ -1,5 +1,5 @@
 <template>
-  <header :class="[{ visible: headerStore.state }, { start: $route.fullPath === '/' && firstDownloadStore.active }]">
+  <header :class="['Header', { visible: headerStore.state }, { start: $route.fullPath === '/' && firstDownloadStore.active }]">
     <div class="header_wrapper">
       <NuxtLink to="/" class="logo_link">
         <nuxt-icon
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
-header {
+.Header {
   position: absolute;
   top: 0;
   left: 0;

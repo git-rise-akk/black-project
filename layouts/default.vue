@@ -1,7 +1,9 @@
 <template>
-  <div v-if="!$device.isMobileOrTablet" class="layout-default">
+  <div v-if="true" class="layout-default">
     <slot />
-    <Header />
+    <Header v-if="false" />
+    <MobHeader v-if="true" />
+    <MobMenu v-if="true"/>
     <PopupService
       :id="openPopupStore.popupService[0]"
       :class="{'PopupService_active': openPopupStore.popupService[1] }"
@@ -12,12 +14,12 @@
       @closePopup="closesPopupCallback ()"
     />
   </div>
-  <div v-else class="layout-mobile">
+  <!-- <div v-else class="layout-mobile">
     <div class="info">
       <div class="glowing-circle"></div>
       <div class="text">мобильная версия<br />скоро засветится</div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
