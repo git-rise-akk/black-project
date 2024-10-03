@@ -30,10 +30,14 @@
 <script>
 
 import { mapStores } from 'pinia';
-import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default {
+  provide() {
+    return {
+      scroller: this.scroller,
+    }
+  },  
   data() {
     return {
       openPopup: false,
@@ -44,12 +48,12 @@ export default {
       scroller: '.page_about',
       portfolioContent: {
         1: {
-          photos: ['/assets/webpages/about/portfolio/room-lighting/00.jpg',
+          photos: ['/assets/webpages/about/portfolio/room-lighting/00.jpg', 
             '/assets/webpages/about/portfolio/room-lighting/01.jpg',
             '/assets/webpages/about/portfolio/room-lighting/02.jpg',
           ],
           title: 'room lighting',
-          text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI',
+          text: 'Настроим вашу систему освещения<br /> по вашему техническому заданию.<br /> Запустим проект любой сложности.<br /> -Настройка ситемы на протоколе - KNX;<br /> -Настройка ситемы на протоколе - DALI;<br /> -Настройка ситемы на протоколе - DMX512;<br /> -Настройка ситемы на протоколе - SPI',
         },
         2: {
           photos: ['/assets/webpages/about/portfolio/bright-horizons-office/00.jpg',
@@ -57,7 +61,7 @@ export default {
             '/assets/webpages/about/portfolio/bright-horizons-office/02.jpg',
           ],
           title: 'bright horizons office',
-          text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI',
+          text: 'Настроим вашу систему освещения<br /> по вашему техническому заданию.<br /> Запустим проект любой сложности.<br /> -Настройка ситемы на протоколе - KNX;<br /> -Настройка ситемы на протоколе - DALI;<br /> -Настройка ситемы на протоколе - DMX512;<br /> -Настройка ситемы на протоколе - SPI',
         },
         3: {
           photos: ['/assets/webpages/about/portfolio/architectural-lighting/00.jpg',
@@ -65,103 +69,20 @@ export default {
             '/assets/webpages/about/portfolio/architectural-lighting/02.jpg',
           ],
           title: 'architectural lighting',
-          text: 'Настроим вашу систему освещения по вашему<br />Техническому Заданию. Запустим проект любой<br />сложности.-Настройка ситемы на протоколе<br />- KNX; -Настройка ситемы на протоколе - DALI;<br />-Настройка ситемы на протоколе - DMX512;<br />-Настройка ситемы на протоколе - SPI',
+          text: 'Настроим вашу систему освещения<br /> по вашему техническому заданию.<br /> Запустим проект любой сложности.<br /> -Настройка ситемы на протоколе - KNX;<br /> -Настройка ситемы на протоколе - DALI;<br /> -Настройка ситемы на протоколе - DMX512;<br /> -Настройка ситемы на протоколе - SPI',
         },
       },
       typeInfoGallery: '',
     };
   },
   computed: {
-    ...mapStores(firstDownload, openPopup),
+    ...mapStores(firstDownload, openPopup, useDeviceStore),
   },
-  mounted() {
-    this.animateTextByLetters();
-    this.animateCardsPrtfolio();
+  mounted() { 
+    this.animateCardsPortfolio();
     this.animateCardsServices();
     
-    this.firstDownloadStore.active = false;
-
-    const imgs = gsap.utils.toArray('.SectionStart .img');
-    const imgsCompany = gsap.utils.toArray('.SectionCompany .img');
-    const imgsWrapper = gsap.utils.toArray('.SectionStart .img_wrapper');
-    const imgsCompanyWrapper = gsap.utils.toArray('.SectionCompany .img_wrapper');
-
-    // start
-
-    imgs.forEach((img, index) => {
-      gsap.to(img, {
-        scale: 1,
-        duration: 1.2,
-        delay: this.returnsDelayTime(index),
-        ease: 'power1.inOut',
-        scrollTrigger: {
-          trigger: img,
-          start: 'center bottom',
-          scroller: '.page_about',
-          end: 'center top',
-          // markers: true,
-        },
-      });
-    });
-
-    imgsWrapper.forEach((img, index) => {
-      gsap.to(img, {
-        y: 0,
-        duration: 1.2,
-        delay: this.returnsDelayTime(index),
-        scrollTrigger: {
-          trigger: img,
-          start: 'center bottom',
-          scroller: '.page_about',
-          end: 'center top',
-          scrub: true,
-        },
-      });
-    });
-
-    gsap.to('.SectionStart .StandardButton', {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: '.SectionStart .StandardButton',
-        start: 'top bottom',
-        scroller: '.page_about',
-        end: 'top top',
-      },
-    });
-
-    // company
-
-    imgsCompany.forEach((img, index) => {
-      gsap.to(img, {
-        scale: 1,
-        duration: 1.2,
-        delay: index % 2 !== 0 ? 0.4 : 0,
-        ease: 'power1.inOut',
-        scrollTrigger: {
-          trigger: img,
-          start: 'center bottom',
-          scroller: '.page_about',
-          end: 'center top',
-        },
-      });
-    });
-
-    imgsCompanyWrapper.forEach((img, index) => {
-      gsap.to(img, {
-        y: 0,
-        duration: 1.2,
-        delay: index % 2 !== 0 ? 0.4 : 0,
-        scrollTrigger: {
-          trigger: img,
-          start: 'center bottom',
-          scroller: '.page_about',
-          end: 'center top',
-          scrub: true,
-        },
-      });
-    });
+    this.firstDownloadStore.active = false;  
   },
   _methods: {
     cornerHandler(direction) {
@@ -169,32 +90,7 @@ export default {
         this.$router.push('/');
       }
     },
-    async animateTextByLetters() {
-      await this.$nextTick();
-
-      const textAnimLetters1 = document.querySelectorAll('.text-anim-letters, .text-anim-line');
-
-      textAnimLetters1?.forEach((el) => {
-        const spansArray1 = Array.from(el.querySelectorAll('span'));
-
-        gsap.from(spansArray1, {
-          yPercent: 110,
-          stagger: 0.07,
-          duration: 0.5,
-          scrollTrigger: {
-            scroller: this.scroller,
-            trigger: el,
-            /** once - вкл, toggle - выкл */
-            once: true,
-            // toggleActions: 'play play reverse reverse',
-            start: () => 'top 85%',
-            end: () => ' top 40%',
-            // markers: true,
-          },
-        });
-      });
-    },
-    animateCardsPrtfolio() {
+    animateCardsPortfolio() {
       const projects = gsap.utils.toArray('.SectionPortfolio .project');
 
       projects.forEach((project, index) => {
@@ -214,6 +110,25 @@ export default {
           },
         });
       });
+
+      // на десктопе не показывается последняя карточка
+      if (useDeviceStore().device !== 'desktop') {
+        const covers = gsap.utils.toArray('.SectionPortfolio .project__cover');
+        
+        covers.forEach((cover, index) => {
+        gsap.to(cover, {
+          y: '-50%',
+          duration: .2,
+          scrollTrigger: {
+            trigger: cover,
+            start: 'center 75%',
+            scroller: '.page_about',
+            end: 'center 25%',
+            scrub: true,
+          },
+        });
+      });
+      }
     },
     animateCardsServices() {
       const services = gsap.utils.toArray('.SectionServices .service');
@@ -246,19 +161,18 @@ export default {
     opensPopupCallback() {
       this.openPopupStore.popupCallback = true;
     },
-    returnsDelayTime(index) {
-      let time = 0;
-      if (index === 1) {
-        time = 0.6;
-      } else if (index === 2) {
-        time = 0.3;
-      } else if (index === 3) {
-        time = 0.9;
-      }
-      return time;
-    },
     viewSolutions() {
       this.$router.push('/about?section=portfolio');
+    },
+    returnsDevice(device) {
+      let result = '';
+      if (device === 'desktop') {
+        device = 'desktop';
+      } else {
+        device = 'mobile';
+      }
+
+      return result
     }
   },
   get methods() {
@@ -299,9 +213,25 @@ export default {
     position: relative;
     padding: 0 10rem;
 
+    .tablet & {
+      padding: 0 3.8rem;
+    }
+
+    .mobile & {
+      padding: 0 2rem;
+    }
+
     .title_page {
       text-align: center;
       padding-top: 27.7rem;
+
+      .tablet & {
+        padding-top: 22.3rem;
+      }
+
+      .mobile & {
+        padding-top: 13.3rem;
+      }
     }
   }
 }

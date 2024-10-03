@@ -2,165 +2,52 @@
       <section id="services" class="SectionServices section">
         <h2 class="title title_page text-anim-letters" v-text-separate="{ byLetters: true }">Услуги</h2>
         <ul class="services">
-          <li class="service">
-            <div class="number">.01</div>
-            <div class="title">
-              Проектирование<br />
-              систем<br />
-              освещения<br />
-              и управления
-            </div>
-            <p class="text">
-              наши специалисты разработают
-              уникальный проект, соответствующие
-              вашим требованиям и современным
-              стандартам
-            </p>
+          <li
+            v-for="(service, key) in data[useDeviceStore().device]?.services"
+            :key="`service_${key}`"
+            class="service"
+          >
+            <div class="number" v-html="`.0${ +key + 1}`"></div>
+            <div class="title" v-html="service.title"></div>
+            <p class="text" v-html="service.text"></p>
             <div
-                class="more"
-                @click="$emit('popupServices', 0)"
+              class="more"
+              @click="$emit('popupServices', key)"
             >подробнее
             </div>
             <StandardButton
               text="обсудить проект"
-              :width="42.5"
-              :height="12"
-              @click="$emit('callback')"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.02</div>
-            <div class="title">
-              Поставка и продажа<br />
-              светильников,<br />
-              комплектующих,<br />
-              устройств управления<br />
-              освещением (Алиса, Siri)
-            </div>
-            <p class="text">
-              производство светильников и систем
-              освещения из комплектующих высокого
-              уровня надежности и качества,
-              контроль качества на каждом этапе.
-            </p>
-            <div
-              class="more"
-              @click="$emit('popupServices', 1)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить поставку"
-              :width="42.5"
-              :height="12"
-              @click="$emit('callback')"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.03</div>
-            <div class="title">
-              Монтаж и подключение<br />
-              светильников, систем<br />
-              освещения и управления,<br />
-              сборка слаботочных щитов
-            </div>
-            <p class="text">
-              установим и подключим любое,
-              даже самое специфичное оборудование
-            </p>
-            <div
-              class="more"
-              @click="$emit('popupServices', 2)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить монтаж"
-              :width="42.5"
-              :height="12"
-              @click="$emit('callback')"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.04</div>
-            <div class="title">
-              Пуско-наладочные<br />
-              работы – настройка<br />
-              систем управления<br />
-              светом по вашему ТЗ
-            </div>
-            <p class="text">
-              настройка систем освещения на основе
-              протокола управления DALI - данный
-              протокол позволит исполнить любые
-              ваши задумки
-            </p>
-            <div
-              class="more"
-             @click="$emit('popupServices', 3)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить пнр"
-              :width="42.5"
-              :height="12"
-              @click="$emit('callback')"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.05</div>
-            <div class="title">
-              Сервисное<br />
-              обслуживание и ремонт<br />
-              оборудования
-            </div>
-            <p class="text">
-              бывает, что ваш любимый светильник
-              или система управления сломалась
-              или потребовалась дополнительна
-              настройка, мы всегда с радостью
-              придем вам на помощь
-            </p>
-            <div
-              class="more"
-              @click="$emit('popupServices', 4)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить ремонт"
-              :width="42.5"
-              :height="12"
-              @click="$emit('callback')"
-            />
-          </li>
-          <li class="service">
-            <div class="number">.06</div>
-            <div class="title">
-              нужны дополнительные<br />
-              услуги?
-            </div>
-            <p class="text">
-              — светодизайн;
-              — светотехнический расчет;
-              — консультация по выбору освещения
-              и технико-экономическое обоснование
-            </p>
-            <div
-              class="more"
-              @click="$emit('popupServices', 5)"
-            >подробнее
-            </div>
-            <StandardButton
-              text="обсудить задачу"
-              :width="42.5"
-              :height="12"
+              :width="buttonSize[0]"
+              :height="buttonSize[1]"
               @click="$emit('callback')"
             />
           </li>
         </ul>
       </section>
 </template>
+
 <script>
+import { mapStores } from 'pinia';
+import data from '@/assets/data/data.json';
+
 export default {
-    
+  data() {
+    return {
+      data: data,
+    };
+  },
+  computed: {
+    ...mapStores(useDeviceStore),
+    buttonSize() {
+      let size = [42.5, 12];
+      if(useDeviceStore().device === 'tablet') {
+        size = [76.8, 14.8]
+      } else if (useDeviceStore().device === 'mobile') {
+        size = [33.5, 7.7]
+      }
+      return size;
+    }
+  },
 }
 </script>
 
@@ -173,6 +60,18 @@ export default {
     grid-row-gap: 9.7rem;
     margin-top: 10.7rem;
 
+    .tablet & {
+      grid-template-columns: repeat(1, 1fr);
+      grid-row-gap: 9.2rem;
+      margin-top: 6.9rem;
+    }
+
+    .mobile & {
+      grid-template-columns: repeat(1, 1fr);
+      grid-row-gap: 4.8rem;
+      margin-top: 3.6rem;
+    }
+
     .service {
       display: flex;
       flex-direction: column;
@@ -183,18 +82,50 @@ export default {
         font-size: 15rem;
         font-weight: 400;
         line-height: 12rem;
+
+        .tablet & {
+          font-size: 13.5rem;
+          line-height: 13.4rem;
+        }
+
+        .mobile & {
+          font-size: 7rem;
+          line-height: 7rem;
+        }
       }
 
       .title {
         font-size: 2.5rem;
         line-height: 3.1rem;
         margin: 7.7rem 0 4.4rem;
+
+        .tablet & {
+          font-size: 3.1rem;
+          line-height: 3.7rem;
+          margin: 4.8rem 0 2.9rem;
+        }
+
+        .mobile & {
+          font-size: 1.6rem;
+          line-height: 1.9rem;
+          margin: 2.5rem 0 1.5rem;
+        }
       }
 
       .text {
         font-size: 1.4rem;
         line-height: 2.2rem;
         font-weight: 300;
+
+        .tablet & {
+          font-size: 2.3rem;
+          line-height: 2.9rem;
+        }
+
+        .mobile & {
+          font-size: 1.2rem;
+          line-height: 1.5rem;
+        }
       }
 
       .more {
@@ -203,6 +134,16 @@ export default {
         font-size: 2.4rem;
         width: fit-content;
         cursor: pointer;
+
+        .tablet & {
+          margin: 3.8rem 0 6.7rem;
+          font-size: 2.4rem;
+        }
+
+        .mobile & {
+          margin: 2rem 0 3.5rem;
+          font-size: 1.4rem;
+        }
 
         &:after {
           content: '';

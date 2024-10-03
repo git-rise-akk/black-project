@@ -9,16 +9,19 @@
             <NuxtLink
                 class="menu__item"
                 to="/about?section=company"
+                @click="stateMenuStore.state = false"
             >О компании
             </NuxtLink>
             <NuxtLink
                 class="menu__item"
                 to="/about?section=services"
+                @click="stateMenuStore.state = false"
             >Услуги
             </NuxtLink>
             <NuxtLink
                 class="menu__item"
                 to="/about?section=portfolio"
+                @click="stateMenuStore.state = false"
             >Портфолио
             </NuxtLink>
         </nav>
@@ -79,7 +82,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: calc(100vh - 7rem);
     z-index: 10;

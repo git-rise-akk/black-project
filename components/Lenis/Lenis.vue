@@ -44,7 +44,7 @@ export default {
     'corner',
   ],
   computed: {
-    ...mapStores(headerState),
+    ...mapStores(headerState, useDeviceStore),
   },
   watch: {
     '$route.query.section': {
@@ -119,7 +119,7 @@ export default {
 
       this.instance.scrollTo(target, {
         immediate: Boolean(animation),
-        offset: 100,
+        offset: useDeviceStore().device === 'desktop' ? 100 : 0,
       });
       this.$router.replace({ query: {} });
     },

@@ -1,7 +1,7 @@
 <template>
     <section class="SectionContacts section">
         <div class="contacts">
-            <div class="contacts__left">
+            <div v-if="useDeviceStore().device === 'desktop'" class="contacts__left">
                 <div 
                     class="feature text-anim-line" 
                     v-text-separate="{ byLetters: false }"
@@ -48,22 +48,41 @@
     </section>
 </template>
   
-<script>  
+<script>
+import { mapStores } from 'pinia';
+
 export default {
     data() {
         return {};
+    },
+    computed: {
+        ...mapStores(useDeviceStore),
     },
 };
 </script>
   
 <style lang="scss">
 .SectionContacts {
-    padding: 30.1rem 10rem 30.4rem !important;
+    padding: 26.7rem 3.8rem 30.4rem !important;
+
+    .tablet & {
+        padding: 12.1rem 10rem 26.2rem !important;
+    }
+
+    .mobile & {
+        padding: 13.9rem 2rem 15.7rem !important;
+    }
 
     .contacts {
         display: flex;
         justify-content: space-between;
         padding-bottom: 21.7rem;
+
+        .tablet &,
+        .mobile & {
+           display: block;
+           padding-bottom: 0;
+        }
 
         &__left {
             display: flex;
@@ -80,22 +99,69 @@ export default {
             font-weight: 300;
             line-height: 9.5rem;
 
+            .tablet & {
+                font-size: 4.4rem;
+                line-height: 4.4rem;
+            }
+
+            .mobile & {
+                font-size: 2.3rem;
+                line-height: 2.3rem;
+            }
+
             .contacts__info {
                 position: absolute;
                 top: calc(100% + 10.4rem);
                 left: 0;
                 line-height: initial;
 
+                .tablet & {
+                    position: relative;
+                    top: initial;
+                    left: initial;
+                    margin-top: 8.4rem;
+                }
+
+                .mobile & {
+                    position: relative;
+                    top: initial;
+                    left: initial;
+                    margin-top: 4.4rem;
+                }
+
                 .number {
                     display: block;
                     font-size: 7.9rem;
                     font-weight: 300;
+                    white-space: nowrap;
+
+                    .tablet & {
+                        font-size: 6.3rem;
+                        line-height: 6.3rem;
+                    }
+
+                    .mobile & {
+                        font-size: 3.3rem;
+                        line-height: 3.3rem;
+                    }
                 }
 
                 .email {
                     display: block;
                     font-size: 2.5rem;
                     font-weight: 300;
+
+                    .tablet & {
+                        font-size: 2.3rem;
+                        line-height: 2.3rem;
+                        margin-top: 1.9rem;
+                    }
+
+                    .mobile & {
+                        font-size: 1.2rem;
+                        line-height: 1.2rem;
+                        margin-top: 1rem;
+                    }
                 }
             }
         }

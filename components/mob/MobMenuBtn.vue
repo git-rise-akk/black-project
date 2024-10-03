@@ -26,8 +26,6 @@
     },
     methods: {
       toggleMenu() {
-        console.log('test');
-        
         this.stateMenuStore.state = !this.stateMenuStore.state
       },
     },
@@ -37,7 +35,7 @@
   <style lang="scss" scoped>
   .MobMenuBtn {
     position: absolute;
-    top: 0;
+    top: 2.5rem;
     right: 2rem;
     width: 4.5rem;
     height: 4.5rem;
@@ -46,6 +44,12 @@
     justify-content: center;
     cursor: pointer;
     z-index: 10;
+    .tablet & {
+      top: 4.8rem;
+      right: 3.8rem;
+      width: 8.7rem;
+      height: 8.7rem;
+    }
     .lines {
       position: relative;
       height: 1rem;
@@ -57,11 +61,19 @@
         height: 2px;
         background: #fff;
         transition: transform 0.3s ease-in, top 0.5s ease-out 0.3s;
+        .tablet & {
+          height: 3px;
+          width: 4.3rem;
+        }
         &.line--bottom {
           top: initial;
           bottom: 0;
           transition: transform 0.3s ease-in, bottom 0.3s ease-out 0.3s;
         }
+      }
+      .tablet & {
+        height: 2rem;
+        width: 4.3rem;
       }
     }
     &.MobMenuBtn--close {

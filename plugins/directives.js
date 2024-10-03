@@ -6,7 +6,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       const opt = {
         byLetters: true,
         ...binding.value,
-      };
+      }; 
 
       let itemsArray;
 

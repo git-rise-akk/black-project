@@ -42,8 +42,8 @@
 					</div>
 					<StandardButton
 						text="Отправить"
-						:width="35.6"
-						:height="8"
+						:width="buttonSize[0]"
+						:height="buttonSize[1]"
 						@click="submit()"
 					/>
 					<div 
@@ -97,6 +97,15 @@ export default {
 	},
 	computed: {
 		...mapStores(openPopup),
+		buttonSize() {
+			let size = [35.6, 8];
+			if(useDeviceStore().device === 'tablet') {
+				size = [76.8, 14.8]
+			} else if (useDeviceStore().device === 'mobile') {
+				size = [33.5, 5.9]
+			}
+			return size;
+		}
 	},
 	watch: {
 		'user.phone'(value) {
@@ -236,11 +245,36 @@ export default {
 		transform: translateY(calc(100% + 20rem));
 		opacity: 0;
 		transition: transform 0.5s, opacity 0.1s 0.6s;
+		.tablet & {
+			width: 100%;
+    		height: 100%;
+			padding: 4.6rem 3.8rem 0;
+		}
+
+		.mobile & {
+			width: 100%;
+    		height: 100%;
+			padding: 4.6rem 2rem;
+		}
 		.screen {
 			position: absolute;
 			inset: 5.2rem;
 			display: flex;
 			flex-direction: column;
+			.tablet & {
+				top: 4.6rem;
+				left: 3.8rem;
+				right: 3.8rem;
+				bottom: 4.6rem;
+			}
+
+			.mobile & {
+				top: 4.6rem;
+				left: 2rem;
+				right: 2rem;
+				bottom: 4.6rem;
+			}
+
 			&.screen-error,
 			&.screen-success {
 				text-align: center;
@@ -263,6 +297,14 @@ export default {
 				&::placeholder {
 					color: #fff;
 					opacity: 0.3;
+				}
+
+				.tablet & {
+					font-size: 1.2rem;
+				}
+
+				.mobile & {
+					font-size: 1.2rem;
 				}
 
 				&:-webkit-autofill,
@@ -291,10 +333,26 @@ export default {
 			font-size: 2.7rem;
 			margin-bottom: 5.4rem;
 			text-align: center;
+
+			.tablet & {
+				font-size: 1.6rem;
+			}
+
+			.mobile & {
+				font-size: 1.6rem;
+			}
 		}
 		.description {
 			margin-bottom: 2.7rem;
 			font-size: 1.4rem;
+
+			.tablet & {
+				font-size: 1.1rem;
+			}
+
+			.mobile & {
+				font-size: 1.1rem;
+			}
 		}
 		.fields {
 			display: flex;
@@ -312,10 +370,20 @@ export default {
 				text-decoration: underline;
 				text-underline-offset: 0.2rem;
 			}
+
+			.tablet & {
+				font-size: 1rem;
+			}
+
+			.mobile & {
+				font-size: 1rem;
+			}
 		}
 		.Close {
-			top: 2rem;
-			right: 2rem;
+			&:not(.mobile &):not(.tablet &) {
+				top: 2rem;
+				right: 2rem;
+			}
 		}
 	}
 }

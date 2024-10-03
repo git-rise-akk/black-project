@@ -16,12 +16,12 @@
             </div>
           </li>
           <li
-              class="project project_n1"
-              @click="$emit('openGallery', 2)"
+            class="project project_n1"
+            @click="$emit('openGallery', 2)"
           >
             <img
-                class="project__cover"
-                src="/assets/webpages/about/portfolio/bright-horizons-office/cover.jpg"
+              class="project__cover"
+              src="/assets/webpages/about/portfolio/bright-horizons-office/cover.jpg"
             />
             <div class="project__name">
               <div class="title">Bright Horizons Office</div>
@@ -33,8 +33,8 @@
               @click="$emit('openGallery', 3)"
           >
             <img
-                class="project__cover"
-                src="/assets/webpages/about/portfolio/architectural-lighting/cover.jpg"
+              class="project__cover"
+              src="/assets/webpages/about/portfolio/architectural-lighting/cover.jpg"
             />
             <div class="project__name">
               <div class="title">architectural lighting<br />of the house</div>
@@ -44,8 +44,14 @@
         </ul>
       </section>
 </template>
+
 <script>
+import { mapStores } from 'pinia';
+
 export default {
+  computed: {
+    ...mapStores(useDeviceStore),
+  },
     
 }
 </script>
@@ -54,6 +60,14 @@ export default {
 .SectionPortfolio {
   .projects {
     margin-top: 9.7rem;
+
+    .tablet & {
+      margin-top: 7.5rem;
+    }
+
+    .mobile & {
+      margin-top: 3.9rem;
+    }
 
     .project {
       position: relative;
@@ -67,6 +81,22 @@ export default {
       overflow: hidden;
       opacity: 0.1;
       transform: translateX(20%);
+      -webkit-tap-highlight-color: transparent;
+
+      .tablet & {
+        height: initial;
+        aspect-ratio: 1 / 1;
+        width: calc(100% + 7.6rem);
+        margin-left: -3.8rem;
+      }
+
+      .mobile & {
+        height: initial;
+        aspect-ratio: 1 / 1;
+        width: calc(100% + 4rem);
+        margin-left: -2rem;
+      }
+      
 
       &::after {
         content: '';
@@ -101,6 +131,19 @@ export default {
         height: 100%;
         object-fit: cover;
         transition: transform 1.5s;
+
+        .tablet & {
+          transform: translate(-50%, -45%) scale(1);
+          width: 125%;
+          height: 125%;
+          transition: initial;
+        }
+        .mobile & {
+          transform: translate(-50%, -45%) scale(1);
+          width: 125%;
+          height: 125%;
+          transition: initial;
+        }
       }
 
       &__name {
@@ -114,16 +157,36 @@ export default {
           line-height: 6.1rem;
           white-space: nowrap;
           margin-bottom: 3.8rem;
+
+          .tablet & {
+            font-size: 3.1rem;
+            line-height: 2.7rem;
+            margin-bottom: 1.5rem;
+          }
+          .mobile & {
+            font-size: 1.6rem;
+            line-height: 1.4rem;
+            margin-bottom: 0.8rem;
+          }
         }
 
         .subtitle {
           font-size: 2.6rem;
           font-weight: 300;
           text-transform: lowercase;
+
+          .tablet & {
+            font-size: 2rem;
+            line-height: 1.3rem;
+          }
+          .mobile & {
+            font-size: 1rem;
+            line-height: 0.7rem;
+          }
         }
       }
 
-      &:hover {
+      &:not(.tablet &):not(.mobile &):hover {
         .project__cover {
           transform: translate(-50%, -50%) scale(1.1);
         }

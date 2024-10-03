@@ -54,6 +54,7 @@ export default defineNuxtConfig({
 
   plugins: [
     '@/plugins/directives.js',
+    { src: '@/plugins/registerGsap.js', mode: 'client'}
   ],
 
   css: ["@/assets/css/main.scss"],

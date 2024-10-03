@@ -22,9 +22,13 @@
         position: relative;
         z-index: 1;
         #logo {
-            fill: transparent;
             width: 100%;
+            fill: transparent;
             fill: #fff;
+            .tablet  &,
+            .mobile & {
+                height: auto;
+            }
             .page_first-download & {
                 fill: transparent;
                 animation: anim-fill 1s ease forwards 2s;

@@ -14,6 +14,22 @@
   --index: calc((100vw / var(--width)) + (100vh / var(--height)));
 }
 
+@media (min-width: 768px) {
+  :root {
+    --width: 768;
+    --height: 1024;
+    --index: calc((100vw / var(--width)) + (100vh / var(--height)));
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --width: 1920;
+    --height: 1080;
+    --index: calc((100vw / var(--width)) + (100vh / var(--height)));
+  }
+}
+
 html,
 body {
   font-size: calc(var(--index) * 5);

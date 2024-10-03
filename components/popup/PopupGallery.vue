@@ -2,10 +2,10 @@
   <ClientOnly>
     <Teleport to="body">
         <Transition
-            appear
-            name="popup-fade"
+          appear
+          name="popup-fade"
         >
-        <div v-if="active" class="PopupGallery">
+        <div v-if="active" :class="['PopupGallery', useDeviceStore().device]">
           <div class="PopupGallery__controls">
             <transition name="show">
               <div
@@ -41,7 +41,10 @@
               <div class="text" v-html="content.text"></div>
             </div>
           </transition>
-          <div class="PopupGallery__counter-photos">
+          <div
+            v-if="useDeviceStore().device === 'desktop'"
+            class="PopupGallery__counter-photos"
+          >
             <div class="current-photo" :style="{ width: widthNumber }">
               <transition :name="getTransitionNameNumber">
                 <div :key="currentPhoto" class="number">{{ currentPhoto + 1 }}</div>
@@ -58,62 +61,65 @@
 </template>
   
 <script>
-    export default {
-        props: {
-          content: {
-              type: Object,
-              default: () => ({}),
-          },
-          active: {
-              type: Boolean,
-              default: false,
-          },
-        },
-        data() {
-            return {
-              currentPhoto: 0,
-              direction: 1,
-            };
-        },
-        computed: {
-          getDynamicTransitionName()  {
-            return this.direction === 1 ? 'photo-left' : 'photo-right';
-          },
-          widthNumber() {
-            const numberCharacters = String(this.content.photos.length).length;
-            if ( numberCharacters < 2) {
-              return '6rem';
-            } else if (numberCharacters >= 2 && numberCharacters < 3) {
-              return '11rem';
-            } else {
-              return '16rem';
-            }
-          },
-          getTransitionNameNumber() {
-            return this.direction === 1 ? 'number-next' : 'number-back';
-          },
-        },
-        methods: {
-          closingEvent() {
-            this.currentPhoto = 0;
-            this.$emit('closePopup');
-          },
-          changesCurrentPhoto(number) {
-            this.direction = number;
-            if (this.currentPhoto === 0 && number === -1) {
-              this.currentPhoto = 0;
-            } else if (this.currentPhoto === this.content.photos.length - 1 && number === 1) {
-              this.currentPhoto = this.content.photos.length - 1;
-            } else {
-              this.currentPhoto = this.currentPhoto + number;
-            }
-          }
-        },
-    }    
+import { mapStores } from 'pinia';
+
+  export default {
+    props: {
+      content: {
+        type: Object,
+        default: () => ({}),
+      },
+      active: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data() {
+      return {
+        currentPhoto: 0,
+        direction: 1,
+      };
+    },
+    computed: {
+      ...mapStores(useDeviceStore),
+      getDynamicTransitionName()  {
+        return this.direction === 1 ? 'photo-left' : 'photo-right';
+      },
+      widthNumber() {
+        const numberCharacters = String(this.content.photos.length).length;
+        if ( numberCharacters < 2) {
+          return '6rem';
+        } else if (numberCharacters >= 2 && numberCharacters < 3) {
+          return '11rem';
+        } else {
+          return '16rem';
+        }
+      },
+      getTransitionNameNumber() {
+        return this.direction === 1 ? 'number-next' : 'number-back';
+      },
+    },
+    methods: {
+      closingEvent() {
+        this.currentPhoto = 0;
+        this.$emit('closePopup');
+      },
+      changesCurrentPhoto(number) {
+        this.direction = number;
+        if (this.currentPhoto === 0 && number === -1) {
+          this.currentPhoto = 0;
+        } else if (this.currentPhoto === this.content.photos.length - 1 && number === 1) {
+          this.currentPhoto = this.content.photos.length - 1;
+        } else {
+          this.currentPhoto = this.currentPhoto + number;
+        }
+      }
+    },
+  }    
 </script>
   
 <style lang="scss">
-  .PopupGallery{
+  .PopupGallery {
     position: fixed;
     z-index: 20;
     top: 0;
@@ -128,6 +134,18 @@
     .Close {
       right: 7rem;
     }
+    &.tablet {
+      .Close {
+        right: 3.8rem;
+      }
+    }
+
+    &.mobile {
+      .Close {
+        right: 1rem;
+      }
+    }
+
     &::after {
       content: '';
       position: absolute;
@@ -155,9 +173,30 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        -webkit-tap-highlight-color: transparent;
+        .tablet & {
+          width: 6.2rem;
+          height: 6.2rem;
+        }
+
+        .mobile & {
+          width: 6.2rem;
+          height: 6.2rem;
+        }
+
         svg {
           width: 4.8rem;
           height: 4rem;
+
+          .tablet & {
+            width: 2.5rem;
+            height: 2rem;
+          }
+
+          .mobile & {
+            width: 2.5rem;
+            height: 2rem;
+          }
         }
         &::after {
           content: '';
@@ -167,6 +206,14 @@
           border-radius: 50%;
           background: #000;
           filter: blur(6rem);
+
+          .tablet & {
+            filter: blur(2rem);
+          }
+
+          .mobile & {
+            filter: blur(2rem);
+          }
         }
         .arrow-left,
         .arrow-right {
@@ -175,14 +222,32 @@
         }
         &__left {
           left: 2rem;
-          &:hover .arrow-left {
-            transform: translateX(-20%)
+          
+          .tablet & {
+            left: 0;
+          }
+
+          .mobile & {
+            left: 0;
+          }
+          
+          &:not(.mobile &):not(.tablet &):hover .arrow-left {
+            transform: translateX(-20%);
           }
         }
         &__right {
           right: 2rem;
-          &:hover .arrow-right {
-            transform: translateX(20%)
+          
+          .tablet & {
+            right: 0;
+          }
+
+          .mobile & {
+            right: 0;
+          }
+
+          &:not(.mobile &):not(.tablet &):hover .arrow-right {
+            transform: translateX(20%);
           }
         }
       }
@@ -210,13 +275,36 @@
       left: 5.5rem;
       bottom: 3rem;
       z-index: 1;
+      .tablet & {
+        left: 3.8rem;
+      }
+
+      .mobile & {
+        left: 2rem;
+      }
+
       .title {
         font-size: 4rem;
+        .tablet & {
+          font-size: 3rem;
+        }
+
+        .mobile & {
+          font-size: 2rem;
+        }
       }
       .text {
         font-size: 1.8rem;
         margin-top: 1rem;
         text-transform: none;
+
+        .tablet & {
+          font-size: 1.6rem;
+        }
+
+        .mobile & {
+          font-size: 1.2rem;
+        }
       }
     }
     &__counter-photos {

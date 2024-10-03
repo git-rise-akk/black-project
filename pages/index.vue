@@ -4,7 +4,7 @@
       :class="['page page_home page_down', {'page_first-download': firstDownloadStore.active }]"
       @wheel="wheelEvent"
   >
-    <Logo v-if="!tablet"/>
+    <Logo v-if="useDeviceStore().device === 'desktop'"/>
     <MobLogo v-else />
     <video
         ref="video"
@@ -22,8 +22,8 @@
       вашей задачи и запроса
     </div>
     <StandardButton
-      :width="42.5"
-      :height="12"
+      :width="buttonSize[0]"
+      :height="buttonSize[1]"
       text="заказать проект"
       @click="opensPopupCallback()"
     />
@@ -32,9 +32,9 @@
         @click="scrollDown"
     >
       <nuxt-icon
-          class="arrow"
-          name="arrow-down"
-          filled
+        class="arrow"
+        name="arrow-down"
+        filled
       />
     </div>
     <div
@@ -43,9 +43,9 @@
         @click="switchesSound()"
     >
       <nuxt-icon
-          class="sound"
-          name="sound"
-          filled
+        class="sound"
+        name="sound"
+        filled
       />
       <div class="line"></div>
     </div>
@@ -59,18 +59,25 @@ export default {
   data() {
     return {
       sound: false,
-      tablet: false,
+      // tablet: false,
     };
   },
   computed: {
-    ...mapStores(firstDownload, openPopup),
+    ...mapStores(firstDownload, openPopup, useDeviceStore),
+    buttonSize() {
+      let size = [42.5, 12];
+      if(useDeviceStore().device === 'tablet') {
+        size = [76.8, 14.8]
+      } else if (useDeviceStore().device === 'mobile') {
+        size = [33.5, 7.7]
+      }
+      return size;
+    }
   },
   mounted() {
     setTimeout(() => {
       this.firstDownloadStore.active = false;
     }, 6000);
-    window.innerWidth <= 720 ? this.tablet = true : this.tablet = false;
-    console.log(window.innerWidth);
   },
   methods: {
     switchesSound() {
@@ -110,6 +117,12 @@ export default {
   width: 100vw;
   overflow: hidden;
   padding: 19rem 10rem 0;
+  .tablet & {
+    padding: 21.9rem 3.8rem 0;
+  }
+  .mobile & {
+    padding: 11.4rem 2rem 0;
+  }
 
   .video {
     position: absolute;
@@ -126,6 +139,20 @@ export default {
     font-weight: 300;
     margin-top: 4.6rem;
     line-height: 3.6rem;
+    .tablet & {
+      font-size: 2.7rem;
+      line-height: 3.3rem;
+      br {
+        display: none;
+      }
+    }
+    .mobile & {
+      font-size: 1.4rem;
+      line-height: 1.7rem;
+      br {
+        display: none;
+      }
+    }
   }
 
   .scroll-down {
@@ -140,6 +167,16 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    .tablet & {
+      height: 11.3rem;
+      width: 11.3rem;
+    }
+
+    .mobile & {
+      height: 5.9rem;
+      width: 5.9rem;
+    }
 
     &::after {
       content: '';
@@ -156,8 +193,17 @@ export default {
     .arrow {
       height: 4.8rem;
       width: 4rem;
-      animation: animation-up-down 1.5s linear infinite alternate;
-      z-index: 1;
+      // animation: animation-up-down 1.5s linear infinite alternate;
+      z-index: 1; 
+
+      .tablet & {
+        height: 4.5rem;
+        width: initial;
+      }
+      .mobile & {
+        height: 2.3rem;
+        width: initial;
+      }
 
       svg {
         height: 100%;
@@ -174,6 +220,17 @@ export default {
     height: 2.8rem;
     cursor: pointer;
 
+    .tablet & {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+    .mobile & {
+      width: 2.3rem;
+      height: 2.3rem;
+      right: 2rem;
+      bottom: 3rem;
+    }
+
     .line {
       position: absolute;
       top: 2.6rem;
@@ -184,6 +241,13 @@ export default {
       transform: rotate(-55deg);
       transition: width 0.3s ease;
       transform-origin: left;
+
+      .tablet &,
+      .mobile & {
+        top: 2.2rem;
+        width: 3rem;
+        height: 2px;
+      }
     }
 
     .sound {

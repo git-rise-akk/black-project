@@ -1,7 +1,8 @@
 <template>
   <div class="PopupService">
     <div class="PopupService_bg"></div>
-    <div class="PopupService_wrapper">
+    <Lenis>
+      <div class="PopupService_wrapper">
       <div class="PopupService__left">
         <div
             class="title"
@@ -18,9 +19,9 @@
           ></div>
           <StandardButton
             :text="info[id].btn"
-            :width="52"
-            :height="12"
-           @click="opensPopupCallback"
+            :width="buttonSize[0]"
+            :height="buttonSize[1]"
+           @click="opensPopupCallback"  
           />
         </div>
       </div>
@@ -52,6 +53,7 @@
       </div>
       <Close @click="closingEvent()" />
     </div>
+    </Lenis>
   </div>
 </template>
 
@@ -113,7 +115,16 @@ export default {
     };
   },
   computed: {
-    ...mapStores(openPopup),
+    ...mapStores(openPopup, useDeviceStore),
+    buttonSize() {
+      let size = [52, 12];
+      if(useDeviceStore().device === 'tablet') {
+        size = [76.8, 14.8]
+      } else if (useDeviceStore().device === 'mobile') {
+        size = [33.5, 5.9]
+      }
+      return size;
+    }
   },
   methods: {
     closingEvent() {
@@ -142,6 +153,14 @@ export default {
   align-items: center;
   pointer-events: none;
 
+  .tablet & {
+   display: block;
+  }
+
+  .mobile & {
+    display: block;
+  }
+
   &_active {
     opacity: 1;
     pointer-events: auto;
@@ -156,6 +175,12 @@ export default {
       opacity: 1;
       transition: transform .5s;
     }
+  }
+
+  .Lenis {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
   }
 
   &_bg {
@@ -181,6 +206,26 @@ export default {
     transform: translateY(calc(100% + 1.6rem));
     opacity: 0;
     transition: transform .5s, opacity .1s .6s;
+
+    .tablet & {
+      flex-direction: column;
+      padding: 4.6rem 3.8rem;
+      height: auto;
+      width: 100vw;
+      min-height: 100vh;
+      min-height: 100dvh;
+      justify-content: flex-start;
+    }
+
+    .mobile & {
+      flex-direction: column;
+      padding: 4.6rem 2rem;
+      height: auto;
+      width: 100vw;
+      min-height: 100vh;
+      min-height: 100dvh;
+      justify-content: flex-start;
+    }
   }
 
   &__left {
@@ -189,9 +234,29 @@ export default {
     display: flex;
     flex-direction: column;
 
+    .tablet & {
+      width: 100%;
+    }
+
+    .mobile & {
+      width: 100%;
+    }
+
     .title {
       font-size: 2.5rem;
       margin-bottom: 5.4rem;
+
+      .tablet & {
+        font-size: 1.6rem;
+        margin-bottom: 2.5rem;
+        width: 85%;
+      }
+
+      .mobile & {
+        font-size: 1.6rem;
+        margin-bottom: 2.5rem;
+        width: 85%;
+      }
     }
 
     .content {
@@ -201,14 +266,51 @@ export default {
       flex: 1;
       height: 100%;
 
+      .tablet & {
+        justify-content: initial;
+        height: auto;
+      }
+
+      .mobile & {
+        justify-content: initial;
+        height: auto;
+      }
+
       .text {
         font-size: 1.4rem;
         line-height: 2.2rem;
         font-weight: 300;
+
+        .tablet & {
+          font-size: 1.2rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .mobile & {
+          font-size: 1.2rem;
+          margin-bottom: 2.5rem;
+        }
       }
 
       .price {
         font-size: 4rem;
+
+        .tablet & {
+          position: absolute;
+          font-size: 2.5rem;
+          bottom: 12.5rem;
+        }
+
+        .mobile & {
+          position: absolute;
+          font-size: 2.5rem;
+          bottom: 12.5rem;
+        }
+      }
+
+      .StandardButton {
+        position: absolute;
+        bottom: 4.6rem;
       }
     }
   }
@@ -222,6 +324,20 @@ export default {
     grid-template-rows: 1.7fr 1fr;
     grid-column-gap: 0.6rem;
     grid-row-gap: 0.6rem;
+
+    .tablet & {
+      width: 100%;
+      height: 19.2rem;
+      min-height: 19.2rem;
+      margin-bottom: 13rem;
+    }
+
+    .mobile & {
+      width: 100%;
+      height: 19.2rem;
+      min-height: 19.2rem;
+      margin-bottom: 13rem;
+    }
 
     .part {
       position: relative;
@@ -238,7 +354,7 @@ export default {
           width: 100%;
           transition: transform .7s;
           cursor: pointer;
-          &:hover {
+          &:not(.mobile &):not(.tablet &):hover {
             transform: scale(1.1);
           }
         }
@@ -251,6 +367,12 @@ export default {
         .image_wrapper {
           top: 10.1rem;
           height: 65%;
+
+          .tablet &,
+          .mobile & {
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
       }
 

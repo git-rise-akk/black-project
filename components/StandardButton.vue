@@ -98,6 +98,13 @@ export default {
   transition: opacity .3s;
   cursor: pointer;
 
+  .tablet & {
+    font-size: 3.1rem;
+  }
+  .mobile & {
+    font-size: 1.6rem;
+  }
+
   &.disabled {
     opacity: 0.7;
     cursor: no-drop;
@@ -136,7 +143,7 @@ export default {
     }
   }
 
-  &:not(.disabled):hover svg {
+  &:not(.disabled):not(.tablet &):not(.mobile &):hover svg {
     path {
       stroke-dashoffset: 0;
       transition: stroke-dashoffset 1.1s;

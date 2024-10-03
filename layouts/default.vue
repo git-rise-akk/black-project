@@ -1,9 +1,9 @@
 <template>
-  <div v-if="true" class="layout-default">
+  <div v-if="true" :class="['layout-default', deviceStore.device]">
     <slot />
-    <Header v-if="false" />
-    <MobHeader v-if="true" />
-    <MobMenu v-if="true"/>
+    <Header v-if="deviceStore.device === 'desktop'" />
+    <MobHeader v-else />
+    <MobMenu v-if="deviceStore.device !== 'desktop'"/>
     <PopupService
       :id="openPopupStore.popupService[0]"
       :class="{'PopupService_active': openPopupStore.popupService[1] }"
@@ -24,14 +24,18 @@
 
 <script setup>
 import { useWindowStore } from '@/stores/windowStore.js';
+import { useDeviceStore } from '@/stores/deviceStore.js';
 import { openPopup } from '@/stores/openPopup.js';
 
 const windowStore = useWindowStore();
+const deviceStore = useDeviceStore();
 const openPopupStore = openPopup();
-
 
 function resizeHandler() {
   windowStore.updateWindowSize(innerWidth, innerHeight);
+  deviceStore.returnsDevice(innerWidth)
+  console.log(deviceStore.device);
+  
 }
 
 const closesPopupCallback = () => {
