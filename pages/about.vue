@@ -417,12 +417,12 @@
             <div class="contacts__info">
               <a
                 class="number text-anim-line"
-                href="tel:+79990009900"
-              >+7 999 000 99 00</a>
+                href="tel:+79299053232"
+              >+7 929 905 32 32</a>
               <a
                 class="email text-anim-line"
-                href="mailto:blackproject@gmail.com"
-              >blackproject@gmail.com</a>
+                href="mailto:black_project.light@gmail.com"
+              >black_project.light@gmail.com</a>
             </div>
           </div>
         </div>
