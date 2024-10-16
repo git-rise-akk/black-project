@@ -1,20 +1,20 @@
 <template>
-  <div
-      ref="page"
-      :class="['page page_home page_down', {'page_first-download': firstDownloadStore.active }]"
-      @wheel="wheelEvent"
-  >
+  <EventManager
+	  :class="['page page_home page_down', {'page_first-download': firstDownloadStore.active }]"
+		@wheel="({ direction }) => wheelEvent(direction)"
+    @vertical-swipe="wheelEvent"
+	>
     <Logo v-if="useDeviceStore().device === 'desktop'"/>
     <MobLogo v-else />
     <video
-        ref="video"
-        class="video"
-        src="/assets/webpages/home/major.mp4"
-        poster="/assets/webpages/home/major.jpg"
-        playsinline
-        loop
-        muted
-        autoplay
+      ref="video"
+      class="video"
+      :src="`${src}.mp4`"
+      :poster="`${src}.jpg`"
+      playsinline
+      loop
+      muted
+      autoplay
     ></video>
     <div class="info">
       Мы — светотехническая компания,<br />
@@ -28,8 +28,8 @@
       @click="opensPopupCallback()"
     />
     <div
-        class="scroll-down"
-        @click="scrollDown"
+      class="scroll-down"
+      @click="scrollDown"
     >
       <nuxt-icon
         class="arrow"
@@ -38,9 +38,9 @@
       />
     </div>
     <div
-        class="sound_wrapper"
-        :class="{active: sound}"
-        @click="switchesSound()"
+      class="sound_wrapper"
+      :class="{active: sound}"
+      @click="switchesSound()"
     >
       <nuxt-icon
         class="sound"
@@ -49,7 +49,7 @@
       />
       <div class="line"></div>
     </div>
-  </div>
+  </EventManager>
 </template>
 
 <script>
@@ -72,6 +72,9 @@ export default {
         size = [33.5, 7.7]
       }
       return size;
+    },
+    src() {
+      return '/assets/webpages/home/major'
     }
   },
   mounted() {
@@ -95,8 +98,8 @@ export default {
       this.openPopupService = true;
       this.idPopupService = id;
     },
-    wheelEvent(e) {
-      if (e.deltaY >= 1) {
+    wheelEvent(direction) {
+      if (direction >= 1) {
         this.$router.push('/about');
       }
     },
@@ -105,7 +108,7 @@ export default {
     },
   },
   beforeUnmount() {
-    window.removeEventListener('wheel', this.$refs.page);
+    // window.removeEventListener('wheel', this.$refs.page);
   },
 };
 </script>
@@ -193,7 +196,7 @@ export default {
     .arrow {
       height: 4.8rem;
       width: 4rem;
-      // animation: animation-up-down 1.5s linear infinite alternate;
+      animation: animation-up-down 1.5s linear infinite alternate;
       z-index: 1; 
 
       .tablet & {

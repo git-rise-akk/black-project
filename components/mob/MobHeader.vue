@@ -1,5 +1,5 @@
 <template>
-    <header :class="['MobHeader', { visible: headerStore.state }, { start: $route.fullPath === '/' && firstDownloadStore.active }]">
+    <header :class="['MobHeader', { start: $route.fullPath === '/' && firstDownloadStore.active }]">
       <div class="MobHeader__wrapper">
         <NuxtLink to="/" class="logo_link">
           <nuxt-icon
@@ -23,7 +23,7 @@
       };
     },
     computed: {
-      ...mapStores(headerState, firstDownload, stateMenu),
+      ...mapStores(firstDownload, stateMenu),
     },
     mounted() {
     },
@@ -45,6 +45,10 @@
     z-index: 10;
     background: linear-gradient(0deg, rgba(30, 30, 30, 0) 0%, rgba(30, 30, 30, 0.6) 60%);
     backdrop-filter: blur(1px);
+
+    &.start {
+      animation: anim-header 1s 2s both;
+    }
 
     &__wrapper {
       display: flex;
@@ -114,6 +118,15 @@
         &::after {
           right: -3.8rem;
         }
+      }
+    }
+
+    @keyframes anim-header {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
       }
     }
   }

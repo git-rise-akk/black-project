@@ -1,6 +1,11 @@
 <template>
       <section id="services" class="SectionServices section">
-        <h2 class="title title_page text-anim-letters" v-text-separate="{ byLetters: true }">Услуги</h2>
+        <TextSeparate
+          tag="h2"
+          class="title title_page"
+          by-letters
+          text="Услуги"
+        /> 
         <ul class="services">
           <li
             v-for="(service, key) in data[useDeviceStore().device]?.services"

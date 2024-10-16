@@ -1,6 +1,5 @@
 <template>
       <section id="company" class="SectionCompany section">
-        <h2 class="title title_page text-anim-letters" v-text-separate="{ byLetters: true }"></h2> 
         <TextSeparate
           tag="h2"
           class="title title_page"
@@ -10,17 +9,15 @@
         <ul class="about">
           <li class="about__item about__item_n0">
             <div class="text-content">
-              <div
-                class="title title_company text-anim-line"
-                v-html="data[useDeviceStore().device]?.company?.title_0"
-                v-text-separate="{ byLetters: false }"
-              ></div>
-              <p 
-                v-html="data[useDeviceStore().device]?.company?.text_0"
-                class="text text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              >
-              </p>
+              <TextSeparate
+                class="title title_company"
+                :text="data[useDeviceStore().device]?.company?.title_0"
+              />
+              <TextSeparate
+                class="text"
+                tag="p"
+                :text="data[useDeviceStore().device]?.company?.text_0"
+              />
             </div>
             <div class="images">
               <div class="img_wrapper img_wrapper_n0">
@@ -39,16 +36,15 @@
           </li>
           <li class="about__item about__item_n1">
             <div class="text-content">
-              <div
-                v-html="data[useDeviceStore().device]?.company?.title_1"
-                class="title text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              ></div>
-              <p
-                v-html="data[useDeviceStore().device]?.company?.text_1"
-                class="text text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              ></p>
+              <TextSeparate
+                class="title title_company"
+                :text="data[useDeviceStore().device]?.company?.title_1"
+              />
+              <TextSeparate
+                class="text"
+                tag="p"
+                :text="data[useDeviceStore().device]?.company?.text_1"
+              />
             </div>
             <div class="images">
               <div class="img_wrapper img_wrapper_n0">
@@ -73,16 +69,15 @@
           </li>
           <li class="about__item about__item_n2">
             <div class="text-content">
-              <div
-                v-html="data[useDeviceStore().device]?.company?.title_2"
-                class="title text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              ></div>
-              <p
-                v-html="data[useDeviceStore().device]?.company?.text_2"
-                class="text text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              ></p>
+              <TextSeparate
+                class="title title_company"
+                :text="data[useDeviceStore().device]?.company?.title_2"
+              />
+              <TextSeparate
+                class="text"
+                tag="p"
+                :text="data[useDeviceStore().device]?.company?.text_2"
+              />
             </div>
             <div class="images">
               <div class="img_wrapper img_wrapper_n0">
@@ -107,16 +102,15 @@
           </li>
           <li class="about__item about__item_n3">
             <div class="text-content">
-              <div
-                v-html="data[useDeviceStore().device]?.company?.title_3"
-                class="title text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              ></div>
-              <p
-                v-html="data[useDeviceStore().device]?.company?.text_3" 
-                class="text text-anim-line"
-                v-text-separate="{ byLetters: false }"
-              ></p>
+              <TextSeparate
+                class="title title_company"
+                :text="data[useDeviceStore().device]?.company?.title_3"
+              />
+              <TextSeparate
+                class="text"
+                tag="p"
+                :text="data[useDeviceStore().device]?.company?.text_3"
+              />
             </div>
             <div class="images">
               <div class="img_wrapper img_wrapper_n0">
@@ -262,6 +256,7 @@ export default {
         .img_wrapper {
           position: absolute;
           transform: translateY(50%);
+          will-change: transform;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -273,6 +268,7 @@ export default {
           .img {
             object-fit: cover;
             transform: scale(0);
+            will-change: transform;
             width: 100%;
             height: 100%;
           }

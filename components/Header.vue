@@ -1,5 +1,5 @@
 <template>
-  <header :class="['Header', { visible: headerStore.state }, { start: $route.fullPath === '/' && firstDownloadStore.active }]">
+  <header :class="['Header', { start: $route.fullPath === '/' && firstDownloadStore.active }]">
     <div class="header_wrapper">
       <NuxtLink to="/" class="logo_link">
         <nuxt-icon
@@ -55,7 +55,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapStores(headerState, firstDownload),
+    ...mapStores(firstDownload),
   },
   mounted() {
   },
@@ -71,8 +71,6 @@ export default {
   z-index: 10;
   display: flex;
   justify-content: center;
-  transform: translateY(-100%);
-  // transition: transform .4s;
   transition: transform 1s;
   padding: 5.4rem 0;
   background: linear-gradient(0deg, rgba(30, 30, 30, 0) 0%, rgba(30, 30, 30, 0.6) 60%);
@@ -100,10 +98,6 @@ export default {
         }
       }
     }
-  }
-
-  &.visible {
-    transform: translateY(0);
   }
 
   .menu {

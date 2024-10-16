@@ -67,7 +67,7 @@ export default {
       return {};
     },
     computed: {
-      ...mapStores(headerState, firstDownload, stateMenu),
+      ...mapStores(firstDownload, stateMenu),
     },
     mounted() {
     },

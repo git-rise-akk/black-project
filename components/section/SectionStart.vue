@@ -81,7 +81,7 @@ export default {
       imgsWrapper.forEach((img, index) => {
         gsap.to(img, {
           y: 0, 
-          duration: index * 0.7,
+          // duration: 1000,
           // delay: this.returnsDelayTime(index),
           scrollTrigger: {
             trigger: img, 
@@ -230,7 +230,8 @@ export default {
 
     .img_wrapper {
       position: absolute;
-      transform: translateY(20%);
+      transform: translateY(30%);
+      will-change: transform;
       display: flex;
       align-items: center;
       justify-content: center;

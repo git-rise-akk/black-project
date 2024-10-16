@@ -1,8 +1,7 @@
 <template>
   <div class="PopupService">
     <div class="PopupService_bg"></div>
-    <Lenis>
-      <div class="PopupService_wrapper">
+    <div class="PopupService_wrapper">
       <div class="PopupService__left">
         <div
             class="title"
@@ -21,7 +20,7 @@
             :text="info[id].btn"
             :width="buttonSize[0]"
             :height="buttonSize[1]"
-           @click="opensPopupCallback"  
+          @click="opensPopupCallback"  
           />
         </div>
       </div>
@@ -53,7 +52,6 @@
       </div>
       <Close @click="closingEvent()" />
     </div>
-    </Lenis>
   </div>
 </template>
 
@@ -155,10 +153,12 @@ export default {
 
   .tablet & {
    display: block;
+   overflow: hidden scroll;
   }
 
   .mobile & {
     display: block;
+    overflow: hidden scroll;
   }
 
   &_active {
@@ -175,12 +175,6 @@ export default {
       opacity: 1;
       transition: transform .5s;
     }
-  }
-
-  .Lenis {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
   }
 
   &_bg {
@@ -309,8 +303,11 @@ export default {
       }
 
       .StandardButton {
-        position: absolute;
-        bottom: 4.6rem;
+        .tablet &,
+        .mobile &  {
+          position: absolute;
+          bottom: 4.6rem;
+        }
       }
     }
   }

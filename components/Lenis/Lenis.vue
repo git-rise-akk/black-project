@@ -44,7 +44,7 @@ export default {
     'corner',
   ],
   computed: {
-    ...mapStores(headerState, useDeviceStore),
+    ...mapStores(useDeviceStore),
   },
   watch: {
     '$route.query.section': {
@@ -68,8 +68,6 @@ export default {
 
       this.instance.on('scroll', (e) => {
         ScrollTrigger.update();
-        /*вынести наружу*/
-        // this.headerStore.state = e.direction !== 1;
       });
       this.handleGsap();
     },
