@@ -28,17 +28,17 @@
       <div class="contacts">
         <a
             class="number"
-            href="tel:+79990009900"
-        >+7 999 000 99 00</a>
+            href="tel:+79299053232"
+        >+7 929 905 32 32</a>
         <div class="messengers">
           <a
               class="messenger messenger_telegram"
-              href="https://t.me/Sergey_svet77"
+              href="https://t.me/Bprojectlight"
               target="_blank"
           >telegram</a>
           <a
               class="messenger messenger_whatsapp"
-              href="https://wa.me/79969225087"
+              href="https://wa.me/79299053232"
               target="_blank"
           >whatsapp</a>
         </div>

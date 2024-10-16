@@ -3,18 +3,23 @@
         <nuxt-icon class="logo" name="logo" filled />
         <ul class="social-network">
             <li>
-                <a class="link" href="https://www.instagram.com/" target="_blank">
+                <a class="link" href="https://www.instagram.com/black_project.light" target="_blank">
                     <nuxt-icon class="social social-instagram" name="instagram" filled />
                 </a>
             </li>
             <li>
-                <a class="link" href="https://tiktok.com/" target="_blank">
-                    <nuxt-icon class="social social-tik-tok" name="tik-tok" filled />
+                <a class="link" href="https://vk.com/club227779548" target="_blank">
+                    <nuxt-icon class="social social-vk" name="vk" filled />
                 </a>
             </li>
             <li>
-                <a class="link" href="https://vk.com/" target="_blank">
-                    <nuxt-icon class="social social-vk" name="vk" filled />
+                <a class="link" href="https://www.youtube.com/@BlackProject-light" target="_blank">
+                    <nuxt-icon class="social social-youtube" name="youtube" filled />
+                </a>
+            </li>
+            <li>
+                <a class="link" href="https://t.me/Bprojectlight " target="_blank">
+                    <nuxt-icon class="social social-telegram" name="telegram" filled />
                 </a>
             </li>
         </ul>
