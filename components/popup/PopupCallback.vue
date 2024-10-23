@@ -41,11 +41,17 @@
 						/>
 					</div>
 					<StandardButton
+            v-if="useDeviceStore().device === 'desktop'"
 						text="Отправить"
-						:width="buttonSize[0]"
-						:height="buttonSize[1]"
+						:width="35.6"
+						:height="8"
 						@click="submit()"
 					/>
+          <MobStandardButton
+            v-else
+            text="Отправить"
+            @click="submit()"
+          />
 					<div 
 						class="policy"
 					>
@@ -96,16 +102,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapStores(openPopup),
-		buttonSize() {
-			let size = [35.6, 8];
-			if(useDeviceStore().device === 'tablet') {
-				size = [76.8, 14.8]
-			} else if (useDeviceStore().device === 'mobile') {
-				size = [33.5, 5.9]
-			}
-			return size;
-		}
+		...mapStores(openPopup, useDeviceStore),
 	},
 	watch: {
 		'user.phone'(value) {
@@ -238,7 +235,7 @@ export default {
 	&_form {
 		position: relative;
 		width: 52rem;
-    	height: 83rem;
+    height: 83rem;
 		background: $popup;
 		z-index: 1;
 		padding: 5.2rem;
@@ -247,13 +244,13 @@ export default {
 		transition: transform 0.5s, opacity 0.1s 0.6s;
 		.tablet & {
 			width: 100%;
-    		height: 100%;
+      height: 100%;
 			padding: 4.6rem 3.8rem 0;
 		}
 
 		.mobile & {
 			width: 100%;
-    		height: 100%;
+      height: 100%;
 			padding: 4.6rem 2rem;
 		}
 		.screen {
@@ -299,10 +296,6 @@ export default {
 					opacity: 0.3;
 				}
 
-				.tablet & {
-					font-size: 1.2rem;
-				}
-
 				.mobile & {
 					font-size: 1.2rem;
 				}
@@ -334,10 +327,6 @@ export default {
 			margin-bottom: 5.4rem;
 			text-align: center;
 
-			.tablet & {
-				font-size: 1.6rem;
-			}
-
 			.mobile & {
 				font-size: 1.6rem;
 			}
@@ -345,10 +334,6 @@ export default {
 		.description {
 			margin-bottom: 2.7rem;
 			font-size: 1.4rem;
-
-			.tablet & {
-				font-size: 1.1rem;
-			}
 
 			.mobile & {
 				font-size: 1.1rem;
@@ -359,7 +344,8 @@ export default {
 			flex-direction: column;
 			gap: 1.4rem;
 		}
-		.StandardButton {
+		.StandardButton,
+    .MobStandardButton {
 			margin: auto auto 0;
 		}
 		.policy {

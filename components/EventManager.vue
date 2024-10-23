@@ -217,7 +217,6 @@ function mouseupHandler(event) {
 
 /** touchSwipe */
 function touchStartHandler(event) {
-	console.log('touchSwipe', event);
 	if (!props.touchEnabled) {
 		return null;
 	}

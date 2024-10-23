@@ -3,6 +3,7 @@
     class="Lenis"
     ref="Lenis"
     @wheel="checkCorner"
+    @touchmove="checkCorner"
   >
     <div
       class="Lenis__content"
@@ -36,6 +37,9 @@ export default {
       cornerEventEmitted: false,
       /* end corner */
 
+      touch: {
+        previous: null,
+      },
       // blockScrol: flase,
     };
   },
@@ -80,7 +84,19 @@ export default {
 
       gsap.ticker.lagSmoothing(0);
     },
-    checkCorner({ deltaY }) {
+    checkCorner(event) {
+      let deltaY;
+      if (event.type === 'touchmove') {
+        const current = event.touches[0].pageY;
+        
+        deltaY = this.touch.previous - current ; 
+
+        this.touch.previous = current;
+      
+      } else {
+        deltaY = event.deltaY;
+      }
+      
       const currentWheelDirection = Math.sign(deltaY);
 
       const cornerTermZero = this.instance?.progress < 0.02 && currentWheelDirection === -1;

@@ -8,7 +8,7 @@
         /> 
         <ul class="services">
           <li
-            v-for="(service, key) in data[useDeviceStore().device]?.services"
+            v-for="(service, key) in data[useDeviceStore().device === 'desktop' ? 'desktop' : 'mobile']?.services"
             :key="`service_${key}`"
             class="service"
           >
@@ -21,9 +21,15 @@
             >подробнее
             </div>
             <StandardButton
+              v-if="useDeviceStore().device === 'desktop'"
               text="обсудить проект"
-              :width="buttonSize[0]"
-              :height="buttonSize[1]"
+              :width="42.5"
+              :height="12"
+              @click="$emit('callback')"
+            />
+            <MobStandardButton
+              v-else
+              text="обсудить проект"
               @click="$emit('callback')"
             />
           </li>
@@ -41,18 +47,30 @@ export default {
       data: data,
     };
   },
+  mounted() { 
+    this.animateCardsServices();
+  },
   computed: {
     ...mapStores(useDeviceStore),
-    buttonSize() {
-      let size = [42.5, 12];
-      if(useDeviceStore().device === 'tablet') {
-        size = [76.8, 14.8]
-      } else if (useDeviceStore().device === 'mobile') {
-        size = [33.5, 7.7]
-      }
-      return size;
-    }
   },
+  methods: {
+    animateCardsServices() {
+      const services = gsap.utils.toArray('.SectionServices .service');
+      services.forEach((service, index) => {
+        gsap.to(service, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          scrollTrigger: {
+            trigger: service,
+            start: 'top bottom',
+            scroller: '.page_about',
+            end: 'bottom top',
+          },
+        });
+      });
+    },
+  }
 }
 </script>
 
@@ -61,7 +79,7 @@ export default {
   .services {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 21rem;
+    grid-column-gap: min(5vw, 21rem);
     grid-row-gap: 9.7rem;
     margin-top: 10.7rem;
 

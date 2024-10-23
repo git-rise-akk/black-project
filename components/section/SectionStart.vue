@@ -21,9 +21,15 @@
             "
           />
           <StandardButton
+            v-if="useDeviceStore().device === 'desktop'"
             text="посмотреть решения"
-            :width="buttonSize[0]"
-            :height="buttonSize[1]"
+            :width="52"
+            :height="11"
+            @click="$emit('viewSolutions')"
+          />
+          <MobStandardButton
+            v-else
+            text="посмотреть решения"
             @click="$emit('viewSolutions')"
           />
         </div>
@@ -81,8 +87,6 @@ export default {
       imgsWrapper.forEach((img, index) => {
         gsap.to(img, {
           y: 0, 
-          // duration: 1000,
-          // delay: this.returnsDelayTime(index),
           scrollTrigger: {
             trigger: img, 
             start: 'center bottom',
@@ -110,29 +114,18 @@ export default {
       });
     });
 
-    gsap.to('.SectionStart .StandardButton', {
+    gsap.to('.SectionStart .button-anim', {
       opacity: 1,
       y: 0,
       duration: 0.5,
       scrollTrigger: {
-        trigger: '.SectionStart .StandardButton',
+        trigger: '.SectionStart .button-anim',
         start: 'top bottom',
         scroller: '.page_about',
         end: 'top top',
       },
     });
 
-  },
-  computed: {
-    buttonSize() {
-      let size = [52, 11];
-      if(useDeviceStore().device === 'tablet') {
-        size = [76.8, 14.8]
-      } else if (useDeviceStore().device === 'mobile') {
-        size = [33.5, 7.7]
-      }
-      return size;
-    }
   },
   methods: {
     returnsDelayTime(index) {
@@ -158,7 +151,7 @@ export default {
   .section__left {
     position: relative;
     flex: 1;
-    z-index: 2;
+    z-index: 3;
 
     .title {
       position: relative;
@@ -167,7 +160,7 @@ export default {
       z-index: 1;
       .tablet & {
         padding-top: 22.3rem;
-        line-height: 3rem;
+        line-height: 6rem;
       }
       .mobile & {
         padding-top: 11.4rem;
@@ -176,10 +169,12 @@ export default {
     }
 
     .info {
+      position: relative;
       font-size: 4rem;
       font-weight: 300;
       margin-top: 3.9rem;
       line-height: 4.6rem;
+      z-index: 1;
       .tablet & {
         font-size: 2.7rem;
         line-height: 3.3rem;
@@ -196,15 +191,18 @@ export default {
       margin-top: 11.1rem;
       opacity: 0;
       transform: translateY(100%);
+    }
+
+    .MobStandardButton {
+      margin-top: 19.9rem;
+      opacity: 0;
+      transform: translateY(100%);
+      font-size: 1.4rem;
+      line-height: 1.5rem;
       .tablet & {
         font-size: 2.7rem;
         line-height: 3.3rem;
         margin-top: 38.2rem;
-      }
-      .mobile & {
-        font-size: 1.4rem;
-        line-height: 1.5rem;
-        margin-top: 19.9rem;
       }
     }
   }
@@ -216,7 +214,7 @@ export default {
       position: absolute;
       top: 0;
       right: 3.8rem;
-      bottom: 92.2rem;
+      bottom: 22.5rem;
       left: 3.8rem;
     }
 

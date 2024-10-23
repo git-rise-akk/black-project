@@ -2,46 +2,48 @@
     <section class="SectionContacts section">
         <div class="contacts">
             <div v-if="useDeviceStore().device === 'desktop'" class="contacts__left">
-                <div 
-                    class="feature text-anim-line" 
-                    v-text-separate="{ byLetters: false }"
-                >
-                    Опыт в области<br />
-                    проектирования,<br />
-                    монтажа<br />
-                    и автоматизации<br />
-                    более 10 лет
-                </div>
-                <div
-                    class="feature text-anim-line"
-                    v-text-separate="{ byLetters: false }"
-                >
-                    обеспечиваем<br />
-                    высокое качество<br />
-                    на каждом этапе<br />
-                    работы
-                </div>
+                <TextSeparate
+                    class="feature"
+                    text="
+                        Опыт в области<br />
+                        проектирования,<br />
+                        монтажа<br />
+                        и автоматизации<br />
+                        более 10 лет
+                    "
+                />
+                <TextSeparate
+                    class="feature"
+                    text="
+                        обеспечиваем<br />
+                        высокое качество<br />
+                        на каждом этапе<br />
+                        работы
+                    "
+                />
             </div>
             <div class="contacts__right">
-                <div
-                    class="text-anim-line"
-                    v-text-separate="{ byLetters: false }"
-                >
-                    Нужна консультация<br />
-                    или хотите обсудить<br />
-                    ваш проект?
-                </div>
+                <TextSeparate
+                    class="feature"
+                    text="
+                        Нужна консультация<br />
+                        или хотите обсудить<br />
+                        ваш проект?
+                    "
+                />
                 <div class="contacts__info">
-                <a
-                    class="number text-anim-line"
-                    href="tel:+79990009900"
-                    v-text-separate="{ byLetters: false }"
-                >+7 999 000 99 00</a>
-                <a
-                    class="email text-anim-line"
-                    href="mailto:blackproject@gmail.com"
-                    v-text-separate="{ byLetters: false }"
-                >blackproject@gmail.com</a>
+                    <TextSeparate
+                        class="number"
+                        tag="a"
+                        href="tel:+79299053232"
+                        text="+7 929 905 32 32"
+                    />
+                    <TextSeparate
+                        class="email"
+                        tag="a"
+                        href="mailto:black_project.light@gmail.com"
+                        text="black_project.light@gmail.com"
+                    />
                 </div>
             </div>
         </div>

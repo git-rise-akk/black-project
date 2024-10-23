@@ -82,8 +82,8 @@ export default defineNuxtConfig({
   },
 
   devServer: {
-      host: '0.0.0.0',
-      port: 80,
+    host: '0.0.0.0',
+    port: 80,
   },
 
   compatibilityDate: '2024-08-22',

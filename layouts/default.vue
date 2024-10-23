@@ -1,8 +1,10 @@
 <template>
-  <div v-if="true" :class="['layout-default', deviceStore.device]">
+  <div :class="['layout-default', deviceStore.device]">
     <slot />
-    <Header v-if="deviceStore.device === 'desktop'" />
-    <MobHeader v-else />
+    <ClientOnly>
+      <Header v-if="deviceStore.device === 'desktop'" />
+      <MobHeader v-else />
+    </ClientOnly>
     <MobMenu v-if="deviceStore.device !== 'desktop'"/>
     <PopupService
       :id="openPopupStore.popupService[0]"
@@ -14,12 +16,6 @@
       @closePopup="closesPopupCallback ()"
     />
   </div>
-  <!-- <div v-else class="layout-mobile">
-    <div class="info">
-      <div class="glowing-circle"></div>
-      <div class="text">мобильная версия<br />скоро засветится</div>
-    </div>
-  </div> -->
 </template>
 
 <script setup>
@@ -31,12 +27,7 @@ const windowStore = useWindowStore();
 const deviceStore = useDeviceStore();
 const openPopupStore = openPopup();
 
-function resizeHandler() {
-  windowStore.updateWindowSize(innerWidth, innerHeight);
-  deviceStore.returnsDevice(innerWidth)
-  console.log(deviceStore.device);
-  
-}
+
 
 const closesPopupCallback = () => {
   openPopupStore.popupCallback = false;
@@ -46,10 +37,6 @@ const closesPopupService = () => {
   openPopupStore.popupService = [];
 };
 
-onMounted(() => {
-  resizeHandler();
-  window.addEventListener('resize', resizeHandler);
-});
 
 </script>
 

@@ -57,8 +57,6 @@ export default {
   computed: {
     ...mapStores(firstDownload),
   },
-  mounted() {
-  },
 };
 </script>
 

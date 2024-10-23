@@ -28,9 +28,9 @@
         <div class="MobMenu__contacts">
             <a
                 class="phone"
-                href="tel:+79990009900"
+                href="tel:+79299053232"
             >
-                +7 999 000 99 00
+                +7 929 905 32 32
             </a>
             <ul class="social-network">
                 <li>
@@ -39,21 +39,26 @@
                     </a>
                 </li>
                 <li>
-                    <a class="link" href="https://tiktok.com/" target="_blank">
-                        <nuxt-icon class="social social-tik-tok" name="tik-tok" filled />
+                    <a class="link" href="https://vk.com/" target="_blank">
+                        <nuxt-icon class="social social-vk" name="vk" filled />
                     </a>
                 </li>
                 <li>
-                    <a class="link" href="https://vk.com/" target="_blank">
-                        <nuxt-icon class="social social-vk" name="vk" filled />
+                    <a class="link" href="https://www.youtube.com/@BlackProject-light" target="_blank">
+                        <nuxt-icon class="social social-youtube" name="youtube" filled />
+                    </a>
+                </li>
+                <li>
+                    <a class="link" href="https://t.me/Bprojectlight " target="_blank">
+                        <nuxt-icon class="social social-telegram" name="telegram" filled />
                     </a>
                 </li>
             </ul>
             <a
                 class="email"
-                href="mailto:blackproject@gmail.com"
+                href="mailto:black_project.light@gmail.com"
             >
-                blackproject@gmail.com
+                black_project.light@gmail.com
             </a>
       </div>
     </div>
@@ -90,6 +95,10 @@ export default {
     visibility: hidden;
     user-select: none;
     transition: visibility .7s, opacity .7s;
+    .tablet & {
+        top: 13.8rem;
+        height: calc(100vh - 13.8rem);
+    }
     .logo {
         height: 5.1rem;
         opacity: 0;
@@ -133,6 +142,7 @@ export default {
         .social-network {
             margin: 3.2rem 0;
             display: flex;
+            align-items: center;
             gap: 2.5rem;
             li {
                 height: 3.2rem;

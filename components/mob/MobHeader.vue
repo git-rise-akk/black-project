@@ -92,7 +92,8 @@
             clip-path: polygon(100% 0, 100% 100%, 100% 100%, 0 100%, 0 0);
 
             .tablet & {
-                width: 100vw;
+              top: -4.8rem;
+              width: 100vw;
               width: 100dvw;
               height: 100vh;
               height: 100dvh;

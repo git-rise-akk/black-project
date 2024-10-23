@@ -2,6 +2,7 @@
   <Lenis
     ref="page"
     class="page page_about page_up"
+    :corner-event-delay="useDeviceStore().device === 'desktop' ? 900 : 40"
     @corner="cornerHandler"
   >
     <div class="scroll">
@@ -19,9 +20,9 @@
       <SectionContacts />
       <Footer />
       <PopupGallery
-          @closePopup="closesPopupGallery()"
-          :content="portfolioContent[typeInfoGallery]"
-          :active="openPopup"
+        @closePopup="closesPopupGallery()"
+        :content="portfolioContent[typeInfoGallery]"
+        :active="openPopup"
       />
     </div>
   </Lenis>
@@ -79,9 +80,6 @@ export default {
     ...mapStores(firstDownload, openPopup, useDeviceStore),
   },
   mounted() { 
-    this.animateCardsPortfolio();
-    this.animateCardsServices();
-    
     this.firstDownloadStore.active = false;  
   },
   _methods: {
@@ -90,65 +88,9 @@ export default {
         this.$router.push('/');
       }
     },
-    animateCardsPortfolio() {
-      const projects = gsap.utils.toArray('.SectionPortfolio .project');
-
-      projects.forEach((project, index) => {
-        gsap.to(project, {
-          opacity: 1,
-          x: 0,
-          duration: 1.2,
-          scrollTrigger: {
-            trigger: project,
-            scroller: '.page_about',
-            start: 'top 90%',
-            end: 'bottom top',
-            onEnter: () => {
-              const name = project.querySelector('.project__name');
-              gsap.to(name, { x: 1, duration: 1.2 });
-            },
-          },
-        });
-      });
-
-      // на десктопе не показывается последняя карточка
-      if (useDeviceStore().device !== 'desktop') {
-        const covers = gsap.utils.toArray('.SectionPortfolio .project__cover');
-        
-        covers.forEach((cover, index) => {
-        gsap.to(cover, {
-          y: '-50%',
-          duration: .2,
-          scrollTrigger: {
-            trigger: cover,
-            start: 'center 75%',
-            scroller: '.page_about',
-            end: 'center 25%',
-            scrub: true,
-          },
-        });
-      });
-      }
-    },
-    animateCardsServices() {
-      const services = gsap.utils.toArray('.SectionServices .service');
-      services.forEach((service, index) => {
-        gsap.to(service, {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          scrollTrigger: {
-            trigger: service,
-            start: 'top bottom',
-            scroller: '.page_about',
-            end: 'bottom top',
-          },
-        });
-      });
-    },
     opensPopupService(id) {
       this.openPopupStore.popupService = [];
-      this.openPopupStore.popupService.push(id);
+      this.openPopupStore.popupService.push(+id);
       this.openPopupStore.popupService.push(true);
     },
     opensPopupGallery(type) {

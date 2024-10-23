@@ -1,7 +1,7 @@
 <template>
   <div
     ref="StandardButton"
-    class="StandardButton"
+    class="StandardButton button-anim"
     :style="{ width: `${width}rem`, height: `${height}rem` }"
   >
     <svg
@@ -84,7 +84,6 @@ export default {
   mounted() {
     this.windowStore = useWindowStore();
   },
-  methods: {},
 };
 </script>
 
@@ -116,6 +115,12 @@ export default {
 
     path {
       transition: stroke-dashoffset 1s;
+      .tablet & {
+        transition: initial;
+      }
+      .mobile & {
+        transition: initial;
+      }
     }
   }
 
@@ -151,4 +156,3 @@ export default {
   }
 }
 </style>
-

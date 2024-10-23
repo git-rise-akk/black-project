@@ -4,8 +4,6 @@
 		@wheel="({ direction }) => wheelEvent(direction)"
     @vertical-swipe="wheelEvent"
 	>
-    <Logo v-if="useDeviceStore().device === 'desktop'"/>
-    <MobLogo v-else />
     <video
       ref="video"
       class="video"
@@ -16,21 +14,30 @@
       muted
       autoplay
     ></video>
-    <div class="info">
-      Мы — светотехническая компания,<br />
-      которая настроена на решение любой<br />
-      вашей задачи и запроса
-    </div>
-    <StandardButton
-      :width="buttonSize[0]"
-      :height="buttonSize[1]"
-      text="заказать проект"
-      @click="opensPopupCallback()"
-    />
-    <div
-      class="scroll-down"
-      @click="scrollDown"
-    >
+    <ClientOnly>
+      <Logo v-if="checkScreen()"/>
+      <MobLogo v-else />
+      <div class="info">
+        Мы — светотехническая компания,<br />
+        которая настроена на решение любой<br />
+        вашей задачи и запроса
+      </div>
+      <StandardButton
+        v-if="checkScreen()"
+        :width="42.5"
+        :height="12"
+        text="заказать проект"
+        @click="opensPopupCallback()"
+      />
+      <MobStandardButton
+        v-else
+        text="заказать проект"
+        @click="opensPopupCallback()"
+      />
+      <div
+        class="scroll-down"
+        @click="scrollDown"
+      >
       <nuxt-icon
         class="arrow"
         name="arrow-down"
@@ -49,6 +56,7 @@
       />
       <div class="line"></div>
     </div>
+    </ClientOnly>
   </EventManager>
 </template>
 
@@ -59,20 +67,10 @@ export default {
   data() {
     return {
       sound: false,
-      // tablet: false,
     };
   },
   computed: {
     ...mapStores(firstDownload, openPopup, useDeviceStore),
-    buttonSize() {
-      let size = [42.5, 12];
-      if(useDeviceStore().device === 'tablet') {
-        size = [76.8, 14.8]
-      } else if (useDeviceStore().device === 'mobile') {
-        size = [33.5, 7.7]
-      }
-      return size;
-    },
     src() {
       return '/assets/webpages/home/major'
     }
@@ -83,6 +81,9 @@ export default {
     }, 6000);
   },
   methods: {
+    checkScreen() {
+      return innerWidth > 1280;
+    },
     switchesSound() {
       this.sound = !this.sound;
       if (this.sound) {
@@ -107,9 +108,6 @@ export default {
       this.openPopupStore.popupCallback = true;
     },
   },
-  beforeUnmount() {
-    // window.removeEventListener('wheel', this.$refs.page);
-  },
 };
 </script>
 
@@ -120,6 +118,8 @@ export default {
   width: 100vw;
   overflow: hidden;
   padding: 19rem 10rem 0;
+
+
   .tablet & {
     padding: 21.9rem 3.8rem 0;
   }
@@ -245,7 +245,13 @@ export default {
       transition: width 0.3s ease;
       transform-origin: left;
 
-      .tablet &,
+      .tablet & {
+        top: 4.2rem;
+        left: 0.5rem;
+        width: 6rem;
+        height: 0.4rem;
+      }
+
       .mobile & {
         top: 2.2rem;
         width: 3rem;
@@ -270,7 +276,8 @@ export default {
     }
   }
 
-  .StandardButton {
+  .StandardButton,
+  .MobStandardButton {
     margin-top: 4.6rem;
   }
 
@@ -291,7 +298,8 @@ export default {
       animation: show-elem .3s 2s forwards;
     }
 
-    .StandardButton {
+    .StandardButton,
+    .MobStandardButton {
       opacity: 0;
       transform: translateY(15rem);
       animation: text-show 1s 2s forwards;

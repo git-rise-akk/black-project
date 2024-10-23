@@ -11,12 +11,12 @@
             <div class="text-content">
               <TextSeparate
                 class="title title_company"
-                :text="data[useDeviceStore().device]?.company?.title_0"
+                :text="data[identifiesDevice]?.company?.title_0"
               />
               <TextSeparate
                 class="text"
                 tag="p"
-                :text="data[useDeviceStore().device]?.company?.text_0"
+                :text="data[identifiesDevice]?.company?.text_0"
               />
             </div>
             <div class="images">
@@ -38,12 +38,12 @@
             <div class="text-content">
               <TextSeparate
                 class="title title_company"
-                :text="data[useDeviceStore().device]?.company?.title_1"
+                :text="data[identifiesDevice]?.company?.title_1"
               />
               <TextSeparate
                 class="text"
                 tag="p"
-                :text="data[useDeviceStore().device]?.company?.text_1"
+                :text="data[identifiesDevice]?.company?.text_1"
               />
             </div>
             <div class="images">
@@ -71,12 +71,12 @@
             <div class="text-content">
               <TextSeparate
                 class="title title_company"
-                :text="data[useDeviceStore().device]?.company?.title_2"
+                :text="data[identifiesDevice]?.company?.title_2"
               />
               <TextSeparate
                 class="text"
                 tag="p"
-                :text="data[useDeviceStore().device]?.company?.text_2"
+                :text="data[identifiesDevice]?.company?.text_2"
               />
             </div>
             <div class="images">
@@ -104,12 +104,12 @@
             <div class="text-content">
               <TextSeparate
                 class="title title_company"
-                :text="data[useDeviceStore().device]?.company?.title_3"
+                :text="data[identifiesDevice]?.company?.title_3"
               />
               <TextSeparate
                 class="text"
                 tag="p"
-                :text="data[useDeviceStore().device]?.company?.text_3"
+                :text="data[identifiesDevice]?.company?.text_3"
               />
             </div>
             <div class="images">
@@ -178,6 +178,9 @@ export default {
   },
   computed: {
     ...mapStores(useDeviceStore),
+    identifiesDevice() {
+      return useDeviceStore().device === 'desktop' ? 'desktop' : 'mobile';
+    }
   },
 }
 </script>
@@ -303,8 +306,8 @@ export default {
               .tablet & {
                 top: initial;
                 bottom: 0;
-                height: 28.5rem;
-                width: 34.5rem;
+                height: 23.7rem;
+                width: 28.7rem;
               }
               .mobile & {
                 top: initial;
@@ -323,8 +326,8 @@ export default {
               .tablet & {
                 top: 0;
                 bottom: initial;
-                height: 28.5rem;
-                width: 34.5rem;
+                height: 23.8rem;
+                width: 45.8rem;
               }
               .mobile & {
                 top: 0;
@@ -383,7 +386,7 @@ export default {
 
               .tablet & {
                 top: 1.7rem;
-                left: 51%;
+                left: 26vw;
                 height: 27rem;
                 width: 28.7rem;
               }
@@ -425,7 +428,7 @@ export default {
           width: 73.8rem;
 
           .tablet & {
-           height: 24.8rem;
+           height: 28.2rem;
           }
 
           .mobile & {

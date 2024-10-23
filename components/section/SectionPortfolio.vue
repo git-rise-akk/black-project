@@ -1,6 +1,11 @@
 <template>
       <section id="portfolio" class="SectionPortfolio section">
-        <h2 class="title title_page text-anim-letters" v-text-separate="{ byLetters: true }">Портфолио</h2>
+        <TextSeparate
+          tag="h2"
+          class="title title_page"
+          by-letters
+          text="Портфолио"
+        /> 
         <ul class="projects">
           <li
             class="project project_n0"
@@ -52,7 +57,51 @@ export default {
   computed: {
     ...mapStores(useDeviceStore),
   },
-    
+  mounted() { 
+    this.animateCardsPortfolio();
+  },
+  methods: {
+    animateCardsPortfolio() {
+      const projects = gsap.utils.toArray('.SectionPortfolio .project');
+
+      projects.forEach((project, index) => {
+        gsap.to(project, {
+          opacity: 1,
+          x: 0,
+          duration: 1.2,
+          scrollTrigger: {
+            trigger: project,
+            scroller: '.page_about',
+            start: 'top 90%',
+            end: 'bottom top',
+            onEnter: () => {
+              const name = project.querySelector('.project__name');
+              gsap.to(name, { x: 1, duration: 1.2 });
+            },
+          },
+        });
+      });
+
+      // на десктопе не показывается последняя карточка
+      if (useDeviceStore().device !== 'desktop') {
+        const covers = gsap.utils.toArray('.SectionPortfolio .project__cover');
+        
+        covers.forEach((cover, index) => {
+          gsap.to(cover, {
+            y: '-50%',
+            duration: .2,
+            scrollTrigger: {
+              trigger: cover,
+              start: 'center 75%',
+              scroller: '.page_about',
+              end: 'center 25%',
+              scrub: true,
+            },
+          });
+        });
+      }
+    },
+  }
 }
 </script>
 

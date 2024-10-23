@@ -17,10 +17,16 @@
               v-html="`от ${separateThousands(info[id].price)}`"
           ></div>
           <StandardButton
+            v-if="useDeviceStore().device === 'desktop'"
             :text="info[id].btn"
-            :width="buttonSize[0]"
-            :height="buttonSize[1]"
-          @click="opensPopupCallback"  
+            :width="52"
+            :height="12"
+            @click="opensPopupCallback"  
+          />
+          <MobStandardButton
+            v-else
+            :text="info[id].btn"
+            @click="opensPopupCallback"  
           />
         </div>
       </div>
@@ -114,15 +120,6 @@ export default {
   },
   computed: {
     ...mapStores(openPopup, useDeviceStore),
-    buttonSize() {
-      let size = [52, 12];
-      if(useDeviceStore().device === 'tablet') {
-        size = [76.8, 14.8]
-      } else if (useDeviceStore().device === 'mobile') {
-        size = [33.5, 5.9]
-      }
-      return size;
-    }
   },
   methods: {
     closingEvent() {
@@ -154,11 +151,23 @@ export default {
   .tablet & {
    display: block;
    overflow: hidden scroll;
+   scrollbar-width: none;
+   -ms-overflow-style: none;
+
+   &::-webkit-scrollbar {
+    display: none;
+   }
   }
 
   .mobile & {
     display: block;
     overflow: hidden scroll;
+    scrollbar-width: none;
+   -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &_active {
@@ -241,7 +250,6 @@ export default {
       margin-bottom: 5.4rem;
 
       .tablet & {
-        font-size: 1.6rem;
         margin-bottom: 2.5rem;
         width: 85%;
       }
@@ -276,7 +284,6 @@ export default {
         font-weight: 300;
 
         .tablet & {
-          font-size: 1.2rem;
           margin-bottom: 2.5rem;
         }
 
@@ -291,22 +298,29 @@ export default {
 
         .tablet & {
           position: absolute;
-          font-size: 2.5rem;
-          bottom: 12.5rem;
+          font-size: 3.7rem;
+          bottom: 22.5rem;
         }
 
         .mobile & {
           position: absolute;
           font-size: 2.5rem;
-          bottom: 12.5rem;
+          bottom: 13.5rem;
         }
       }
 
-      .StandardButton {
+      .MobStandardButton {
         .tablet &,
         .mobile &  {
           position: absolute;
           bottom: 4.6rem;
+        }
+
+        .tablet & {
+          width: calc(100% - 7.6rem);
+        }
+        .mobile &  {
+         width: calc(100% - 4.4rem);
         }
       }
     }
@@ -324,16 +338,16 @@ export default {
 
     .tablet & {
       width: 100%;
-      height: 19.2rem;
-      min-height: 19.2rem;
-      margin-bottom: 13rem;
+      height: 27.2rem;
+      min-height: 27.2rem;
+      margin-bottom: 26rem;
     }
 
     .mobile & {
       width: 100%;
       height: 19.2rem;
       min-height: 19.2rem;
-      margin-bottom: 13rem;
+      margin-bottom: 15rem;
     }
 
     .part {
