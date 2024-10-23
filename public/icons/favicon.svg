@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="520" height="520"><svg width="520" height="520" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M57.0073 0H7V520H57.0073V0Z" fill="#1E1E1E"></path>
+<path d="M119.838 53.0284L169.396 59.7445L108.101 520H57.0068L119.838 53.0284Z" fill="#1E1E1E"></path>
+<path d="M220.075 122.354L284.215 140.925L165.719 520H108.102L220.075 122.354Z" fill="#1E1E1E"></path>
+<path d="M313.566 204.286L367.922 231.596L223.336 520H165.718L313.566 204.286Z" fill="#1E1E1E"></path>
+<path d="M388.578 304.79L433.15 340.84L291.825 520H223.336L388.578 304.79Z" fill="#1E1E1E"></path>
+<path d="M442.934 415.126L475.547 464.286L386.404 520H291.825L442.934 415.126Z" fill="#1E1E1E"></path>
+<path d="M513.596 205.38V262.187L207.03 169.329L220.075 122.355L513.596 205.38Z" fill="#1E1E1E"></path>
+<path d="M513.595 302.607V362.691L290.737 254.54L313.566 204.288L513.595 302.607Z" fill="#1E1E1E"></path>
+<path d="M513.596 405.294V469.748L358.138 344.117L388.578 304.79L513.596 405.294Z" fill="#1E1E1E"></path>
+<path d="M513.597 520H446.195L396.188 447.899L442.934 415.126L513.597 520Z" fill="#1E1E1E"></path>
+<path d="M120.06 52.4368L113.537 101.596L513.604 159.497V107.06L120.06 52.4368Z" fill="#1E1E1E"></path>
+<path d="M513.596 50.2521V0L7.00037 0V50.2521L513.596 50.2521Z" fill="#1E1E1E"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: contrast(0.3846153846153846) brightness(4.5); } }
+</style></svg>

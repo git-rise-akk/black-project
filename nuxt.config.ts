@@ -12,32 +12,31 @@ export default defineNuxtConfig({
           {name: 'format-detection', content: 'telephone=no'},
           {name: 'msapplication-TileColor', content: '#da532c'},
           {name: 'theme-color', content: "#ffffff"},
+          {name: 'apple-mobile-web-app-title', content: "BP"},
         ],
   
         link: [
+          {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '48x48',
+            href: '/icons/favicon-48x48.png',
+          },
+          {
+            rel: 'icon',
+            type: 'image/svg+xml',
+            href: '/icons/favicon.svg',
+          },
+          {
+            rel: 'shortcut icon',
+            href: '/icons/favicon.ico',
+          },
           {
             rel: 'apple-touch-icon',
             sizes: '180x180',
             href: '/icons/apple-touch-icon.png',
           },
-          {
-            rel: 'icon',
-            type: 'image/png',
-            sizes: '32x32',
-            href: '/icons/favicon-32x32.png',
-          },
-          {
-            rel: 'icon',
-            type: 'image/png',
-            sizes: '16x16',
-            href: '/icons/favicon-16x16.png',
-          },
           {rel: 'manifest', href: '/site.webmanifest'},
-          {
-            rel: 'mask-icon',
-            href: '/icons/safari-pinned-tab.svg',
-            color: '#5bbad5',
-          },
         ],
   
       },
