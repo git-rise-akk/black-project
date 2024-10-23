@@ -76,6 +76,7 @@
           clip-path: polygon(100% 0, 100% 78%, 78% 100%, 0 100%, 0 0);
           transition: clip-path .8s, width .8s, height .8s, top .8s, right .8s;
           background: $btn;
+          will-change: clip-path, width, height;
           .tablet & {
             width: 8.7rem;
             height: 8.7rem;
