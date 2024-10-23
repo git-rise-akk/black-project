@@ -16,6 +16,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@vueform/nuxt": "^1.7.0",
     "@vueform/vueform": "^1.10.3",
+    "cheerio": "^1.0.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.13",
     "node-telegram-bot-api": "^0.66.0",

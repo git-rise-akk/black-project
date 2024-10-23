@@ -1,3 +1,4 @@
+import * as cheerio from 'cheerio';
 import TelegramBotApi from 'node-telegram-bot-api';
 
 export default function (opt: any) {
@@ -11,6 +12,11 @@ export default function (opt: any) {
     const bot = new TelegramBotApi(opt.token, {
         polling: true,
     });
+
+    function stripHtml(html: string): string {
+        const $ = cheerio.load(html);
+        return $.text();
+    }
 
     bot
         .onText(/\/add/, (msg: any, [ _, val ]: string[]) => {
