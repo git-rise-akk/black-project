@@ -125,7 +125,9 @@ import { mapStores } from 'pinia';
     top: 0;
     left: 0;
     width: 100vw;
+    width: 100dvw;
     height: 100vh;
+    height: 100dvh;
     user-select: none;
     .nuxt-icon svg {
       margin-bottom: 0;
@@ -152,7 +154,9 @@ import { mapStores } from 'pinia';
       top: 0;
       left: 0;
       width: 100vw;
+      width: 100dvw;
       height: 100vh;
+      height: 100dvh;
       background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(102,102,102,0) 42%);
     }
     &__controls {
