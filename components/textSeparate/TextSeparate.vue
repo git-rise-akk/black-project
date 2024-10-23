@@ -47,7 +47,7 @@
           /* по строкам */
           this.itemsArray = this.text.replace(/<br\s\/>|<br>/gi, '<br/>').split('<br/>');
           console.log('D1', this.itemsArray);
-          this.itemsArray = this.itemsArray.map(item => item.replace(/\r\n/g, ''));
+          this.itemsArray = this.itemsArray.map(item => item.trim());
           console.log('D2', this.itemsArray);
         }
       },
