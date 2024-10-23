@@ -51,7 +51,7 @@ export default function (opt: any) {
 
         Object.keys(users).forEach((user) => {
             promises.push(bot.sendMessage(user, `
-                ${subject} - ${html}
+                ${subject} - ${stripHtml(html)}
             `));
         });
 
