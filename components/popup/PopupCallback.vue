@@ -202,7 +202,9 @@ export default {
 	top: 0;
 	left: 0;
 	width: 100vw;
+  width: 100dvw;
 	height: 100vh;
+  height: 100dvh;
 	display: flex;
 	justify-content: center;
 	align-items: center;

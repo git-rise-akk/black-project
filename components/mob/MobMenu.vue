@@ -89,7 +89,9 @@ export default {
     align-items: center;
     position: fixed;
     width: 100vw;
+    width: 100dvw;
     height: calc(100vh - 7rem);
+    height: calc(100dvh - 7rem);
     z-index: 10;
     opacity: 0;
     visibility: hidden;
@@ -98,6 +100,7 @@ export default {
     .tablet & {
         top: 13.8rem;
         height: calc(100vh - 13.8rem);
+        height: calc(100dvh - 13.8rem);
     }
     .logo {
         height: 5.1rem;

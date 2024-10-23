@@ -46,9 +46,7 @@
         } else if (!this.byLetters) {
           /* по строкам */
           this.itemsArray = this.text.replace(/<br\s\/>|<br>/gi, '<br/>').split('<br/>');
-          console.log('D1', this.itemsArray);
           this.itemsArray = this.itemsArray.map(item => item.trim());
-          console.log('D2', this.itemsArray);
         }
       },
       injectText() {
@@ -63,7 +61,6 @@
           Object.assign(span.style, { display: 'inline-block' });
 
           this.spansArray.push(span);
-          console.log('D3', this.spansArray);
           this.$el.appendChild(spanWrapper);
           
         });
